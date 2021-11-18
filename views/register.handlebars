@@ -25,7 +25,8 @@
             </div>
             <div class="form-group">
               <!-- Input pro email-->
-              <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address" required>
+              <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address" required>              
+
             </div>
             <div class="form-group">
               <!-- Input pro heslo-->
@@ -39,7 +40,9 @@
             </div>
             <!-- Link na registraci-->
             <a href="login" class="">Already have an account?</a>
-
+            {{#if message}}
+              <h4 class="alert alert-danger mt-4">{{message}}</h4>
+            {{/if}}
         </div>
         <!-- Konec formu-->
         </form>

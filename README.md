@@ -1,2 +1,3 @@
 # Social_media
-School project
+
+Projekt je sociální síť na způsob Facebooku

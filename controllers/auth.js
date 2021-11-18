@@ -1,29 +1,45 @@
-const express = require('express');
-const router = express.Router();
+const jwt = require('jsonwebtoken');
 const conn = require('../database');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
-exports.register = async (req, res) => {
-	// Data z formu
-	const fName = req.body.fName;
-	const lName = req.body.lName;
-	const email = req.body.email;
-	const hashedPassword = await bcrypt.hash(req.body.pass, 10);
+exports.register = (req, res) => {
+	// Získávání dat z formuláře 'register'
+	const { fName, lName, email, pass } = req.body;
 
-	// SQL příkaz do databáze
-	const sql =
-		"INSERT INTO users (`firstName`, `lastName`, `email`, `password`) VALUES ('" +
-		fName +
-		"', '" +
-		lName +
-		"', '" +
-		email +
-		"', '" +
-		hashedPassword +
-		"')";
-	conn.query(sql, (err) => {
-		if (err) throw err;
-		console.log('data saved');
-	});
-	res.redirect('/');
+	conn.query(
+		'SELECT email FROM users WHERE email = ?',
+		[email],
+		async (error, results) => {
+			if (error) {
+				console.log(error);
+			}
+
+			if (results.length > 0) {
+				return res.render('register', {
+					message: 'That email is already in use',
+				});
+			}
+			let hashedPassword = await bcrypt.hash(pass, 8);
+
+			conn.query(
+				'INSERT INTO users SET ?',
+				{
+					firstName: fName,
+					lastName: lName,
+					password: hashedPassword,
+					email: email,
+				},
+				(error, results) => {
+					if (error) {
+						console.log(error);
+					} else {
+						console.log(results);
+						return res.render('register', {
+							message: 'User registered',
+						});
+					}
+				}
+			);
+		}
+	);
 };
