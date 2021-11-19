@@ -5,7 +5,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
 	res.render('index', {
 		title: 'Home Page',
-		style: 'index.css'
+		style: 'index.css',
 	});
 });
 
@@ -22,6 +22,13 @@ router.get('/login', (req, res) => {
 	res.render('login', {
 		title: 'Login',
 		style: 'login.css',
+	});
+});
+
+router.get('/account', (req, res) => {
+	res.render('account', {
+		title: 'Account',
+		style: 'account.css',
 	});
 });
 
