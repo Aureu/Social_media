@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // Route for index
-router.get('/', (req, res) => {
+router.get('/home', (req, res) => {
 	res.render('index', {
 		title: 'Home Page',
 		style: 'index.css',
@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 });
 
 // Route for register
-router.get('/register', (req, res) => {
+router.get('/', (req, res) => {
 	res.render('register', {
 		title: 'SignUp',
 		style: 'register.css',
@@ -25,6 +25,7 @@ router.get('/login', (req, res) => {
 	});
 });
 
+// Route for account
 router.get('/account', (req, res) => {
 	res.render('account', {
 		title: 'Account',
