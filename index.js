@@ -10,8 +10,8 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
 // Route for public folder
-const public = path.join(__dirname, './public');
-app.use(express.static(public));
+const public = path.join(__dirname, 'public');
+app.use(express.static('./public'));
 
 // Body Parser Middleware
 app.use(express.json());

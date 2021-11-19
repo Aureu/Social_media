@@ -40,6 +40,7 @@ exports.register = (req, res) => {
 					}
 				}
 			);
+			res.redirect('/');
 		}
 	);
 };
