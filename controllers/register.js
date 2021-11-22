@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const conn = require('../database');
-const bcrypt = require('bcrypt.js');
+const bcrypt = require('bcryptjs');
 
 exports.register = (req, res) => {
 	// Získávání dat z formuláře 'register'
@@ -38,7 +38,7 @@ exports.register = (req, res) => {
 					} else {
 						console.log(results);
 						// Redirect na account
-						res.redirect('/account');
+						res.redirect('/login');
 					}
 				}
 			);

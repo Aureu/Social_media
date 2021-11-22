@@ -1,15 +1,18 @@
 const conn = require('../database');
+const mysql = require('mysql');
 const bcrypt = require('bcryptjs');
 
 // LOGIN
 exports.login = (req, res) => {
 	const email = req.body.email;
 	const password = req.body.pass;
+	const sql = 'SELECT * FROM users WHERE email = ?';
+	const search_query = mysql.format(sql, [email]);
 
 	conn.query(
 		// Hledání stejného emailu v databázi
-		'SELECT email FROM users WHERE email = ?',
-		[email],
+		search_query,
+
 		async (err, results) => {
 			if (err) throw err;
 			// Pokud se email nenašel, napíše se zpráva dole

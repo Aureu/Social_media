@@ -2,6 +2,8 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const path = require('path');
+const cookieParser = require('cookie-parser');
+const sessions = require('express-session');
 
 const app = express();
 
@@ -20,6 +22,22 @@ app.use(express.urlencoded({ extended: false }));
 // Define Routes
 app.use('/', require('./routes/pages'));
 app.use('/auth', require('./routes/auth'));
+
+// 24 hours from milliseconds
+const oneDay = 1000 * 60 * 60 * 24;
+
+// Session middleware
+app.use(
+	sessions({
+		secret: 'thisismysecrteadfsgddfgd',
+		saveUninitialized: true,
+		cookie: { maxAge: oneDay },
+		resave: false,
+	})
+);
+
+// cookie parser middleware
+app.use(cookieParser());
 
 const PORT = 5000;
 
