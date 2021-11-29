@@ -1,1 +1,8 @@
-Make routes
+Udělat account sessions (Logout a dostání se na účet)
+account page zobrazování jména v navbaru (Později profilovku)
+Dodělat konečně databázi na komplet stránku
+Přidávání textových příspěvků
+Dodělat routes ve formulářích
+
+Hlavní stránka bude register, po registraci se přesměruje na login (Později potvrzení emailem), po úspěšném přihlášení se úživatel
+dostane na svůj profil, kde bude moct vše ovládat

@@ -1,13 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
-// Route for index
-router.get('/home', (req, res) => {
-	res.render('index', {
-		title: 'Home Page',
-		style: 'index.css',
-	});
-});
+const session = require('express-session');
 
 // Route for register
 router.get('/', (req, res) => {
@@ -27,6 +20,7 @@ router.get('/login', (req, res) => {
 
 // Route for account
 router.get('/account', (req, res) => {
+	session = req.session;
 	res.render('account', {
 		title: 'Account',
 		style: 'account.css',

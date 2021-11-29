@@ -3,7 +3,10 @@ const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const sessions = require('express-session');
+const session = require('express-session');
+
+// Proměnná na čas (Day) pro dobu uložení cookie v sessions
+const oneDay = 1000 * 60 * 60 * 24;
 
 const app = express();
 
@@ -23,15 +26,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/', require('./routes/pages'));
 app.use('/auth', require('./routes/auth'));
 
-// 24 hours from milliseconds
-const oneDay = 1000 * 60 * 60 * 24;
-
 // Session middleware
 app.use(
-	sessions({
+	session({
 		secret: 'thisismysecrteadfsgddfgd',
 		saveUninitialized: true,
-		cookie: { maxAge: oneDay },
+		maxAge: oneDay,
 		resave: false,
 	})
 );

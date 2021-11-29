@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 exports.login = (req, res) => {
 	const email = req.body.email;
 	const password = req.body.pass;
+	var session;
 	const sql = 'SELECT * FROM users WHERE email = ?';
 	const search_query = mysql.format(sql, [email]);
 
@@ -21,8 +22,8 @@ exports.login = (req, res) => {
 					message: 'Email does not exist',
 				});
 			} else {
-				const hashedPassword = results[0].password;
 				// get the hashedPassword from result
+				const hashedPassword = results[0].password;
 				// Porovnávání hesla s hasnutym heslem
 				if (await bcrypt.compare(password, hashedPassword)) {
 					return res.render('login', {
