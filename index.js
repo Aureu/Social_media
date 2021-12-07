@@ -3,12 +3,29 @@ const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 const session = require('express-session');
-
-// Proměnná na čas (Day) pro dobu uložení cookie v sessions
-const oneDay = 1000 * 60 * 60 * 24;
+const conn = require('./database');
+const mysql = require('mysql');
+const MySQLStore = require('express-mysql-session')(session);
 
 const app = express();
+
+// creating 24 hours from milliseconds
+const oneDay = 1000 * 60 * 60 * 24;
+
+//session middleware
+app.use(
+	session({
+		secret: 'thisismysecrctekeyfhrgfgrfrty84fwir767',
+		saveUninitialized: true,
+		cookie: { maxAge: oneDay },
+		resave: false,
+	})
+);
+
+// Cookie parser middleware
+app.use(cookieParser());
 
 // Handlebar Middleware
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
@@ -25,19 +42,6 @@ app.use(express.urlencoded({ extended: false }));
 // Define Routes
 app.use('/', require('./routes/pages'));
 app.use('/auth', require('./routes/auth'));
-
-// Session middleware
-app.use(
-	session({
-		secret: 'thisismysecrteadfsgddfgd',
-		saveUninitialized: true,
-		maxAge: oneDay,
-		resave: false,
-	})
-);
-
-// cookie parser middleware
-app.use(cookieParser());
 
 const PORT = 5000;
 

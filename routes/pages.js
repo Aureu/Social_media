@@ -21,10 +21,20 @@ router.get('/login', (req, res) => {
 // Route for account
 router.get('/account', (req, res) => {
 	session = req.session;
-	res.render('account', {
-		title: 'Account',
-		style: 'account.css',
-	});
+	if (session.userid) {
+		res.send("Welcome User <a href='/logout'>click to logout</a>");
+	} else {
+		res.render('account', {
+			title: 'Account',
+			style: 'account.css',
+		});
+	}
+});
+
+// Logout route
+router.get('/logout', (req, res) => {
+	req.session.destroy();
+	res.redirect('/');
 });
 
 module.exports = router;
