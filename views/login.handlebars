@@ -6,24 +6,24 @@
           <h3 class="panel-title">Login</h3>
         </div>
         <div class="panel-body">
-          <!--Začátek formu-->
+          <!--Start of form-->
           <form role="form" action="/auth/login" method="POST">
             <div class="form-group">
-              <!-- Input na email -->
+              <!-- Input for an email -->
               <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
             </div>
             <div class="form-group">
-              <!-- Input na heslo -->
+              <!-- Input for a password -->
               <input type="password" name="pass" id="pass" class="form-control input-sm" placeholder="Password">
             </div>
-            <!-- Handlebar zpráva na chyby -->
+            <!-- Handlebar output for errors(passwords dont match etc.) -->
             <h4>{{message}}</h4>
             <div class="form-group">
               <input type="submit" value="Login" class="btn btn-info btn-block"><br>
-              <a href="/" class="">Create new account</a>
+              <a href="/register" class="">Create new account</a>
             </div>
         </div>
-        <!--Konec formu-->
+        <!--End of the form-->
         </form>
 
       </div>

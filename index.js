@@ -3,11 +3,7 @@ const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const cors = require('cors');
 const session = require('express-session');
-const conn = require('./database');
-const mysql = require('mysql');
-const MySQLStore = require('express-mysql-session')(session);
 
 const app = express();
 

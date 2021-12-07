@@ -3,28 +3,28 @@ const conn = require('../database');
 const bcrypt = require('bcryptjs');
 
 exports.register = (req, res) => {
-	// Získávání dat z formuláře 'register'
+	// Getting data from form on register page
 	const { fName, lName, email, pass } = req.body;
 
 	conn.query(
-		// Vytáhnutí emailu z databáze pro kontrolu
+		// SQL command for searching same email in database
 		'SELECT email FROM users WHERE email = ?',
 		[email],
 		async (error, results) => {
 			if (error) {
 				console.log(error);
 			}
-			// Kontrola stejného emailu v DB
+			// Checking same email in database
 			if (results.length > 0) {
 				return res.render('register', {
 					message: 'That email is already in use',
 				});
 			}
-			// Hashování hesla
+			// Hashing password
 			let hashedPassword = await bcrypt.hash(pass, 10);
 
 			conn.query(
-				// Vložení dat do databáze
+				// Inserting into database in the table 'users'
 				'INSERT INTO users SET ?',
 				{
 					firstName: fName,
@@ -37,7 +37,7 @@ exports.register = (req, res) => {
 						console.log(error);
 					} else {
 						console.log(results);
-						// Redirect na account
+						// Redirect on account
 						res.redirect('/login');
 					}
 				}

@@ -1,9 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const session = require('express-session');
+
+// Route for landing page(index)
+router.get('/', (req, res) => {
+	res.render('index', {
+		title: 'Index',
+		style: 'index.css',
+	});
+});
 
 // Route for register
-router.get('/', (req, res) => {
+router.get('/register', (req, res) => {
 	res.render('register', {
 		title: 'SignUp',
 		style: 'register.css',
@@ -20,21 +27,10 @@ router.get('/login', (req, res) => {
 
 // Route for account
 router.get('/account', (req, res) => {
-	session = req.session;
-	if (session.userid) {
-		res.send("Welcome User <a href='/logout'>click to logout</a>");
-	} else {
-		res.render('account', {
-			title: 'Account',
-			style: 'account.css',
-		});
-	}
-});
-
-// Logout route
-router.get('/logout', (req, res) => {
-	req.session.destroy();
-	res.redirect('/');
+	res.render('account', {
+		title: 'Account',
+		style: 'account.css',
+	});
 });
 
 module.exports = router;

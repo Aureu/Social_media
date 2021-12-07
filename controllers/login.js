@@ -11,12 +11,11 @@ exports.login = (req, res) => {
 	const search_query = mysql.format(sql, [email]);
 
 	conn.query(
-		// Hledání stejného emailu v databázi
 		search_query,
-
+		// Searching for a same email (Form input == database)
 		async (err, results) => {
 			if (err) throw err;
-			// Pokud se email nenašel, napíše se zpráva dole
+			// If email is not found, sends message 'Email does not exist'
 			if (results.length == 0) {
 				return res.render('login', {
 					message: 'Email does not exist',
@@ -25,15 +24,16 @@ exports.login = (req, res) => {
 				// get the hashedPassword from result
 				const hashedPassword = results[0].password;
 				const isMatch = await bcrypt.compare(password, hashedPassword);
-				// Porovnávání hesla s hasnutym heslem
+				// Matching input password with hashed password from database
 				if (!isMatch) {
 					return res.render('login', {
 						message: 'Password incorrect',
 					});
 				} else {
-					session.userid = email;
-					console.log(req.session);
-					res.render('account');
+					// If found user is logged
+					return res.render('login', {
+						message: 'Logged',
+					});
 				}
 			}
 		}
