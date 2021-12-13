@@ -30,6 +30,7 @@ app.set('view engine', 'handlebars');
 // Route for public folder
 const public = path.join(__dirname, 'public');
 app.use(express.static('./public'));
+
 // Route for images in the public folder
 app.use(express.static('./public/images'));
 

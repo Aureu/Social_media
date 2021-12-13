@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 
 exports.register = (req, res) => {
 	// Getting data from form on register page
-	const { fName, lName, email, pass } = req.body;
+	const { fName, lName, email, password } = req.body;
 
 	conn.query(
 		// SQL command for searching same email in database
@@ -21,7 +21,7 @@ exports.register = (req, res) => {
 				});
 			}
 			// Hashing password
-			let hashedPassword = await bcrypt.hash(pass, 10);
+			let hashedPassword = await bcrypt.hash(password, 10);
 
 			conn.query(
 				// Inserting into database in the table 'users'
