@@ -41,6 +41,8 @@ app.use(express.urlencoded({ extended: false }));
 // Define Routes
 app.use('/', require('./routes/pages'));
 app.use('/auth', require('./routes/auth'));
+// routes for admin pages
+app.use('/admin', require('./routes/admin_pages'));
 
 const PORT = 5000;
 
