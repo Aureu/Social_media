@@ -9,11 +9,4 @@ router.get('/admin_dashboard', (req, res) => {
 	});
 });
 
-// Route for accounts list
-router.get('/accounts_list', (req, res) => {
-	res.render('accounts_list', {
-		title: 'Accounts',
-		style: 'accounts.css',
-	});
-});
 module.exports = router;

@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const usersRouter = require('./routes/users');
 
 const app = express();
 
@@ -43,6 +44,7 @@ app.use('/', require('./routes/pages'));
 app.use('/auth', require('./routes/auth'));
 // routes for admin pages
 app.use('/admin', require('./routes/admin_pages'));
+app.use('/users', usersRouter);
 
 const PORT = 5000;
 
