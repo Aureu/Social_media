@@ -86,3 +86,68 @@ exports.viewall = (req, res) => {
 		}
 	);
 };
+
+// Find User by Search
+exports.find = (req, res) => {
+	let searchTerm = req.body.search;
+	// User the connection
+	connection.query(
+		'SELECT * FROM users WHERE firstName LIKE ? OR lastName LIKE ?',
+		['%' + searchTerm + '%', '%' + searchTerm + '%'],
+		(err, rows) => {
+			if (!err) {
+				res.render('user_list', { rows });
+			} else {
+				console.log(err);
+			}
+			console.log(' The data from user table: \n', rows);
+		}
+	);
+};
+
+exports.form = (req, res) => {
+	res.render('add-user');
+};
+
+// Add new user
+exports.create = (req, res) => {
+	const { fName, lName, email, password } = req.body;
+	let searchTerm = req.body.search;
+	const status = 'active';
+
+	// User the connection
+	connection.query(
+		'INSERT INTO users SET ?',
+		{
+			firstName: fName,
+			lastName: lName,
+			password: password,
+			email: email,
+			status: status,
+		},
+		(err, rows) => {
+			if (!err) {
+				res.render('add-user', { alert: 'User added successfully.' });
+			} else {
+				console.log(err);
+			}
+			console.log('The data from user table: \n', rows);
+		}
+	);
+};
+
+// Delete User
+exports.delete = (req, res) => {
+	connection.query(
+		'DELETE FROM users WHERE id = ?',
+		[req.params.id],
+		(err, rows) => {
+			if (!err) {
+				res.redirect('/admin/user_list');
+			} else {
+				console.log(err);
+			}
+			console.log('The data from users table: \n', rows);
+		}
+	);
+};
