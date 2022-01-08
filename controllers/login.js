@@ -34,7 +34,7 @@ exports.login = (req, res) => {
 						});
 					} else {
 						// If found redirect into admin dashboard
-						res.redirect('/admin/admin_dashboard');
+						res.redirect('/admin/user_list');
 					}
 					// If none admin account is found redirect into normal account login
 				} else {

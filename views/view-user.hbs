@@ -1,0 +1,36 @@
+<nav aria-label='breadcrumb'>
+	<ol class='breadcrumb'>
+		<li class='breadcrumb-item'><a href='/admin/user_list'>Home</a></li>
+		<li class='breadcrumb-item active' aria-current='page'>View User</li>
+	</ol>
+</nav>
+
+<div class='view-user p-5'>
+	{{#each rows}}
+		<div class='row mb-5'>
+			<div class='col text-center'>
+				<h3>{{this.firstName}} {{this.lastName}}</h3>
+			</div>
+		</div>
+		<div class='row'>
+			<div class='col'>
+				<table class='table'>
+					<thead>
+						<tr>
+							<th scope='col'>First Name</th>
+							<th scope='col'>Last Name</th>
+							<th scope='col'>Email</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope='row'>{{this.firstName}}</th>
+							<td>{{this.lastName}}</td>
+							<td>{{this.email}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	{{/each}}
+</div>

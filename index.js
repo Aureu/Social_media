@@ -2,31 +2,13 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const path = require('path');
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
-const usersRouter = require('./routes/users');
 
 const app = express();
 
-// creating 24 hours from milliseconds
-const oneDay = 1000 * 60 * 60 * 24;
-
-//session middleware
-app.use(
-	session({
-		secret: 'thisismysecrctekeyfhrgfgrfrty84fwir767',
-		saveUninitialized: true,
-		cookie: { maxAge: oneDay },
-		resave: false,
-	})
-);
-
-// Cookie parser middleware
-app.use(cookieParser());
-
 // Handlebar Middleware
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
-app.set('view engine', 'handlebars');
+const handlebars = exphbs.create({ extname: '.hbs' });
+app.engine('.hbs', handlebars.engine);
+app.set('view engine', '.hbs');
 
 // Route for public folder
 const public = path.join(__dirname, 'public');
@@ -42,9 +24,8 @@ app.use(express.urlencoded({ extended: false }));
 // Define Routes
 app.use('/', require('./routes/pages'));
 app.use('/auth', require('./routes/auth'));
-// routes for admin pages
-app.use('/admin', require('./routes/admin_pages'));
-app.use('/users', usersRouter);
+// routes for admin
+app.use('/admin', require('./routes/users'));
 
 const PORT = 5000;
 

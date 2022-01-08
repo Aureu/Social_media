@@ -1,10 +1,12 @@
 const jwt = require('jsonwebtoken');
 const conn = require('../database');
 const bcrypt = require('bcryptjs');
+const { stat } = require('fs');
 
 exports.register = (req, res) => {
 	// Getting data from form on register page
 	const { fName, lName, email, password } = req.body;
+	const status = 'active';
 
 	conn.query(
 		// SQL command for searching same email in database
@@ -31,6 +33,7 @@ exports.register = (req, res) => {
 					lastName: lName,
 					password: hashedPassword,
 					email: email,
+					status: status,
 				},
 				(error, results) => {
 					if (error) {
