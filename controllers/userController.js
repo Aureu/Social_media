@@ -6,7 +6,7 @@ const connection = require('../database');
 exports.view = (req, res) => {
 	// User the connection
 	connection.query(
-		'SELECT * FROM users WHERE status = "active"',
+		'SELECT * FROM user WHERE status = "active"',
 		(err, rows) => {
 			// When done with the connection, release it
 			if (!err) {
@@ -24,7 +24,7 @@ exports.view = (req, res) => {
 exports.edit = (req, res) => {
 	// User the Connection
 	connection.query(
-		'SELECT * FROM users WHERE id = ?',
+		'SELECT * FROM user WHERE id = ?',
 		[req.params.id],
 		(err, rows) => {
 			if (!err) {
@@ -39,16 +39,16 @@ exports.edit = (req, res) => {
 
 // Update User
 exports.update = (req, res) => {
-	const { fName, lName, email } = req.body;
+	const { fName, lName, username, email } = req.body;
 	// User the connection
 	connection.query(
-		'UPDATE users SET firstName = ?, lastName = ?, email = ? WHERE id = ?',
-		[fName, lName, email, req.params.id],
+		'UPDATE user SET first_name = ?, last_name = ?, username = ?, email = ? WHERE id = ?',
+		[fName, lName, username, email, req.params.id],
 		(err, rows) => {
 			if (!err) {
 				// User the connection
 				connection.query(
-					'SELECT * FROM users WHERE id = ?',
+					'SELECT * FROM user WHERE id = ?',
 					[req.params.id],
 					(err, rows) => {
 						// when done with the connection, release it
@@ -76,7 +76,7 @@ exports.update = (req, res) => {
 exports.viewall = (req, res) => {
 	// User the connection
 	connection.query(
-		'SELECT * FROM users WHERE id = ?',
+		'SELECT * FROM user WHERE id = ?',
 		[req.params.id],
 		(err, rows) => {
 			if (!err) {
@@ -94,7 +94,7 @@ exports.find = (req, res) => {
 	let searchTerm = req.body.search;
 	// User the connection
 	connection.query(
-		'SELECT * FROM users WHERE firstName LIKE ? OR lastName LIKE ?',
+		'SELECT * FROM user WHERE first_name LIKE ? OR last_name LIKE ?',
 		['%' + searchTerm + '%', '%' + searchTerm + '%'],
 		(err, rows) => {
 			if (!err) {
@@ -114,12 +114,12 @@ exports.form = (req, res) => {
 // Add new user
 exports.create = (req, res) => {
 	// Getting data from form
-	const { fName, lName, email, password } = req.body;
+	const { fName, lName, username, email, password } = req.body;
 	const status = 'active';
 
 	connection.query(
 		// SQL command for searching same email in database
-		'SELECT email FROM users WHERE email = ?',
+		'SELECT email FROM user WHERE email = ?',
 		[email],
 		async (error, results) => {
 			if (error) {
@@ -136,10 +136,11 @@ exports.create = (req, res) => {
 
 			connection.query(
 				// Inserting into database in the table 'users'
-				'INSERT INTO users SET ?',
+				'INSERT INTO user SET ?',
 				{
-					firstName: fName,
-					lastName: lName,
+					first_name: fName,
+					last_name: lName,
+					username: username,
 					password: hashedPassword,
 					email: email,
 					status: status,
@@ -163,15 +164,16 @@ exports.create = (req, res) => {
 // Delete User
 exports.delete = (req, res) => {
 	connection.query(
-		'DELETE FROM users WHERE id = ?',
-		[req.params.id],
+		'UPDATE user SET status = ? WHERE id = ?',
+		['removed', req.params.id],
 		(err, rows) => {
 			if (!err) {
+				let removedUser = encodeURIComponent('User successeflly removed.');
 				res.redirect('/admin/user_list');
 			} else {
 				console.log(err);
 			}
-			console.log('The data from users table: \n', rows);
+			console.log('The data from beer table are: \n', rows);
 		}
 	);
 };

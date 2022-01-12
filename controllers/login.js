@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 exports.login = (req, res) => {
 	const email = req.body.email;
 	const password = req.body.password;
-	const sql = 'SELECT * FROM users WHERE email = ?';
+	const sql = 'SELECT * FROM user WHERE email = ?';
 	const search_query = mysql.format(sql, [email]);
 	const admin = 'admin@admin.com';
 

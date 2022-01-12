@@ -5,12 +5,12 @@ const { stat } = require('fs');
 
 exports.register = (req, res) => {
 	// Getting data from form on register page
-	const { fName, lName, email, password } = req.body;
+	const { fName, lName, username, email, password } = req.body;
 	const status = 'active';
 
 	conn.query(
 		// SQL command for searching same email in database
-		'SELECT email FROM users WHERE email = ?',
+		'SELECT email FROM user WHERE email = ?',
 		[email],
 		async (error, results) => {
 			if (error) {
@@ -27,10 +27,11 @@ exports.register = (req, res) => {
 
 			conn.query(
 				// Inserting into database in the table 'users'
-				'INSERT INTO users SET ?',
+				'INSERT INTO user SET ?',
 				{
-					firstName: fName,
-					lastName: lName,
+					first_name: fName,
+					last_name: lName,
+					username: username,
 					password: hashedPassword,
 					email: email,
 					status: status,
