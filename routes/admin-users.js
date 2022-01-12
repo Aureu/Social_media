@@ -10,9 +10,6 @@ router.get('/viewuser/:id', userController.viewall);
 router.post('/', userController.find);
 router.get('/adduser', userController.form);
 router.post('/adduser', userController.create);
-
-/* 
-
-router.get('/:id', userController.delete); */
+//router.get('/:id', userController.delete);
 
 module.exports = router;

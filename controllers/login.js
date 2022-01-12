@@ -1,7 +1,6 @@
 const conn = require('../database');
 const mysql = require('mysql');
 const bcrypt = require('bcryptjs');
-const session = require('express-session');
 
 // LOGIN
 exports.login = (req, res) => {

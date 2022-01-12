@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+const bcrypt = require('bcryptjs');
 const connection = require('../database');
 
 // View users
@@ -23,7 +24,8 @@ exports.view = (req, res) => {
 exports.edit = (req, res) => {
 	// User the Connection
 	connection.query(
-		'SELECT * FROM users WHERE id = ?'[req.params.id],
+		'SELECT * FROM users WHERE id = ?',
+		[req.params.id],
 		(err, rows) => {
 			if (!err) {
 				res.render('edit-user', { rows });
@@ -37,11 +39,11 @@ exports.edit = (req, res) => {
 
 // Update User
 exports.update = (req, res) => {
-	const { firstName, lastName, email } = req.body;
+	const { fName, lName, email } = req.body;
 	// User the connection
 	connection.query(
 		'UPDATE users SET firstName = ?, lastName = ?, email = ? WHERE id = ?',
-		[firstName, lastName, email, req.params.id],
+		[fName, lName, email, req.params.id],
 		(err, rows) => {
 			if (!err) {
 				// User the connection
@@ -54,7 +56,7 @@ exports.update = (req, res) => {
 						if (!err) {
 							res.render('edit-user', {
 								rows,
-								alert: `${firstName} has been updated.`,
+								alert: `${fName} has been updated.`,
 							});
 						} else {
 							console.log(err);
@@ -111,27 +113,49 @@ exports.form = (req, res) => {
 
 // Add new user
 exports.create = (req, res) => {
+	// Getting data from form
 	const { fName, lName, email, password } = req.body;
-	let searchTerm = req.body.search;
 	const status = 'active';
 
-	// User the connection
 	connection.query(
-		'INSERT INTO users SET ?',
-		{
-			firstName: fName,
-			lastName: lName,
-			password: password,
-			email: email,
-			status: status,
-		},
-		(err, rows) => {
-			if (!err) {
-				res.render('add-user', { alert: 'User added successfully.' });
-			} else {
-				console.log(err);
+		// SQL command for searching same email in database
+		'SELECT email FROM users WHERE email = ?',
+		[email],
+		async (error, results) => {
+			if (error) {
+				console.log(error);
 			}
-			console.log('The data from user table: \n', rows);
+			// Checking same email in database
+			if (results.length > 0) {
+				return res.render('add-user', {
+					alert: 'That email is already in use',
+				});
+			}
+			// Hashing password
+			let hashedPassword = await bcrypt.hash(password, 10);
+
+			connection.query(
+				// Inserting into database in the table 'users'
+				'INSERT INTO users SET ?',
+				{
+					firstName: fName,
+					lastName: lName,
+					password: hashedPassword,
+					email: email,
+					status: status,
+				},
+				(error, results) => {
+					if (error) {
+						console.log(error);
+					} else {
+						console.log(results);
+						// Redirect on account
+						return res.render('add-user', {
+							alert: 'User added successfully',
+						});
+					}
+				}
+			);
 		}
 	);
 };

@@ -2,6 +2,7 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const path = require('path');
+const session = require('express-session');
 
 const app = express();
 
@@ -25,7 +26,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/', require('./routes/pages'));
 app.use('/auth', require('./routes/auth'));
 // routes for admin
-app.use('/admin', require('./routes/users'));
+app.use('/admin', require('./routes/admin-users'));
+
+// Session middleware
+app.use(
+	session({
+		secret: 'keyboard cat',
+		resave: false,
+		saveUninitialized: true,
+		cookie: { maxAge: 60000 },
+	})
+);
 
 const PORT = 5000;
 
