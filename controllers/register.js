@@ -4,30 +4,30 @@ const bcrypt = require('bcryptjs');
 const { stat } = require('fs');
 
 exports.register = (req, res) => {
-	// Getting data from form on register page
+	// Získá data z register formu
 	const { fName, lName, username, email, password } = req.body;
 	const status = 'active';
 
 	conn.query(
-		// SQL command for searching same email in database
+		// sql příkaz, který hledá jestli daný email už neexistuje
 		'SELECT email FROM user WHERE email = ?',
 		[email],
 		async (error, results) => {
 			if (error) {
 				console.log(error);
 			}
-			// Checking same email in database
+			// Hledá stejný email
 			if (results.length > 0) {
 				return res.render('register', {
-					message: 'That email is already in use',
+					message: 'Tento email se již využívá',
 				});
 			}
-			// Hashing password
+			// Hashování hesla
 			let hashedPassword = await bcrypt.hash(password, 10);
 
 			conn.query(
-				// Inserting into database in the table 'users'
-				'INSERT INTO user SET ?',
+				// Vkládá data do tabulky users
+				'INSERT INTO users SET ?',
 				{
 					first_name: fName,
 					last_name: lName,
@@ -41,8 +41,8 @@ exports.register = (req, res) => {
 						console.log(error);
 					} else {
 						console.log(results);
-						// Redirect on account
-						res.redirect('/login');
+						// Přesměruje na přihlášení
+						res.redirect('/user/login');
 					}
 				}
 			);

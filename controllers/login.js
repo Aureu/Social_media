@@ -6,48 +6,48 @@ const bcrypt = require('bcryptjs');
 exports.login = (req, res) => {
 	const email = req.body.email;
 	const password = req.body.password;
-	const sql = 'SELECT * FROM user WHERE email = ?';
+	const sql = 'SELECT * FROM users WHERE email = ?';
 	const search_query = mysql.format(sql, [email]);
 	const admin = 'admin@admin.com';
 
 	conn.query(
 		search_query,
-		// Searching for a same email (Form input == database)
+		// Hledá jestli se email z inputu nachází v databázi
 		async (err, results) => {
 			if (err) throw err;
-			// If email is not found, sends message 'Email does not exist'
+			// Pokud nenajde stejný email, hodí message 'Zadaný email neexistuje
 			if (results.length == 0) {
 				return res.render('login', {
-					message: 'Email does not exist',
+					message: 'Zadaný email neexistuje',
 				});
 			} else {
-				// Checking for admin account
+				// Kontroluje jestli uživatel není admin
 				if (email == admin) {
-					// get the hashedPassword from result
+					// Získa zahashované heslo
 					const hashedPassword = results[0].password;
 					const isMatch = await bcrypt.compare(password, hashedPassword);
-					// Matching input password with hashed password from database
+					// Kontroluje jestli jsou hesla stejná
 					if (!isMatch) {
 						return res.render('login', {
-							message: 'Password incorrect',
+							message: 'Heslo není správné',
 						});
 					} else {
-						// If found redirect into admin dashboard
+						// Pokud je uživatel admin, hodí ho do admin sekce
 						res.redirect('/admin/user_list');
 					}
-					// If none admin account is found redirect into normal account login
+					// Pokud není admin, pokračuje v loginu jako normální uživatel
 				} else {
-					// get the hashedPassword from result
+					// Získá zahashované heslo
 					const hashedPassword = results[0].password;
 					const isMatch = await bcrypt.compare(password, hashedPassword);
-					// Matching input password with hashed password from database
+					// Kontroluje jestli jsou hesla stejná
 					if (!isMatch) {
 						return res.render('login', {
-							message: 'Password incorrect',
+							message: 'Heslo není správné',
 						});
 					} else {
-						// If found user is logged
-						res.redirect('/account');
+						// Pokud najde uživatele, přihlásí ho
+						res.redirect('/user/account');
 					}
 				}
 			}

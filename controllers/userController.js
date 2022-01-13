@@ -2,107 +2,92 @@ const mysql = require('mysql');
 const bcrypt = require('bcryptjs');
 const connection = require('../database');
 
-// View users
+// Zobrazení uživatelů do tabulky
 exports.view = (req, res) => {
-	// User the connection
 	connection.query(
-		'SELECT * FROM user WHERE status = "active"',
+		// Zobrazí všechny aktivní uživatele
+		'SELECT * FROM users WHERE status = "active"',
 		(err, rows) => {
-			// When done with the connection, release it
-			if (!err) {
-				let removedUser = req.query.removed;
-				res.render('user_list', { rows, removedUser });
-			} else {
+			// Pokud najde chybu, vypíše jí do konzole
+			if (err) {
 				console.log(err);
+			} else {
+				let removedUser = req.query.removed;
+				// Zobrazí view user_list
+				res.render('user_list', { rows, removedUser });
 			}
-			console.log('The data from users table: \n', rows);
+			console.log('Data z tabulky: \n', rows);
 		}
 	);
 };
 
-// Edit user
+// Přesměrování na 'edit-user' podle přesného id z tabulky
 exports.edit = (req, res) => {
-	// User the Connection
 	connection.query(
-		'SELECT * FROM user WHERE id = ?',
+		// Vezme uživatele podle jeho ID z tabulky
+		'SELECT * FROM users WHERE user_id = ?',
 		[req.params.id],
 		(err, rows) => {
-			if (!err) {
-				res.render('edit-user', { rows });
-			} else {
+			if (err) {
 				console.log(err);
+			} else {
+				// Zobrazí view edit-user
+				res.render('edit-user', { rows });
 			}
-			console.log('The data from user table: \n', rows);
+			console.log('Data z tabulky: \n', rows);
 		}
 	);
 };
 
-// Update User
+// Změnění dat uživatele
 exports.update = (req, res) => {
 	const { fName, lName, username, email } = req.body;
-	// User the connection
 	connection.query(
-		'UPDATE user SET first_name = ?, last_name = ?, username = ?, email = ? WHERE id = ?',
+		// Změní určitá data uživatele v databázi
+		'UPDATE users SET first_name = ?, last_name = ?, username = ?, email = ? WHERE id = ?',
 		[fName, lName, username, email, req.params.id],
 		(err, rows) => {
-			if (!err) {
-				// User the connection
+			// Vypisování chyb
+			if (err) {
+				console.log(err);
+			} else {
 				connection.query(
-					'SELECT * FROM user WHERE id = ?',
+					// Vybere uživatele podle ID a změní mu data
+					'SELECT * FROM users WHERE user_id = ?',
 					[req.params.id],
 					(err, rows) => {
-						// when done with the connection, release it
-
-						if (!err) {
+						if (err) {
+							console.log(err);
+						} else {
+							// Zobrazí view 'edit-user'
 							res.render('edit-user', {
 								rows,
 								alert: `${fName} has been updated.`,
 							});
-						} else {
-							console.log(err);
 						}
-						console.log('The data from user table: \n', rows);
+						console.log('Data z tabulky: \n', rows);
 					}
 				);
-			} else {
-				console.log(err);
 			}
-			console.log('The data from user table: \n', rows);
+			console.log('Data z tabulky: \n', rows);
 		}
 	);
 };
 
-// View Users
-exports.viewall = (req, res) => {
-	// User the connection
+// Zobrazování jednotlivých uživatelů a jejich informací
+exports.view_user = (req, res) => {
 	connection.query(
-		'SELECT * FROM user WHERE id = ?',
+		// Vybere uživatele podle jeho ID v tabulce
+		'SELECT * FROM users WHERE user_id = ?',
 		[req.params.id],
 		(err, rows) => {
-			if (!err) {
+			if (err) {
+				console.log(err);
+			} else {
+				// Zobrazí view 'view-user'
 				res.render('view-user', { rows });
-			} else {
-				console.log(err);
 			}
-			console.log('The data from user table: \n', rows);
-		}
-	);
-};
-
-// Find User by Search
-exports.find = (req, res) => {
-	let searchTerm = req.body.search;
-	// User the connection
-	connection.query(
-		'SELECT * FROM user WHERE first_name LIKE ? OR last_name LIKE ?',
-		['%' + searchTerm + '%', '%' + searchTerm + '%'],
-		(err, rows) => {
-			if (!err) {
-				res.render('user_list', { rows });
-			} else {
-				console.log(err);
-			}
-			console.log(' The data from user table: \n', rows);
+			console.log('Data z tabulky: \n', rows);
 		}
 	);
 };
@@ -111,32 +96,32 @@ exports.form = (req, res) => {
 	res.render('add-user');
 };
 
-// Add new user
+// Přídání nového uživatele
 exports.create = (req, res) => {
-	// Getting data from form
+	// Získává data z formu
 	const { fName, lName, username, email, password } = req.body;
 	const status = 'active';
 
 	connection.query(
-		// SQL command for searching same email in database
-		'SELECT email FROM user WHERE email = ?',
+		// SQL příkaz co hledá stejný email v DB
+		'SELECT email FROM users WHERE email = ?',
 		[email],
 		async (error, results) => {
 			if (error) {
 				console.log(error);
 			}
-			// Checking same email in database
+			// Hledání stejného emailu v DB
 			if (results.length > 0) {
 				return res.render('add-user', {
 					alert: 'That email is already in use',
 				});
 			}
-			// Hashing password
+			// Hashování hesla
 			let hashedPassword = await bcrypt.hash(password, 10);
 
 			connection.query(
-				// Inserting into database in the table 'users'
-				'INSERT INTO user SET ?',
+				// Vkládání dat z formu do tabulky users v DB
+				'INSERT INTO users SET ?',
 				{
 					first_name: fName,
 					last_name: lName,
@@ -150,9 +135,9 @@ exports.create = (req, res) => {
 						console.log(error);
 					} else {
 						console.log(results);
-						// Redirect on account
+						// Vrátí alert jestli se uživatel přidal
 						return res.render('add-user', {
-							alert: 'User added successfully',
+							alert: 'Uživatel byl přidán',
 						});
 					}
 				}
@@ -161,19 +146,19 @@ exports.create = (req, res) => {
 	);
 };
 
-// Delete User
+// Změnění aktivního uživatele na neaktivního uživatele
 exports.delete = (req, res) => {
 	connection.query(
-		'UPDATE user SET status = ? WHERE id = ?',
+		// SQL příkaz pro status
+		'UPDATE users SET status = ? WHERE user_id = ?',
 		['removed', req.params.id],
 		(err, rows) => {
 			if (!err) {
-				let removedUser = encodeURIComponent('User successeflly removed.');
 				res.redirect('/admin/user_list');
 			} else {
 				console.log(err);
 			}
-			console.log('The data from beer table are: \n', rows);
+			console.log('Data z tabulky: \n', rows);
 		}
 	);
 };

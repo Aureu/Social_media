@@ -1,0 +1,35 @@
+const express = require('express');
+const router = express.Router();
+const registerController = require('../controllers/register');
+const loginController = require('../controllers/login');
+
+// Route pro signup
+router.get('/signup', (req, res) => {
+	res.render('signup', {
+		title: 'SignUp',
+		style: 'signup.css',
+	});
+});
+
+// Route pro login
+router.get('/login', (req, res) => {
+	res.render('login', {
+		title: 'Login',
+		style: 'login.css',
+	});
+});
+
+// Route pro register s controllerem
+router.post('/register', registerController.register);
+// Route pro login s controllerem
+router.post('/login', loginController.login);
+
+// Route pro uživatele
+router.get('/account', (req, res) => {
+	res.render('account', {
+		title: 'Account',
+		style: 'account.css',
+	});
+});
+
+module.exports = router;

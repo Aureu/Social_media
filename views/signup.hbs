@@ -5,15 +5,19 @@
 		<div class='col-md-6'>
 			<div class='card'>
 				<header class='card-header'>
-					<a href='/login' class='float-right btn btn-outline-primary mt-1'>Log
-						in</a>
-					<h4 class='card-title mt-2'>Sign up</h4>
+					<a
+						href='/user/login'
+						class='float-right btn btn-outline-primary mt-1'
+					>Přihlásit se</a>
+					<h4 class='card-title mt-2'>Zaregistrovat se</h4>
 				</header>
 				<article class='card-body'>
-					<form action='/auth/register' method='POST'>
+					<!-- Register formulář -->
+					<form action='/user/register' method='POST'>
 						<div class='form-row'>
+							<!-- Input na jméno -->
 							<div class='col form-group'>
-								<label>First name </label>
+								<label>Jméno </label>
 								<input
 									type='text'
 									class='form-control'
@@ -23,8 +27,9 @@
 								/>
 							</div>
 							<!-- form-group end.// -->
+							<!-- Input na příjmení -->
 							<div class='col form-group'>
-								<label>Last name</label>
+								<label>Přijmení</label>
 								<input
 									type='text'
 									class='form-control'
@@ -36,9 +41,10 @@
 							<!-- form-group end.// -->
 						</div>
 						<!-- form-row end.// -->
+						<!-- Input pro přezdívku -->
 						<div class='form-row'>
 							<div class='col form-group'>
-								<label for='username'>Username</label>
+								<label for='username'>Přezdívka</label>
 								<input
 									type='text'
 									class='form-control'
@@ -48,8 +54,9 @@
 								/>
 							</div>
 						</div>
+						<!-- Input pro email -->
 						<div class='form-group'>
-							<label>Email address</label>
+							<label>Email</label>
 							<input
 								type='email'
 								class='form-control'
@@ -59,8 +66,9 @@
 							/>
 						</div>
 						<!-- form-group end.// -->
+						<!-- input pro heslo -->
 						<div class='form-group'>
-							<label>Create password</label>
+							<label>Heslo</label>
 							<input
 								class='form-control'
 								type='password'
@@ -71,7 +79,7 @@
 						<!-- form-group end.// -->
 						<div class='form-group'>
 							<button type='submit' class='btn btn-primary btn-block'>
-								Register
+								Registrovat se
 							</button>
 						</div>
 						<!-- form-group// -->
@@ -79,8 +87,8 @@
 					</form>
 				</article>
 				<!-- card-body end .// -->
-				<div class='border-top card-body text-center'>Have an account?
-					<a href='/login'>Log In</a></div>
+				<div class='border-top card-body text-center'>Máte účet?
+					<a href='/user/login'>Log In</a></div>
 			</div>
 			<!-- card.// -->
 		</div>

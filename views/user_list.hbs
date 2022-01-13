@@ -1,14 +1,4 @@
-{{#if removedUser}}
-	<div class='alert alert-success alert-dismissible fade show' role='alert'>
-		User has been removed.
-		<button
-			type='button'
-			class='btn-close'
-			data-bs-dismiss='alert'
-			aria-label='Close'
-		></button>
-	</div>
-{{/if}}
+
 
 <div class='row'>
 	<div class='col-6'>
@@ -23,53 +13,44 @@
 	</div>
 </div>
 
-<form class='d-flex' method='POST' action='/' novalidate>
-	<input
-		class='form-control me-2'
-		type='search'
-		placeholder='Search'
-		name='search'
-		aria-label='Search'
-	/>
-	<button class='btn btn-outline-light' type='submit'>Search</button>
 </form>
 <table class='table table-bordered'>
 	<thead class='thead-dark'>
 		<tr>
 			<th scope='col'>#</th>
-			<th scope='col'>First Name</th>
-			<th scope='col'>Last Name</th>
-			<th scope='col'>Username</th>
+			<th scope='col'>Jméno</th>
+			<th scope='col'>Přijmení</th>
+			<th scope='col'>Přezdívka</th>
 			<th scope='col'>Email</th>
-			<th scope='col' class='text-end'>Action</th>
+			<th scope='col' class='text-end'>Akce</th>
 		</tr>
 	</thead>
 	<tbody>
 
 		{{#each rows}}
 			<tr>
-				<th scope='row'>{{this.id}}</th>
+				<th scope='row'>{{this.user_id}}</th>
 				<td>{{this.first_name}}</td>
 				<td>{{this.last_name}}</td>
 				<td>{{this.username}}</td>
 				<td>{{this.email}}</td>
 				<td class='text-end'>
 					<a
-						href='/admin/viewuser/{{this.id}}'
+						href='/admin/viewuser/{{this.user_id}}'
 						type='button'
 						class='btn btn-light btn-small'
-					><i class='bi bi-eye'></i> View</a>
+					><i class='bi bi-eye'></i> Zobrazit</a>
 					<a
-						href='/admin/edituser/{{this.id}}'
+						href='/admin/edituser/{{this.user_id}}'
 						type='button'
 						class='btn btn-light btn-small'
 					><i class='bi bi-pencil'></i>
-						Edit</a>
+						Upravit</a>
 					<a
-						href='/admin/delete/{{this.id}}'
+						href='/admin/delete/{{this.user_id}}'
 						type='button'
 						class='btn btn-light btn-small'
-					><i class='bi bi-person-x'></i> Delete</a>
+					><i class='bi bi-person-x'></i> Smazat</a>
 				</td>
 			</tr>
 		{{/each}}
