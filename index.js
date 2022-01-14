@@ -45,4 +45,4 @@ app.use(cookieParser());
 
 const PORT = 5000;
 
-app.listen(PORT, () => console.log(`This app is listening on port ${PORT}`));
+app.listen(PORT, () => console.log(`Aplikace běží na portu 5000 ${PORT}`));

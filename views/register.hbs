@@ -1,5 +1,5 @@
 <div class='container'>
-	<br />
+	<br /><br /><br /><br /><br /><br />
 
 	<div class='row justify-content-center'>
 		<div class='col-md-6'>
@@ -13,7 +13,7 @@
 				</header>
 				<article class='card-body'>
 					<!-- Register formulář -->
-					<form action='/user/register' method='POST'>
+					<form action='/user/signup' method='POST'>
 						<div class='form-row'>
 							<!-- Input na jméno -->
 							<div class='col form-group'>
@@ -26,7 +26,6 @@
 									id='fName'
 								/>
 							</div>
-							<!-- form-group end.// -->
 							<!-- Input na příjmení -->
 							<div class='col form-group'>
 								<label>Přijmení</label>
@@ -38,9 +37,7 @@
 									id='lName'
 								/>
 							</div>
-							<!-- form-group end.// -->
 						</div>
-						<!-- form-row end.// -->
 						<!-- Input pro přezdívku -->
 						<div class='form-row'>
 							<div class='col form-group'>
@@ -65,7 +62,6 @@
 								id='email'
 							/>
 						</div>
-						<!-- form-group end.// -->
 						<!-- input pro heslo -->
 						<div class='form-group'>
 							<label>Heslo</label>
@@ -76,28 +72,21 @@
 								id='password  '
 							/>
 						</div>
-						<!-- form-group end.// -->
 						<div class='form-group'>
 							<button type='submit' class='btn btn-primary btn-block'>
 								Registrovat se
 							</button>
 						</div>
-						<!-- form-group// -->
-
+						{{message}}
 					</form>
 				</article>
-				<!-- card-body end .// -->
 				<div class='border-top card-body text-center'>Máte účet?
 					<a href='/user/login'>Log In</a></div>
 			</div>
-			<!-- card.// -->
 		</div>
-		<!-- col.//-->
 
 	</div>
-	<!-- row.//-->
 
 </div>
-<!--container end.//-->
 
 <br /><br />

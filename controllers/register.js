@@ -10,7 +10,7 @@ exports.register = (req, res) => {
 
 	conn.query(
 		// sql příkaz, který hledá jestli daný email už neexistuje
-		'SELECT email FROM user WHERE email = ?',
+		'SELECT email FROM users WHERE email = ?',
 		[email],
 		async (error, results) => {
 			if (error) {
@@ -19,7 +19,7 @@ exports.register = (req, res) => {
 			// Hledá stejný email
 			if (results.length > 0) {
 				return res.render('register', {
-					message: 'Tento email se již využívá',
+					message: 'Zadaný email se již využívá',
 				});
 			}
 			// Hashování hesla
@@ -29,10 +29,10 @@ exports.register = (req, res) => {
 				// Vkládá data do tabulky users
 				'INSERT INTO users SET ?',
 				{
-					first_name: fName,
-					last_name: lName,
-					username: username,
-					password: hashedPassword,
+					jmeno: fName,
+					prijmeni: lName,
+					prezdivka: username,
+					heslo: hashedPassword,
 					email: email,
 					status: status,
 				},

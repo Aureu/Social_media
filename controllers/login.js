@@ -24,12 +24,12 @@ exports.login = (req, res) => {
 				// Kontroluje jestli uživatel není admin
 				if (email == admin) {
 					// Získa zahashované heslo
-					const hashedPassword = results[0].password;
+					const hashedPassword = results[0].heslo;
 					const isMatch = await bcrypt.compare(password, hashedPassword);
 					// Kontroluje jestli jsou hesla stejná
 					if (!isMatch) {
 						return res.render('login', {
-							message: 'Heslo není správné',
+							message: 'Zadané heslo není správné',
 						});
 					} else {
 						// Pokud je uživatel admin, hodí ho do admin sekce
@@ -38,12 +38,12 @@ exports.login = (req, res) => {
 					// Pokud není admin, pokračuje v loginu jako normální uživatel
 				} else {
 					// Získá zahashované heslo
-					const hashedPassword = results[0].password;
+					const hashedPassword = results[0].heslo;
 					const isMatch = await bcrypt.compare(password, hashedPassword);
 					// Kontroluje jestli jsou hesla stejná
 					if (!isMatch) {
 						return res.render('login', {
-							message: 'Heslo není správné',
+							message: 'Zadané heslo není správné',
 						});
 					} else {
 						// Pokud najde uživatele, přihlásí ho

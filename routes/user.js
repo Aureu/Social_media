@@ -20,7 +20,7 @@ router.get('/login', (req, res) => {
 });
 
 // Route pro register s controllerem
-router.post('/register', registerController.register);
+router.post('/signup', registerController.register);
 // Route pro login s controllerem
 router.post('/login', loginController.login);
 

@@ -44,7 +44,7 @@ exports.update = (req, res) => {
 	const { fName, lName, username, email } = req.body;
 	connection.query(
 		// Změní určitá data uživatele v databázi
-		'UPDATE users SET first_name = ?, last_name = ?, username = ?, email = ? WHERE id = ?',
+		'UPDATE users SET jmeno = ?, prijmeni = ?, prezdivka = ?, email = ? WHERE user_id = ?',
 		[fName, lName, username, email, req.params.id],
 		(err, rows) => {
 			// Vypisování chyb
@@ -123,10 +123,10 @@ exports.create = (req, res) => {
 				// Vkládání dat z formu do tabulky users v DB
 				'INSERT INTO users SET ?',
 				{
-					first_name: fName,
-					last_name: lName,
-					username: username,
-					password: hashedPassword,
+					jmeno: fName,
+					prijmeni: lName,
+					prezdivka: username,
+					heslo: hashedPassword,
 					email: email,
 					status: status,
 				},
