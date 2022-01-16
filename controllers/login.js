@@ -47,7 +47,7 @@ exports.login = (req, res) => {
 						});
 					} else {
 						// Pokud najde uživatele, přihlásí ho
-						res.redirect('/user/account');
+						res.redirect('/profile/profile');
 					}
 				}
 			}

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const registerController = require('../controllers/register');
+const signupController = require('../controllers/signup');
 const loginController = require('../controllers/login');
 
 // Route pro signup
@@ -20,16 +20,8 @@ router.get('/login', (req, res) => {
 });
 
 // Route pro register s controllerem
-router.post('/signup', registerController.register);
+router.post('/signup', signupController.signup);
 // Route pro login s controllerem
 router.post('/login', loginController.login);
-
-// Route pro uživatele
-router.get('/account', (req, res) => {
-	res.render('account', {
-		title: 'Account',
-		style: 'account.css',
-	});
-});
 
 module.exports = router;

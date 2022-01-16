@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: false }));
 // Routes pro stránky
 app.use('/', require('./routes/pages'));
 // routes pro uživatele
-app.use('/user', require('./routes/user'));
+app.use('/auth', require('./routes/auth'));
 // routes pro admina
 app.use('/admin', require('./routes/admin-users'));
 

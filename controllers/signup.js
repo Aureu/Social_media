@@ -1,9 +1,8 @@
 const jwt = require('jsonwebtoken');
 const conn = require('../database');
 const bcrypt = require('bcryptjs');
-const { stat } = require('fs');
 
-exports.register = (req, res) => {
+exports.signup = (req, res) => {
 	// Získá data z register formu
 	const { fName, lName, username, email, password } = req.body;
 	const status = 'active';
@@ -18,7 +17,7 @@ exports.register = (req, res) => {
 			}
 			// Hledá stejný email
 			if (results.length > 0) {
-				return res.render('register', {
+				return res.render('signup', {
 					message: 'Zadaný email se již využívá',
 				});
 			}
@@ -42,7 +41,7 @@ exports.register = (req, res) => {
 					} else {
 						console.log(results);
 						// Přesměruje na přihlášení
-						res.redirect('/user/login');
+						res.redirect('/auth/login');
 					}
 				}
 			);
