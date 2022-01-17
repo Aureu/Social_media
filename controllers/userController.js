@@ -14,7 +14,11 @@ exports.view = (req, res) => {
 			} else {
 				let removedUser = req.query.removed;
 				// Zobrazí view user_list
-				res.render('user_list', { rows, removedUser });
+				return res.render('user_list', {
+					rows,
+					removedUser,
+					style: 'user_list.css',
+				});
 			}
 			console.log('Data z tabulky: \n', rows);
 		}
@@ -32,7 +36,7 @@ exports.edit = (req, res) => {
 				console.log(err);
 			} else {
 				// Zobrazí view edit-user
-				res.render('edit-user', { rows });
+				res.render('edit-user', { rows, style: 'edit-user.css' });
 			}
 			console.log('Data z tabulky: \n', rows);
 		}
@@ -63,6 +67,7 @@ exports.update = (req, res) => {
 							res.render('edit-user', {
 								rows,
 								alert: `${fName} has been updated.`,
+								style: 'edit-user.css',
 							});
 						}
 						console.log('Data z tabulky: \n', rows);
@@ -93,7 +98,9 @@ exports.view_user = (req, res) => {
 };
 
 exports.form = (req, res) => {
-	res.render('add-user');
+	res.render('add-user', {
+		style: 'add-user.css',
+	});
 };
 
 // Přídání nového uživatele
@@ -114,6 +121,7 @@ exports.create = (req, res) => {
 			if (results.length > 0) {
 				return res.render('add-user', {
 					alert: 'That email is already in use',
+					style: 'add-user.css',
 				});
 			}
 			// Hashování hesla

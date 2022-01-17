@@ -1,59 +1,63 @@
+<section class='ftco-section pt-5'>
+	<div class='container'>
+		<div class='row'>
+			<div class='col-6'>
+				<h1>Users</h1>
+			</div>
+			<div class='col-6 d-flex justify-content-end'>
+				<a
+					href='/admin/adduser'
+					type='button'
+					class='add-btn btn align-self-center'
+				>+ add user</a>
+			</div>
+		</div>
+		<div class='row'>
+			<div class='col-md-12'>
+				<div class='table-wrap'>
+					<table class='table table-hover'>
+						<thead>
+							<tr>
+								<th scope='col'>#</th>
+								<th scope>Jméno a příjmení</th>
+								<th scope='col'>Role</th>
+								<th scope='col'>Email</th>
+								<th scope='col'>Akce</th>
+							</tr>
+						</thead>
+						<tbody>
 
+							{{#each rows}}
+								<tr>
+									<th scope='row'>{{this.user_id}}</th>
+									<td>{{this.jmeno}} {{this.prijmeni}}</td>
+									<td>{{this.role}}</td>
+									<td>{{this.email}}</td>
+									<td class='text-end'>
+										<a
+											href='/admin/viewuser/{{this.user_id}}'
+											type='button'
+											class='btn'
+										><i class='bi bi-eye'></i> Zobrazit</a>
+										<a
+											href='/admin/edituser/{{this.user_id}}'
+											type='button'
+											class='btn'
+										><i class='bi bi-pencil'></i>
+											Upravit</a>
+										<a
+											href='/admin/delete/{{this.user_id}}'
+											type='button'
+											class='btn'
+										><i class='bi bi-person-x'></i> Smazat</a>
+									</td>
+								</tr>
+							{{/each}}
 
-<div class='row'>
-	<div class='col-6'>
-		<h1>Users</h1>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div class='col-6 d-flex justify-content-end'>
-		<a
-			href='/admin/adduser'
-			type='button'
-			class='btn btn-primary align-self-center'
-		>+ add user</a>
-	</div>
-</div>
-
-</form>
-<table class='table table-bordered'>
-	<thead class='thead-dark'>
-		<tr>
-			<th scope='col'>#</th>
-			<th scope='col'>Jméno</th>
-			<th scope='col'>Přijmení</th>
-			<th scope='col'>Přezdívka</th>
-			<th scope='col'>Email</th>
-			<th scope='col' class='text-end'>Akce</th>
-		</tr>
-	</thead>
-	<tbody>
-
-		{{#each rows}}
-			<tr>
-				<th scope='row'>{{this.user_id}}</th>
-				<td>{{this.jmeno}}</td>
-				<td>{{this.prijmeni}}</td>
-				<td>{{this.prezdivka}}</td>
-				<td>{{this.email}}</td>
-				<td class='text-end'>
-					<a
-						href='/admin/viewuser/{{this.user_id}}'
-						type='button'
-						class='btn btn-light btn-small'
-					><i class='bi bi-eye'></i> Zobrazit</a>
-					<a
-						href='/admin/edituser/{{this.user_id}}'
-						type='button'
-						class='btn btn-light btn-small'
-					><i class='bi bi-pencil'></i>
-						Upravit</a>
-					<a
-						href='/admin/delete/{{this.user_id}}'
-						type='button'
-						class='btn btn-light btn-small'
-					><i class='bi bi-person-x'></i> Smazat</a>
-				</td>
-			</tr>
-		{{/each}}
-
-	</tbody>
-</table>
+</section>

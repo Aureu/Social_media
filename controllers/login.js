@@ -19,6 +19,7 @@ exports.login = (req, res) => {
 			if (results.length == 0) {
 				return res.render('login', {
 					message: 'Zadaný email neexistuje',
+					style: 'login.css',
 				});
 			} else {
 				// Kontroluje jestli uživatel není admin
@@ -30,6 +31,7 @@ exports.login = (req, res) => {
 					if (!isMatch) {
 						return res.render('login', {
 							message: 'Zadané heslo není správné',
+							style: 'login.css',
 						});
 					} else {
 						// Pokud je uživatel admin, hodí ho do admin sekce
@@ -47,7 +49,7 @@ exports.login = (req, res) => {
 						});
 					} else {
 						// Pokud najde uživatele, přihlásí ho
-						res.redirect('/profile/profile');
+						res.redirect('');
 					}
 				}
 			}

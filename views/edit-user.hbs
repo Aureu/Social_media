@@ -15,6 +15,6 @@
 <!-- Zobrazení user-form z Partials -->
 {{#each rows}}
 <form class="row g-3 needs-validation" method="POST" action="/admin/edituser/{{this.user_id}}" novalidate> 
-  {{> user-form}}
+  {{> user-form-nopassword}}
 </form>
 {{/each}}

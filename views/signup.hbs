@@ -2,86 +2,86 @@
 	<br /><br /><br /><br /><br /><br />
 
 	<div class='row justify-content-center'>
-		<div class='col-md-6'>
+		<div class='col-md-5'>
 			<div class='card'>
 				<header class='card-header'>
-					<a
-						href='/auth/login'
-						class='float-right btn btn-outline-primary mt-1'
-					>Přihlásit se</a>
-					<h4 class='card-title mt-2'>Zaregistrovat se</h4>
+
+					<h4 class='card-title mt-2'>Registrace</h4>
 				</header>
 				<article class='card-body'>
 					<!-- Register formulář -->
-					<form action='/auth/signup' method='POST'>
+					<form action='/signup' method='POST'>
 						<div class='form-row'>
 							<!-- Input na jméno -->
 							<div class='col form-group'>
-								<label>Jméno </label>
 								<input
 									type='text'
 									class='form-control'
-									placeholder=''
+									placeholder='Jméno'
 									name='fName'
 									id='fName'
+									required
 								/>
 							</div>
 							<!-- Input na příjmení -->
 							<div class='col form-group'>
-								<label>Přijmení</label>
+
 								<input
 									type='text'
 									class='form-control'
-									placeholder=' '
+									placeholder='Přijmení '
 									name='lName'
 									id='lName'
+									required
 								/>
 							</div>
 						</div>
 						<!-- Input pro přezdívku -->
 						<div class='form-row'>
 							<div class='col form-group'>
-								<label for='username'>Přezdívka</label>
+
 								<input
 									type='text'
 									class='form-control'
-									placeholder=''
+									placeholder='Přezdívka'
 									name='username'
 									id='username'
+									required
 								/>
 							</div>
 						</div>
 						<!-- Input pro email -->
 						<div class='form-group'>
-							<label>Email</label>
 							<input
 								type='email'
 								class='form-control'
-								placeholder=''
+								placeholder='Email'
 								name='email'
 								id='email'
+								required
 							/>
 						</div>
 						<!-- input pro heslo -->
 						<div class='form-group'>
-							<label>Heslo</label>
 							<input
 								class='form-control'
 								type='password'
+								placeholder='Heslo'
 								name='password'
 								id='password  '
+								required
 							/>
 						</div>
 						<div class='form-group'>
-							<button type='submit' class='btn btn-primary btn-block'>
-								Registrovat se
+							<button type='submit' class='btn btn-block'>
+								Zaregistrovat se
 							</button>
 						</div>
 						{{message}}
 					</form>
 				</article>
-				<div class='border-top card-body text-center'>Máte účet?
-					<a href='/auth/login'>Log In</a></div>
+				<div class='card-body text-center'>Máte už účet?
+					<a href='/login'>Přihlásit se</a></div>
 			</div>
 		</div>
 

@@ -6,6 +6,7 @@ exports.signup = (req, res) => {
 	// Získá data z register formu
 	const { fName, lName, username, email, password } = req.body;
 	const status = 'active';
+	const role = 'personal';
 
 	conn.query(
 		// sql příkaz, který hledá jestli daný email už neexistuje
@@ -19,6 +20,7 @@ exports.signup = (req, res) => {
 			if (results.length > 0) {
 				return res.render('signup', {
 					message: 'Zadaný email se již využívá',
+					style: 'signup.css',
 				});
 			}
 			// Hashování hesla
@@ -34,6 +36,7 @@ exports.signup = (req, res) => {
 					heslo: hashedPassword,
 					email: email,
 					status: status,
+					type: role,
 				},
 				(error, results) => {
 					if (error) {
@@ -41,7 +44,7 @@ exports.signup = (req, res) => {
 					} else {
 						console.log(results);
 						// Přesměruje na přihlášení
-						res.redirect('/auth/login');
+						res.redirect('/login');
 					}
 				}
 			);

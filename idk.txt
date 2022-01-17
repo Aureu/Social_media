@@ -1,1 +1,0 @@
-Udělat uživatelské rozhraní, zatím nějak moc nestylovat, začít dělat na nastavení uživatele
