@@ -27,4 +27,4 @@ app.use('/admin', require('./routes/admin-users'));
 
 const PORT = 5000;
 
-app.listen(PORT, () => console.log(`Aplikace běží na portu 5000 ${PORT}`));
+app.listen(PORT, () => console.log(`Aplikace běží na portu  ${PORT}`));

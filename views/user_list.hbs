@@ -5,22 +5,18 @@
 				<h1>Users</h1>
 			</div>
 			<div class='col-6 d-flex justify-content-end'>
-				<a
-					href='/admin/adduser'
-					type='button'
-					class='add-btn btn align-self-center'
-				>+ add user</a>
+				<a href='/admin/adduser' type='button' class='btn align-self-center'>+
+					add user</a>
 			</div>
 		</div>
 		<div class='row'>
 			<div class='col-md-12'>
 				<div class='table-wrap'>
-					<table class='table table-hover'>
+					<table class='table table-dark table-hover'>
 						<thead>
 							<tr>
 								<th scope='col'>#</th>
-								<th scope>Jméno a příjmení</th>
-								<th scope='col'>Role</th>
+								<th scope='col'>Jméno a příjmení</th>
 								<th scope='col'>Email</th>
 								<th scope='col'>Akce</th>
 							</tr>
@@ -31,7 +27,6 @@
 								<tr>
 									<th scope='row'>{{this.user_id}}</th>
 									<td>{{this.jmeno}} {{this.prijmeni}}</td>
-									<td>{{this.role}}</td>
 									<td>{{this.email}}</td>
 									<td class='text-end'>
 										<a

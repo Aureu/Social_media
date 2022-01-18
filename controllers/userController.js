@@ -108,6 +108,7 @@ exports.create = (req, res) => {
 	// Získává data z formu
 	const { fName, lName, username, email, password } = req.body;
 	const status = 'active';
+	const type = 'personal';
 
 	connection.query(
 		// SQL příkaz co hledá stejný email v DB
@@ -137,6 +138,7 @@ exports.create = (req, res) => {
 					heslo: hashedPassword,
 					email: email,
 					status: status,
+					type: type,
 				},
 				(error, results) => {
 					if (error) {
@@ -146,6 +148,7 @@ exports.create = (req, res) => {
 						// Vrátí alert jestli se uživatel přidal
 						return res.render('add-user', {
 							alert: 'Uživatel byl přidán',
+							style: 'add-user.css',
 						});
 					}
 				}
