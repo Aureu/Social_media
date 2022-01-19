@@ -6,7 +6,6 @@ exports.signup = (req, res) => {
 	// Získá data z register formu
 	const { fName, lName, username, email, password } = req.body;
 	const status = 'active';
-	const role = 'personal';
 
 	conn.query(
 		// sql příkaz, který hledá jestli daný email už neexistuje
@@ -36,7 +35,6 @@ exports.signup = (req, res) => {
 					heslo: hashedPassword,
 					email: email,
 					status: status,
-					type: role,
 				},
 				(error, results) => {
 					if (error) {

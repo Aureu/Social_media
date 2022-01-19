@@ -18,10 +18,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Routes pro stránky
-app.use('/', require('./routes/pages'));
-// routes pro uživatele
-app.use('/auth', require('./routes/auth'));
+// routes pro přihlašování a main page
+app.use('/', require('./routes/auth'));
 // routes pro admina
 app.use('/admin', require('./routes/admin-users'));
 

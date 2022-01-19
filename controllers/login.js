@@ -4,10 +4,10 @@ const bcrypt = require('bcryptjs');
 
 // LOGIN
 exports.login = (req, res) => {
-	const email = req.body.email;
+	const username = req.body.username;
 	const password = req.body.password;
-	const sql = 'SELECT * FROM users WHERE email = ?';
-	const search_query = mysql.format(sql, [email]);
+	const sql = 'SELECT * FROM users WHERE prezdivka = ?';
+	const search_query = mysql.format(sql, [username]);
 	const admin = 'admin@admin.com';
 
 	conn.query(
@@ -18,12 +18,12 @@ exports.login = (req, res) => {
 			// Pokud nenajde stejný email, hodí message 'Zadaný email neexistuje
 			if (results.length == 0) {
 				return res.render('login', {
-					message: 'Zadaný email neexistuje',
+					message: 'Zadaný uživatel neexistuje',
 					style: 'login.css',
 				});
 			} else {
-				// Kontroluje jestli uživatel není admin	
-				if (email == admin) {
+				// Kontroluje jestli uživatel není admin
+				if (username == 'admin') {
 					// Získa zahashované heslo
 					const hashedPassword = results[0].heslo;
 					const isMatch = await bcrypt.compare(password, hashedPassword);
@@ -49,7 +49,10 @@ exports.login = (req, res) => {
 						});
 					} else {
 						// Pokud najde uživatele, přihlásí ho
-						res.redirect('');
+						return res.render('index', {
+							style: 'index.css',
+							prezdivka: username,
+						});
 					}
 				}
 			}

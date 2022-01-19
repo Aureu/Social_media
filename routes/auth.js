@@ -19,6 +19,14 @@ router.get('/login', (req, res) => {
 	});
 });
 
+// Route pro index page
+router.get('/index', (req, res) => {
+	res.render('index', {
+		title: 'Index',
+		style: 'index.css',
+	});
+});
+
 // Route pro register s controllerem
 router.post('/signup', signupController.signup);
 // Route pro login s controllerem
