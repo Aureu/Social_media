@@ -22,7 +22,7 @@ exports.login = (req, res) => {
 					style: 'login.css',
 				});
 			} else {
-				// Kontroluje jestli uživatel není admin
+				// Kontroluje jestli uživatel není admin	
 				if (email == admin) {
 					// Získa zahashované heslo
 					const hashedPassword = results[0].heslo;

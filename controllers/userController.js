@@ -12,11 +12,9 @@ exports.view = (req, res) => {
 			if (err) {
 				console.log(err);
 			} else {
-				let removedUser = req.query.removed;
 				// Zobrazí view user_list
 				return res.render('user_list', {
 					rows,
-					removedUser,
 					style: 'user_list.css',
 				});
 			}
@@ -90,7 +88,7 @@ exports.view_user = (req, res) => {
 				console.log(err);
 			} else {
 				// Zobrazí view 'view-user'
-				res.render('view-user', { rows });
+				res.render('view-user', { rows, style: 'view-user.css' });
 			}
 			console.log('Data z tabulky: \n', rows);
 		}
@@ -138,7 +136,6 @@ exports.create = (req, res) => {
 					heslo: hashedPassword,
 					email: email,
 					status: status,
-					type: type,
 				},
 				(error, results) => {
 					if (error) {

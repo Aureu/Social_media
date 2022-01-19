@@ -1,0 +1,16 @@
+body {
+	background-color: #1d1d1d;
+	color: white;
+}
+
+.breadcrumb {
+	background-color: #1d1d1d;
+}
+
+a {
+	color: #8e73f0;
+}
+
+a:hover {
+	color: #715ac4;
+}
