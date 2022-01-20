@@ -69,7 +69,7 @@ exports.update = (req, res) => {
 							// Zobrazí view 'edit-user'
 							res.render('edit-user', {
 								rows,
-								alert: `${fName} has been updated.`,
+								alert: `${fName} byl upraven.`,
 								style: 'edit-user.css',
 								title: 'update',
 							});
@@ -129,7 +129,7 @@ exports.create = (req, res) => {
 			// Hledání stejného emailu v DB
 			if (results.length > 0) {
 				return res.render('add-user', {
-					alert: 'That email is already in use',
+					alert: 'Tento email se již využívá',
 					style: 'add-user.css',
 					title: 'add',
 				});
