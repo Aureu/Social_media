@@ -7,11 +7,10 @@ exports.login = (req, res) => {
 	const username = req.body.username;
 	const password = req.body.password;
 	const sql = 'SELECT * FROM users WHERE prezdivka = ?';
-	const search_query = mysql.format(sql, [username]);
-	const admin = 'admin@admin.com';
+	const vyhledavani = mysql.format(sql, [username]);
 
 	conn.query(
-		search_query,
+		vyhledavani,
 		// Hledá jestli se email z inputu nachází v databázi
 		async (err, results) => {
 			if (err) throw err;
