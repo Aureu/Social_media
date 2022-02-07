@@ -3,7 +3,7 @@ const mysql = require('mysql');
 const bcrypt = require('bcryptjs');
 
 // LOGIN
-exports.login = (req, res) => {
+/* exports.login = (req, res) => {
 	const username = req.body.username;
 	const password = req.body.password;
 	const sql = 'SELECT * FROM users WHERE prezdivka = ?';
@@ -57,4 +57,4 @@ exports.login = (req, res) => {
 			}
 		}
 	);
-};
+}; */

@@ -4,7 +4,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const app = express();
-
+// Získávání controllerů
+const registerRouter = require('./controllers/register');
 // Handlebars Middleware
 const handlebars = exphbs.create({ extname: '.hbs' });
 app.engine('.hbs', handlebars.engine);
@@ -18,10 +19,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// routes pro přihlašování a main page
+/* // routes pro přihlašování a main page
 app.use('/', require('./routes/auth'));
 // routes pro admina
 app.use('/admin', require('./routes/admin-users'));
+ */
+app.use('/register', registerRouter);
 
 const PORT = 5000;
 

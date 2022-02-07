@@ -1,8 +1,37 @@
-const jwt = require('jsonwebtoken');
-const conn = require('../database');
-const bcrypt = require('bcryptjs');
+const express = require('express');
+const router = express.Router();
+const bcrypt = require('bcrypt');
+const Register = require('../models/register');
 
-exports.signup = (req, res) => {
+// Zobrazení stránky
+router.get('/', (req, res) => {
+	res.render('register', {
+		title: 'Register',
+		style: 'signup.css',
+	});
+});
+
+router.post('/', async (req, res) => {
+	try {
+		const { jmeno, prijmeni, prezdivka, email, heslo } = req.body;
+		const status = 'active';
+		console.log(req.body);
+
+		const hashedPassword = await bcrypt.hash(heslo, 10);
+		Register.register(
+			jmeno,
+			prijmeni,
+			prezdivka,
+			email,
+			hashedPassword,
+			status
+		);
+	} catch {
+		res.redirect('/register');
+	}
+});
+
+/* exports.signup = (req, res) => {
 	// Získá data z register formu
 	const { fName, lName, username, email, password } = req.body;
 	const status = 'active';
@@ -48,4 +77,6 @@ exports.signup = (req, res) => {
 			);
 		}
 	);
-};
+}; */
+
+module.exports = router;
