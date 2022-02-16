@@ -1,6 +1,76 @@
+const express = require('express');
+const router = express.Router();
+const bcrypt = require('bcrypt');
+const passport = require('passport');
+const session = require('express-session');
 const conn = require('../database');
-const mysql = require('mysql');
-const bcrypt = require('bcryptjs');
+const LocalStrategy = require('passport-local').Strategy;
+
+const app = express();
+
+passport.serializeUser(function (user, done) {
+	done(null, user.id);
+});
+
+passport.deserializeUser(function (id, done) {
+	conn.query('SELECT * FROM users WHERE id = ' + id, function (err, rows) {
+		done(err, rows[0]);
+	});
+});
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(
+	'local',
+	new LocalStrategy(
+		{
+			usernameField: 'email',
+			passwordField: 'password',
+			passReqToCallback: true,
+		},
+		function (req, res, email, password, done) {
+			conn.query(
+				"SELECT * FROM `users` WHERE `email` = '" + email + "'",
+				function (err, rows) {
+					if (err) return done(err);
+					if (!rows.length) {
+						return done(null, false);
+					}
+					const hashedPassword = results[0].password;
+					const isMatch = bcrypt.compareSync(password, hashedPassword);
+					if (err) return done(err);
+					if (!isMatch) {
+						return done(
+							null,
+							false,
+							req.flash({ message: 'Incorrect password' })
+						);
+					}
+					return done(null, user);
+				}
+			);
+		}
+	)
+);
+
+router.get('/', (req, res) => {
+	res.render('login', {
+		title: 'login',
+		style: 'login.css',
+	});
+});
+
+router.post(
+	'/',
+	passport.authenticate('local', {
+		successRedirect: '/',
+		failureRedirect: '/login',
+		failureFlash: true,
+	})
+);
+
+module.exports = router;
 
 // LOGIN
 /* exports.login = (req, res) => {

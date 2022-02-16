@@ -2,10 +2,10 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const path = require('path');
+const session = require('express-session');
 
 const app = express();
-// Získávání controllerů
-const registerRouter = require('./controllers/register');
+
 // Handlebars Middleware
 const handlebars = exphbs.create({ extname: '.hbs' });
 app.engine('.hbs', handlebars.engine);
@@ -19,7 +19,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+flash = require('express-flash');
+app.use(
+	session({
+		secret: 'secretcookie',
+		resave: true,
+		saveUninitialized: true,
+	})
+);
+
+// Získávání controllerů
+const registerRouter = require('./controllers/register');
+const loginRouter = require('./controllers/login');
+
 app.use('/register', registerRouter);
+app.use('/login', loginRouter);
 
 const PORT = 5000;
 
