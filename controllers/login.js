@@ -5,18 +5,18 @@ const passport = require('passport');
 const session = require('express-session');
 const conn = require('../database');
 const LocalStrategy = require('passport-local').Strategy;
+const mysql = require('mysql');
 
 const app = express();
 
 passport.serializeUser(function (user, done) {
-	done(null, user.id);
+	done(null, user);
 });
 
-passport.deserializeUser(function (id, done) {
-	conn.query('SELECT * FROM users WHERE id = ' + id, function (err, rows) {
-		done(err, rows[0]);
-	});
+passport.deserializeUser(function (user, done) {
+	done(null, user);
 });
+//serializeuser
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -27,27 +27,26 @@ passport.use(
 		{
 			usernameField: 'email',
 			passwordField: 'password',
-			passReqToCallback: true,
 		},
-		function (req, res, email, password, done) {
+		function (email, password, done) {
+			// callback with email and password from our form
 			conn.query(
-				"SELECT * FROM `users` WHERE `email` = '" + email + "'",
-				function (err, rows) {
-					if (err) return done(err);
-					if (!rows.length) {
-						return done(null, false);
+				'SELECT * FROM users WHERE email = ?',
+				[email],
+				(err, results, field) => {
+					if (err) throw err;
+					if (!results.length) {
+						return done(null, false, { message: 'No user found' }); // req.flash is the way to set flashdata using connect-flash
 					}
-					const hashedPassword = results[0].password;
-					const isMatch = bcrypt.compareSync(password, hashedPassword);
-					if (err) return done(err);
-					if (!isMatch) {
-						return done(
-							null,
-							false,
-							req.flash({ message: 'Incorrect password' })
-						);
-					}
-					return done(null, user);
+
+					bcrypt.compare(password, results[0].heslo, (err, isMatch) => {
+						if (err) throw err;
+						if (isMatch) {
+							return done(null, results[0]);
+						} else {
+							return done(null, false, { message: 'Password incorrect' });
+						}
+					});
 				}
 			);
 		}
@@ -58,6 +57,7 @@ router.get('/', (req, res) => {
 	res.render('login', {
 		title: 'login',
 		style: 'login.css',
+		message: req.flash('error'),
 	});
 });
 
@@ -66,6 +66,7 @@ router.post(
 	passport.authenticate('local', {
 		successRedirect: '/',
 		failureRedirect: '/login',
+		badRequestMessage: 'The email does not match any',
 		failureFlash: true,
 	})
 );

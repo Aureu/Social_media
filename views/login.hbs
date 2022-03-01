@@ -41,12 +41,28 @@
 								Přihlásit se
 							</button>
 						</div>
-						{{message}}
+						{{#if message}}
+							<div
+								class='alert alert-danger alert-dismissible fade show'
+								role='alert'
+							>
+								{{{message}}}
+								<button
+									type='button'
+									class='close'
+									data-dismiss='alert'
+									aria-label='Close'
+								>
+									<span aria-hidden='true'>×</span>
+								</button>
+							</div>
+						{{/if}}
 					</form>
 				</div>
 				<div class='card-body text-center'>Nemáte účet?
 					<a href='/register'>Zaregistrovat se</a></div>
 			</div>
+
 		</div>
 
 	</div>

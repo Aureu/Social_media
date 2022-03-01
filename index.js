@@ -6,6 +6,11 @@ const session = require('express-session');
 
 const app = express();
 
+// Získávání controllerů
+const registerRouter = require('./controllers/register');
+const loginRouter = require('./controllers/login');
+//const userRouter = require('./controller/userController');
+
 // Handlebars Middleware
 const handlebars = exphbs.create({ extname: '.hbs' });
 app.engine('.hbs', handlebars.engine);
@@ -27,13 +32,11 @@ app.use(
 		saveUninitialized: true,
 	})
 );
-
-// Získávání controllerů
-const registerRouter = require('./controllers/register');
-const loginRouter = require('./controllers/login');
+app.use(flash());
 
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
+//app.use('/admin', userRouter);
 
 const PORT = 5000;
 

@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
 			status
 		);
 	} catch {
-		res.redirect('/register');
+		res.redirect('/login');
 	}
 });
 

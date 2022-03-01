@@ -1,11 +1,35 @@
 const mysql = require('mysql');
 const bcrypt = require('bcryptjs');
 const connection = require('../database');
+const express = require('express');
+const router = require('./register');
+const Users = require('../models/users');
 
+router.get('/user_list', (req, res) => {
+	Users.view(rows);
+});
+
+router.get('/user_list', userController.view);
+// Editování uživatelů
+router.get('/edituser/:id', userController.edit);
+router.post('/edituser/:id', userController.update);
+router.get('/viewuser/:id', userController.viewall);
+router.post('/', userController.find);
+// Zobrazení jednotlivého uživatele
+router.get('/viewuser/:id', userController.view_user);
+// Přidání uživatele
+router.get('/adduser', userController.form);
+router.post('/adduser', userController.create);
+// Smazání uživatele
+router.get('/delete/:id', userController.delete);
+
+router.get('/');
 // Zobrazení uživatelů do tabulky
 exports.view = (req, res) => {
-	connection.query(
-		// Zobrazí všechny aktivní uživatele
+	connection
+		.query
+
+		/* // Zobrazí všechny aktivní uživatele
 		'SELECT * FROM users WHERE status = "active"',
 		(err, rows) => {
 			// Pokud najde chybu, vypíše jí do konzole
@@ -21,7 +45,8 @@ exports.view = (req, res) => {
 			}
 			console.log('Data z tabulky: \n', rows);
 		}
-	);
+	); */
+		();
 };
 
 // Přesměrování na 'edit-user' podle přesného id z tabulky
@@ -129,7 +154,7 @@ exports.create = (req, res) => {
 			// Hledání stejného emailu v DB
 			if (results.length > 0) {
 				return res.render('add-user', {
-					alert: 'Tento email se již využívá',
+					message: 'Tento email se již využívá',
 					style: 'add-user.css',
 					title: 'add',
 				});
@@ -182,3 +207,5 @@ exports.delete = (req, res) => {
 		}
 	);
 };
+
+module.exports = router;
