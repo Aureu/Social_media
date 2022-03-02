@@ -6,33 +6,34 @@
 </nav>
 
 <div class='view-user p-5'>
-	{{#each rows}}
-		<div class='row mb-5'>
-			<div class='col text-center'>
-				<h3>{{this.first_name}} {{this.last_name}}</h3>
-			</div>
+	<div class='row mb-5'>
+		<div class='col text-center'>
+			<!--<h3>{{this.first_name}} {{this.last_name}}</h3>-->
 		</div>
-		<div class='row'>
-			<div class='col'>
-				<table class='table table-dark'>
-					<thead>
-						<tr>
-							<th scope='col'>Jméno</th>
-							<th scope='col'>Přijmení</th>
-							<th scope='col'>Přezdívka</th>
-							<th scope='col'>Email</th>
-						</tr>
-					</thead>
-					<tbody>
+	</div>
+	<div class='row'>
+		<div class='col'>
+			<table class='table table-dark'>
+				<thead>
+					<tr>
+						<th scope='col'>Jméno</th>
+						<th scope='col'>Přijmení</th>
+						<th scope='col'>Přezdívka</th>
+						<th scope='col'>Email</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each user}}
 						<tr>
 							<th scope='row'>{{this.jmeno}}</th>
 							<td>{{this.prijmeni}}</td>
 							<td>{{this.prezdivka}}</td>
 							<td>{{this.email}}</td>
 						</tr>
-					</tbody>
-				</table>
-			</div>
+					{{/each}}
+				</tbody>
+			</table>
 		</div>
-	{{/each}}
+	</div>
+
 </div>

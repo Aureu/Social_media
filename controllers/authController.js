@@ -10,14 +10,15 @@ const Auth = require('../models/Auth');
 
 const app = express();
 
+// Serializing uživatele do session
 passport.serializeUser(function (user, done) {
 	done(null, user);
 });
-
+// Deserializing
 passport.deserializeUser(function (user, done) {
 	done(null, user);
 });
-
+// Local strategie přihlašování, která se vkládá do route loginu (passport.authenticate)
 passport.use(
 	'local',
 	new LocalStrategy(
@@ -32,10 +33,11 @@ passport.use(
 				[email],
 				(err, results, req) => {
 					if (err) throw err;
+					// Hledá jestli daný uživatel existuje v DB
 					if (!results.length) {
 						return done(null, false, { message: 'No user found' });
 					}
-
+					// Rozhashovavá heslo z DB s zadaným hesle uživatele
 					bcrypt.compare(password, results[0].heslo, (err, isMatch) => {
 						if (err) throw err;
 						if (isMatch) {
@@ -50,4 +52,4 @@ passport.use(
 	)
 );
 
-module.exports = router;
+module.exports = passport;
