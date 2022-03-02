@@ -2,9 +2,16 @@ const conn = require('../database');
 
 // Model pro zobrazení uživatelů do tabulky
 exports.view = () => {
-	let sql = 'SELECT * FROM users WHERE status = "active"';
-	conn.query(sql, (err) => {
-		if (err) throw err;
+	return new Promise((resolve, reject) => {
+		try {
+			let sql = 'SELECT user_id, jmeno, prijmeni, email FROM users';
+			conn.query(sql, (err, results) => {
+				if (err) throw err;
+				resolve(results);
+			});
+		} catch (err) {
+			reject(err);
+		}
 	});
 };
 // Model pro edit uživatele

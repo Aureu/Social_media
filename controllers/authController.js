@@ -6,6 +6,7 @@ const session = require('express-session');
 const conn = require('../database');
 const LocalStrategy = require('passport-local').Strategy;
 const mysql = require('mysql');
+const Auth = require('../models/Auth');
 
 const app = express();
 
@@ -16,10 +17,6 @@ passport.serializeUser(function (user, done) {
 passport.deserializeUser(function (user, done) {
 	done(null, user);
 });
-//serializeuser
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 passport.use(
 	'local',
@@ -51,23 +48,6 @@ passport.use(
 			);
 		}
 	)
-);
-
-router.get('/', (req, res) => {
-	res.render('login', {
-		title: 'login',
-		style: 'login.css',
-		message: req.flash('error'),
-	});
-});
-
-router.post(
-	'/',
-	passport.authenticate('local', {
-		successRedirect: '/session',
-		failureRedirect: '/login?success=false',
-		failureFlash: true,
-	})
 );
 
 module.exports = router;
