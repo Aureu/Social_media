@@ -8,67 +8,79 @@ const userModel = require('../models/users');
 // Zobrazení uživatelů
 router.get('/users', async (req, res) => {
 	const data = await userModel.getUsers();
-	res.render('admin-users/user_list', {
+	res.render('Admin/userTable/userList', {
 		title: 'Userlist',
-		style: 'user_list',
+		style: 'userList.css',
 		users: data,
 	});
 });
 
+// Zobrazí jednoho uživatele
 router.get('/view/:id', async (req, res) => {
 	var id = req.params.id;
 	const data = await userModel.getUser(id);
-	res.render('admin-users/view-user', {
+	res.render('Admin/userTable/viewUser', {
 		title: 'UserList',
+		style: 'viewUser.css',
 		user: data,
 	});
 });
 
-/* module.exports = {
-	getUsers: function (req, res) {
-		userModel.getUsers(function (data) {
-			res.render('admin-users/user_list', {
-				title: 'user list',
-				userData: data,
-			});
-		});
-	},
-	getUser: function (req, res) {
-		userModel.get_users(function (data) {
-			res.render('admin-users/view-user', {
-				title: 'UserList',
-				user: data,
-			});
-		});
-	},
-	addUser: function (req, res) {
-		res.render('add-user', {
-			title: 'Add Users',
-		});
-	},
-	insertUser: function (req, res) {
-		const userDetails = req.body;
-		userModel.addUser(userDetails, function (data) {
-			res.redirect('/admin-users/user_list');
-			console.log('User data is inserted successfully');
-		});
-	},
-	deleteUser: function (req, res) {
-		const deleteId = req.params.id;
-		userModel.deleteUser(deleteId, function (data) {
-			res.render('edit-user', { title: 'Update users', user: data });
-		});
-	},
-	updateUser: function (req, res) {
-		var user = req.body;
-		var id = user.id;
-		userModel.updateUser(user, id, function (data) {
-			res.redirect('/admin-users/user_list');
-			console.log('Data updated successfully');
-		});
-	},
-};
- */
-// Zobrazení jednoho uživatele
+// cesta na form pro úpravu uživatelů
+router.get('/edit/:id', async (req, res) => {
+	var id = req.params.id;
+	const data = await userModel.editUser(id);
+	res.render('Admin/userTable/editUser', {
+		title: 'edit',
+		style: 'editUser.css',
+		user: data,
+	});
+});
+
+// úprava uživatelů
+router.post('/edit/:id', async (req, res) => {
+	var user = req.body;
+	var id = req.params.id;
+	await userModel.updateUser(user, id, function (data) {
+		console.log('data updated');
+	});
+});
+
+// Přidávání nových uživatelů (form)
+router.get('/adduser', (req, res) => {
+	res.render('Admin/userTable/addUser', {
+		style: 'addUser.css',
+	});
+});
+
+// Přidávání nových uživatelů
+router.post('/add', async (req, res) => {
+	try {
+		const { jmeno, prijmeni, prezdivka, email, heslo } = req.body;
+		const status = 'active';
+		console.log(req.body);
+
+		const hashedPassword = await bcrypt.hash(heslo, 10);
+		userModel.addUser(
+			jmeno,
+			prijmeni,
+			prezdivka,
+			email,
+			hashedPassword,
+			status
+		);
+		res.redirect('/admin/users');
+	} catch {
+		res.redirect('/admin/adduser');
+	}
+});
+
+// Mazání uživatelů
+router.get('/delete/:id', async (req, res) => {
+	const id = req.params.id;
+	await userModel.deleteUser(id, function (data) {
+		res.redirect('/admin/users');
+	});
+});
 
 module.exports = router;

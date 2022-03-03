@@ -15,7 +15,7 @@ exports.getUsers = () => {
 		}
 	});
 };
-
+// Získání jednoho uživatele
 exports.getUser = (ID) => {
 	return new Promise((resolve, reject) => {
 		try {
@@ -30,60 +30,55 @@ exports.getUser = (ID) => {
 	});
 };
 
-/* module.exports = {
-	getUsers: (callback) => {
-		return new Promise((resolve, reject) => {
-			try {
-				let sql = 'SELECT user_id, jmeno, prijmeni, email FROM users';
-				conn.query(sql, (err, results) => {
-					if (err) throw err;
-					resolve(results);
-				});
-			} catch (err) {
-				reject(err);
-			}
-		});
-	},
+// Editování uživatele - zobrazení formu podle ID
+exports.editUser = (ID) => {
+	return new Promise((resolve, reject) => {
+		try {
+			let sql = 'SELECT * FROM users WHERE user_id = ?';
+			conn.query(sql, ID, (error, results) => {
+				if (error) throw error;
+				resolve(results);
+			});
+		} catch (err) {
+			reject(err);
+		}
+	});
+};
 
-	// Model pro zobrazení jednoho uživatele
-	getggUser: (user_id, callback) => {
-		let sql = 'SELECT * FROM users WHERE user_id = ?';
-		conn.query(sql, user_id, (err, data, fields) => {
-			if (err) throw err;
-			return callback(data[0]);
-		});
-	},
-	// Model pro edit uživatele
-	editUser: (editID, callback) => {
-		let sql = 'SELECT * FROM users WHERE user_id = ?';
-		conn.query(sql, editID, (err) => {
-			if (err) throw err;
-			return callback(data[0]);
-		});
-	},
-	// Model pro update dat v databázi
-	updateUser: (updateUser, user_id, callback) => {
-		let sql = 'UPDATE users SET ? WHERE user_id = ?';
-		conn.query(sql, [updateUser, user_id], (err) => {
-			if (err) throw err;
-			return callback(data);
-		});
-	},
+// Úprava dat uživatele
+exports.updateUser = (updateUser, ID, callback) => {
+	return new Promise((resolve, reject) => {
+		try {
+			let sql = 'UPDATE users SET ? WHERE user_id = ?';
+			conn.query(sql, [updateUser, ID], (err) => {
+				if (err) throw err;
+				return callback();
+			});
+		} catch (err) {
+			reject(err);
+		}
+	});
+};
 
-	// Model pro vytvoření nového uživatele
-	addUser: (userDetails, callback) => {
-		let sql = 'INSERT INTO users SET ?';
-		conn.query(sql, userDetails, (err, data) => {
-			if (err) throw err;
-			return callback(data);
-		});
-	},
-	// Model pro smazání uživatele v DB
-	deleteUser: (user_id, callback) => {
-		let sql = 'DELETE FROM users WHERE user_id =';
-		conn.query(sql, user_id, (err) => {
-			if (err) throw err;
-			return callback(data);
-		});
-	},
-}; */
+// Přidávání uživatele
+exports.addUser = (jmeno, prijmeni, prezdivka, email, heslo, status) => {
+	let sql = `INSERT INTO users(jmeno, prijmeni, prezdivka, email, heslo, status) VALUES ('${jmeno}','${prijmeni}', '${prezdivka}','${email}','${heslo}','${status}')`;
+	conn.query(sql, (err) => {
+		if (err) throw err;
+	});
+};
+
+// Mazání uživatele
+exports.deleteUser = (ID) => {
+	return new Promise((resolve, reject) => {
+		try {
+			let sql = 'DELETE FROM users WHERE user_id = ?';
+			conn.query(sql, ID, (err, results) => {
+				if (err) throw err;
+				resolve(results);
+			});
+		} catch (err) {
+			reject(err);
+		}
+	});
+};
