@@ -9,7 +9,7 @@ const mysql = require('mysql');
 const auth = require('./authController');
 
 const app = express();
-
+// Render login formu
 router.get('/', (req, res) => {
 	res.render('login', {
 		title: 'login',
@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 		message: req.flash('error'),
 	});
 });
-
+// Passport
 router.post(
 	'/',
 	passport.authenticate('local', {

@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 		style: 'signup.css',
 	});
 });
-
+// Dodělát error handling
 router.post('/', async (req, res) => {
 	try {
 		const { jmeno, prijmeni, prezdivka, email, heslo } = req.body;

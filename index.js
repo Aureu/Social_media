@@ -6,6 +6,7 @@ const session = require('express-session');
 const passport = require('passport');
 const dotenv = require('dotenv');
 const flash = require('connect-flash');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 
@@ -27,6 +28,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// cookie parser middleware
+app.use(cookieParser());
+
 // Session middleware
 app.use(
 	session({
@@ -43,13 +47,10 @@ app.use(passport.session());
 
 // Funkce na zjištění jestli je uživatel již přihlášen
 function isLoggedIn(req, res, next) {
-	if (req.isAuthenticated())
-		// <-- typo here
-		return next();
+	if (req.isAuthenticated()) return next();
 	res.redirect('/login');
 }
-// Routes pro register a login (Používají controller login a register)
-// Předělat na route auth
+// Routes
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 app.use('/admin', userRouter);
