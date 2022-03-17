@@ -10,7 +10,7 @@ const Auth = require('../models/Auth');
 
 const app = express();
 
-// Serializing uživatele do session
+// Serializing
 passport.serializeUser(function (user, done) {
 	done(null, user);
 });

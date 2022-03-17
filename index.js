@@ -14,6 +14,7 @@ const app = express();
 const registerRouter = require('./controllers/register');
 const loginRouter = require('./controllers/login');
 const userRouter = require('./controllers/userController');
+const profileRouter = require('./controllers/profile');
 
 // Handlebars Middleware
 const handlebars = exphbs.create({ extname: '.hbs' });
@@ -21,7 +22,6 @@ app.engine('.hbs', handlebars.engine);
 app.set('view engine', '.hbs');
 
 // Route pro složku public
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Body Parser Middleware
@@ -61,6 +61,8 @@ app.get('/session', isLoggedIn, function (req, res) {
 		style: 'index.css',
 	});
 });
+
+app.use('/user', profileRouter);
 
 const PORT = 5000;
 
