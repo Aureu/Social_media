@@ -14,7 +14,7 @@ const app = express();
 const registerRouter = require('./controllers/register');
 const loginRouter = require('./controllers/login');
 const userRouter = require('./controllers/userController');
-const profileRouter = require('./controllers/profile');
+const profileRouter = require('./controllers/profileController');
 
 // Handlebars Middleware
 const handlebars = exphbs.create({ extname: '.hbs' });
@@ -54,6 +54,7 @@ function isLoggedIn(req, res, next) {
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 app.use('/admin', userRouter);
+app.use('/profile', profileRouter);
 // Test route
 app.get('/session', isLoggedIn, function (req, res) {
 	res.render('index', {
@@ -62,8 +63,11 @@ app.get('/session', isLoggedIn, function (req, res) {
 	});
 });
 
-app.use('/user', profileRouter);
-
+/* app.get('/user', function (req, res) {
+	res.render('profile/user', {
+		style: 'user.css',
+	});
+}); */
 const PORT = 5000;
 
 app.listen(PORT, () => console.log(`Aplikace běží na portu  ${PORT}`));
