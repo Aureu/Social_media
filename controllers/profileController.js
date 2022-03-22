@@ -7,7 +7,7 @@ router.get('/account', async (req, res) => {
 	res.render('profile/profile', {
 		title: 'User',
 		style: 'profile/profilePage.css',
-		jmeno: 'test',
+		jmeno: 'test', // Vkládat hodnoty uživatele
 		prijmeni: 'test',
 		prezdivka: 'test',
 	});

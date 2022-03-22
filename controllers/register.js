@@ -5,13 +5,13 @@ const Register = require('../models/register');
 
 // Zobrazení stránky
 router.get('/', (req, res) => {
-	res.render('register', {
+	res.render('auth/register', {
 		title: 'Register',
-		style: 'signup.css',
+		style: 'auth/register.css',
 	});
 });
 
-// Dodělát error handling
+// Dodělat error handling
 router.post('/', async (req, res) => {
 	try {
 		const { jmeno, prijmeni, prezdivka, email, heslo } = req.body;

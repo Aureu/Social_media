@@ -10,7 +10,7 @@ router.get('/users', async (req, res) => {
 	const data = await userModel.getUsers();
 	res.render('Admin/userTable/userList', {
 		title: 'Userlist',
-		style: 'userList.css',
+		style: 'userlist/userList.css',
 		users: data,
 	});
 });
@@ -21,7 +21,7 @@ router.get('/view/:id', async (req, res) => {
 	const data = await userModel.getUser(id);
 	res.render('Admin/userTable/viewUser', {
 		title: 'UserList',
-		style: 'viewUser.css',
+		style: 'userlist/viewUser.css',
 		user: data,
 	});
 });
@@ -32,7 +32,7 @@ router.get('/edit/:id', async (req, res) => {
 	const data = await userModel.editUser(id);
 	res.render('Admin/userTable/editUser', {
 		title: 'edit',
-		style: 'editUser.css',
+		style: 'userlist/editUser.css',
 		user: data,
 	});
 });
@@ -49,7 +49,7 @@ router.post('/edit/:id', async (req, res) => {
 // Přidávání nových uživatelů (form)
 router.get('/adduser', (req, res) => {
 	res.render('Admin/userTable/addUser', {
-		style: 'addUser.css',
+		style: 'userlist/addUser.css',
 	});
 });
 

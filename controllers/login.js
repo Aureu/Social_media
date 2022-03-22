@@ -11,9 +11,9 @@ const auth = require('./authController');
 const app = express();
 // Render login formu
 router.get('/', (req, res) => {
-	res.render('login', {
+	res.render('auth/login', {
 		title: 'login',
-		style: 'login.css',
+		style: 'auth/login.css',
 		message: req.flash('error'),
 	});
 });
