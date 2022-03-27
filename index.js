@@ -54,7 +54,7 @@ function isLoggedIn(req, res, next) {
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 app.use('/admin', userRouter);
-app.use('/profile', profileRouter);
+app.use('/profile', isLoggedIn, profileRouter);
 // Test route
 app.get('/session', isLoggedIn, function (req, res) {
 	res.render('index', {
