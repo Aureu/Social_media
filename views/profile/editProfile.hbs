@@ -14,7 +14,7 @@
 				<hr />
 			</div>
 			<!-- Form START -->
-			<form class='file-upload'>
+			<form class='file-upload' action="/edit" method="POST">
 				<div class='row mb-5 gx-5'>
 					<!-- Contact detail -->
 					<div class='col-xxl-8 mb-5 mb-xxl-0'>
@@ -29,7 +29,7 @@
 										class='form-control'
 										placeholder=''
 										aria-label='First name'
-										value='Scaralet'
+										value='{{this.jmeno}}'
 									/>
 								</div>
 								<!-- Last name -->
@@ -40,7 +40,7 @@
 										class='form-control'
 										placeholder=''
 										aria-label='Last name'
-										value='Doe'
+										value='{{this.prijmeni}}'
 									/>
 								</div>
 								<!-- Phone number -->
@@ -51,7 +51,7 @@
 										class='form-control'
 										placeholder=''
 										aria-label='Phone number'
-										value='Aureu'
+										value='{{this.prezdivka}}'
 									/>
 								</div>
 
@@ -62,7 +62,7 @@
 										type='email'
 										class='form-control'
 										id='inputEmail4'
-										value='example@homerealty.com'
+										value='{{this.email}}'
 									/>
 								</div>
 
@@ -146,8 +146,8 @@
 				<!-- Row END -->
 				<!-- button -->
 				<div class='gap-3 d-md-flex justify-content-md-end text-center'>
-					<button type='button' class='btn btn-danger btn-lg'>Delete profile</button>
-					<button type='button' class='btn btn-primary btn-lg'>Update profile</button>
+					<button type='submit' class='btn btn-danger btn-lg'>Delete profile</button>
+					<button type='submit' class='btn btn-primary btn-lg'>Update profile</button>
 				</div>
 			</form>
 			<!-- Form END -->
