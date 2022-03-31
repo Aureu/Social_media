@@ -124,3 +124,27 @@ body {
 	background: #644fb5;
 	text-decoration: none;
 }
+
+.btnProfileMenu {
+	border-radius: 6px;
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 16px;
+	background: #8e73f0;
+	padding: 5x 15px 5px 15;
+	text-decoration: none;
+}
+
+.btnProfileMenu {
+	background: #644fb5;
+	text-decoration: none;
+}
+
+.avatarImg {
+	height: 100px;
+	width: 100px;
+}
+
+.btn-secondary {
+	white-space: normal !important;
+}

@@ -5,47 +5,35 @@
 				<div class='card-body'>
 
 					<div class='float-end'>
-						<button type='submit' class='btn btn-block editBtn'>
-							<a href='/profile/edit'>Upravit profil</a>
-						</button>
+						<a href='/profile/edit' class='btn btn-block editBtn'>Upravit profil</a>
 					</div>
 
 					<!-- Uživatelské informace -->
 					<div class='d-flex align-items-start'>
 						<img
 							src='https://bootdey.com/img/Content/avatar/avatar1.png'
-							class='rounded-circle avatar-lg img-thumbnail'
+							class='rounded-circle avatar-lg img-thumbnail avatarImg'
 							alt='profile-image'
 						/>
 						<div class='w-100 ms-3'>
 							<h4 class='my-0'>{{jmeno}} {{prijmeni}}</h4>
 							<p class='text-muted'>@{{prezdivka}}</p>
-							<button
-								type='button'
-								class='editBtn btn btn-soft-primary btn-xs waves-effect mb-2 waves-light'
-							>Příspěvky</button>
-							<button
-								type='button'
-								class='editBtn btn btn-soft-success btn-xs waves-effect mb-2 waves-light'
-							>Informace</button>
-							<button
-								type='button'
-								class='editBtn btn btn-soft-success btn-xs waves-effect mb-2 waves-light'
-							>Přátelé</button>
+
+							<p class='text-muted mb-2 font-13'><strong>Full Name :</strong>
+								<span class='ms-2'>{{jmeno}} {{prijmeni}}</span></p>
+
+							<p class='text-muted mb-2 font-13'><strong>Email :</strong>
+								<span class='ms-2'>{{email}}</span></p>
 
 						</div>
 					</div>
 					<hr />
 					<div class='mt-3'>
-						<h4 class='font-13 text-uppercase'>About Me :</h4>
-						<p class='text-muted font-13 mb-3'>
-
-						</p>
-						<p class='text-muted mb-2 font-13'><strong>Full Name :</strong>
-							<span class='ms-2'>{{jmeno}} {{prijmeni}}</span></p>
-
-						<p class='text-muted mb-2 font-13'><strong>Email :</strong>
-							<span class='ms-2'>{{email}}</span></p>
+						<a href='#' class='btn btnProfileMenu'>Příspěvky</a>
+						<a href='#' class='btn btnProfileMenu'>Informace</a>
+						<a href='#' class='btn btnProfileMenu'>Přátelé</a>
+					</div>
+					<div class='mt-3'>
 
 					</div>
 					<!-- Linky na sociální sítě-->
@@ -80,27 +68,33 @@
 			<!-- end card -->
 			<!-- část pro číselný informace o přátelích, followers.. -->
 			<div class='card'>
-				<div class='card-body text-center'>
+				<div class='card-body'>
+					{{! <div class='card-body text-center'>
 					<div class='row'>
 						<div class='col-4 border-end border-light'>
-							<h5 class='text-muted mt-1 mb-2 fw-normal'>Friends</h5>
+							<h5 class='text-muted mt-1 mb-2 fw-normal'>Přátelé</h5>
 							<h2 class='mb-0 fw-bold'>116</h2>
 						</div>
 						<div class='col-4 border-end border-light'>
-							<h5 class='text-muted mt-1 mb-2 fw-normal'>Followers</h5>
+							<h5 class='text-muted mt-1 mb-2 fw-normal'>Sledující</h5>
 							<h2 class='mb-0 fw-bold'>87</h2>
 						</div>
 						<div class='col-4 border-light'>
-							<h5 class='text-muted mt-1 mb-2 fw-normal'>Posts</h5>
+							<h5 class='text-muted mt-1 mb-2 fw-normal'>Příspěvky</h5>
 							<h2 class='mb-0 fw-bold'>87</h2>
 						</div>
 					</div>
+				</div> }}
+					<h4 class='header-title mb-3'>Úvodní informace</h4>
+					<a href='#' class='btn btn-secondary btn-block mb-2'>Upravit bio</a>
+					<a href='#' class='btn btn-secondary btn-block'>Upravit podrobnosti</a>
+
 				</div>
 			</div>
 			<!-- Inbox, předělat na chaty s přáteli, nebo na seznam přátel -->
 			<div class='card'>
 				<div class='card-body'>
-					<h4 class='header-title mb-3'>Inbox</h4>
+					<h4 class='header-title mb-3'>Přátelé</h4>
 
 					<div
 						class='inbox-widget'
