@@ -36,57 +36,32 @@
 					<div class='mt-3'>
 
 					</div>
-					<!-- Linky na sociální sítě-->
-					{{! <ul class='social-list list-inline mt-3 mb-0'>
-						<li class='list-inline-item'>
-							<a
-								href='javascript: void(0);'
-								class='social-list-item text-center border-primary text-primary'
-							><i class='mdi mdi-facebook'></i></a>
-						</li>
-						<li class='list-inline-item'>
-							<a
-								href='javascript: void(0);'
-								class='social-list-item text-center border-danger text-danger'
-							><i class='mdi mdi-google'></i></a>
-						</li>
-						<li class='list-inline-item'>
-							<a
-								href='javascript: void(0);'
-								class='social-list-item text-center border-info text-info'
-							><i class='mdi mdi-twitter'></i></a>
-						</li>
-						<li class='list-inline-item'>
-							<a
-								href='javascript: void(0);'
-								class='social-list-item text-center border-secondary text-secondary'
-							><i class='mdi mdi-github'></i></a>
-						</li>
-					</ul> }}
+
 				</div>
 			</div>
 			<!-- end card -->
-			<!-- část pro číselný informace o přátelích, followers.. -->
 			<div class='card'>
 				<div class='card-body'>
-					{{! <div class='card-body text-center'>
-					<div class='row'>
-						<div class='col-4 border-end border-light'>
-							<h5 class='text-muted mt-1 mb-2 fw-normal'>Přátelé</h5>
-							<h2 class='mb-0 fw-bold'>116</h2>
-						</div>
-						<div class='col-4 border-end border-light'>
-							<h5 class='text-muted mt-1 mb-2 fw-normal'>Sledující</h5>
-							<h2 class='mb-0 fw-bold'>87</h2>
-						</div>
-						<div class='col-4 border-light'>
-							<h5 class='text-muted mt-1 mb-2 fw-normal'>Příspěvky</h5>
-							<h2 class='mb-0 fw-bold'>87</h2>
-						</div>
-					</div>
-				</div> }}
+
 					<h4 class='header-title mb-3'>Úvodní informace</h4>
-					<a href='#' class='btn btn-secondary btn-block mb-2'>Upravit bio</a>
+					<button
+						class='open-button btn-secondary btn-block btn mb-3'
+						onclick='openForm()'
+					>Open Form</button>
+
+					<div class='form-popup' id='myForm'>
+						<form action='/action_page.php' class='form-container'>
+
+							<input type='text' placeholder='Enter info' name='bio' required />
+
+							<button type='submit' class='btn btnBio'>Login</button>
+							<button
+								type='button '
+								class='btn cancel btnBio'
+								onclick='closeForm()'
+							>Close</button>
+						</form>
+					</div>
 					<a href='#' class='btn btn-secondary btn-block'>Upravit podrobnosti</a>
 
 				</div>
@@ -318,143 +293,6 @@
 			</div>
 			<!-- end card-->
 
-			<!-- Dropdown k reminders-->
-			<div class='card'>
-				<div class='card-body'>
-					<div class='dropdown float-end'>
-						<a
-							href='#'
-							class='dropdown-toggle arrow-none card-drop'
-							data-bs-toggle='dropdown'
-							aria-expanded='false'
-						>
-							<i class='mdi mdi-dots-vertical'></i>
-						</a>
-						<div class='dropdown-menu dropdown-menu-end'>
-							<!-- item-->
-							<a href='javascript:void(0);' class='dropdown-item'>Sales Report</a>
-							<!-- item-->
-							<a href='javascript:void(0);' class='dropdown-item'>Export Report</a>
-							<!-- item-->
-							<a href='javascript:void(0);' class='dropdown-item'>Profit</a>
-							<!-- item-->
-							<a href='javascript:void(0);' class='dropdown-item'>Action</a>
-						</div>
-					</div>
-					<!-- Upcoming reminders, taky do něčeho předělat -->
-					<h4 class='header-title mb-3'>Upcoming Reminders
-						<i class='mdi mdi-adjust ms-1'></i></h4>
-
-					<div class='list-group'>
-						<a href='#' class='my-1'>
-							<div class='d-flex align-items-start' id='tooltips-container'>
-								<div class=''>
-									<i class='mdi mdi-circle h3 text-primary'></i>
-								</div>
-								<div class='w-100 ms-2'>
-									<h5 class='mb-1 mt-0'>New Admin Layout Discuss</h5>
-									<ul class='list-inline text-muted font-12'>
-										<li class='list-inline-item'><i
-												class='mdi mdi-calendar-blank-outline me-1'
-											></i>10 May 2021</li>
-										<li class='list-inline-item'> - </li>
-										<li class='list-inline-item'><i
-												class='mdi mdi-clock-time-eight-outline me-1'
-											></i>09:00am
-											<span class='px-1'>To</span>
-											10:30am</li>
-									</ul>
-								</div>
-							</div>
-						</a>
-						<a href='#' class='my-1'>
-							<div class='d-flex align-items-start' id='tooltips-container'>
-								<div class=''>
-									<i class='mdi mdi-circle h3 text-pink'></i>
-								</div>
-								<div class='w-100 ms-2'>
-									<h5 class='mb-1 mt-0'>Landing Pages Planning</h5>
-									<ul class='list-inline text-muted font-12'>
-										<li class='list-inline-item'><i
-												class='mdi mdi-calendar-blank-outline me-1'
-											></i>10 May 2021</li>
-										<li class='list-inline-item'> - </li>
-										<li class='list-inline-item'><i
-												class='mdi mdi-clock-time-eight-outline me-1'
-											></i>02:00pm
-											<span class='px-1'>To</span>
-											4:00pm</li>
-									</ul>
-								</div>
-							</div>
-						</a>
-						<a href='#' class='my-1'>
-							<div class='d-flex align-items-start' id='tooltips-container'>
-								<div class=''>
-									<i class='mdi mdi-circle h3 text-success'></i>
-								</div>
-								<div class='w-100 ms-2'>
-									<h5 class='mb-1 mt-0'>Meet Our Clients</h5>
-									<ul class='list-inline text-muted font-12'>
-										<li class='list-inline-item'><i
-												class='mdi mdi-calendar-blank-outline me-1'
-											></i>11 May 2021</li>
-										<li class='list-inline-item'> - </li>
-										<li class='list-inline-item'><i
-												class='mdi mdi-clock-time-eight-outline me-1'
-											></i>08:00am
-											<span class='px-1'>To</span>
-											11:20am</li>
-									</ul>
-								</div>
-							</div>
-						</a>
-						<a href='#' class='my-1'>
-							<div class='d-flex align-items-start' id='tooltips-container'>
-								<div class=''>
-									<i class='mdi mdi-circle h3 text-warning'></i>
-								</div>
-								<div class='w-100 ms-2'>
-									<h5 class='mb-1 mt-0'>Project Discussion</h5>
-									<ul class='list-inline text-muted font-12'>
-										<li class='list-inline-item'><i
-												class='mdi mdi-calendar-blank-outline me-1'
-											></i>11 May 2021</li>
-										<li class='list-inline-item'> - </li>
-										<li class='list-inline-item'><i
-												class='mdi mdi-clock-time-eight-outline me-1'
-											></i>12:00am
-											<span class='px-1'>To</span>
-											03:00am</li>
-									</ul>
-								</div>
-							</div>
-						</a>
-						<a href='#' class='my-1'>
-							<div class='d-flex align-items-start' id='tooltips-container'>
-								<div class=''>
-									<i class='mdi mdi-circle h3 text-dark'></i>
-								</div>
-								<div class='w-100 ms-2'>
-									<h5 class='mb-1 mt-0'>Businees Meeting</h5>
-									<ul class='list-inline text-muted font-12'>
-										<li class='list-inline-item'><i
-												class='mdi mdi-calendar-blank-outline me-1'
-											></i>12 May 2021</li>
-										<li class='list-inline-item'> - </li>
-										<li class='list-inline-item'><i
-												class='mdi mdi-clock-time-eight-outline me-1'
-											></i>08:30am
-											<span class='px-1'>To</span>
-											10:00am</li>
-									</ul>
-								</div>
-							</div>
-						</a>
-
-					</div>
-				</div>
-			</div>
 		</div>
 		<!-- end col-->
 		<!-- Přídávání příspěvků -->
@@ -500,152 +338,6 @@
 						<div class='d-flex align-items-start'>
 							<img
 								class='me-2 avatar-sm rounded-circle'
-								src='https://bootdey.com/img/Content/avatar/avatar4.png'
-								alt='Generic placeholder image'
-							/>
-							<div class='w-100'>
-								<h5 class=''>Thelma Fridley
-									<small class='text-muted'> 1 hour ago</small></h5>
-								<div class=''>
-									Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-									scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-									vulputate at, tempus viverra turpis. Duis sagittis ipsum.
-									Praesent mauris. Fusce nec tellus sed augue semper porta.
-									Mauris massa.
-									<br />
-									<a
-										href='javascript: void(0);'
-										class='text-muted font-13 d-inline-block mt-2'
-									><i class='mdi mdi-reply'></i> Reply</a>
-								</div>
-							</div>
-
-						</div>
-						<hr />
-						<div class='post-user-comment-box'>
-							<div class='d-flex align-items-start'>
-								<img
-									class='me-2 avatar-sm rounded-circle'
-									src='https://bootdey.com/img/Content/avatar/avatar3.png'
-									alt='Generic placeholder image'
-								/>
-								<div class='w-100'>
-									<h5 class='mt-0'>Jeremy Tomlinson
-										<small class='text-muted'>3 hours ago</small></h5>
-									Nice work, makes me think of The Money Pit.
-
-									<br />
-									<a
-										href='javascript: void(0);'
-										class='text-muted font-13 d-inline-block mt-2'
-									><i class='mdi mdi-reply'></i> Reply</a>
-
-									<div class='d-flex align-items-start mt-3'>
-										<a class='pe-2' href='#'>
-											<img
-												src='https://bootdey.com/img/Content/avatar/avatar4.png'
-												class='avatar-sm rounded-circle'
-												alt='Generic placeholder image'
-											/>
-										</a>
-										<div class='w-100'>
-											<h5 class='mt-0'>Kathleen Thomas
-												<small class='text-muted'>5 hours ago</small></h5>
-											i'm in the middle of a timelapse animation myself! (Very
-											different though.) Awesome stuff.
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class='d-flex align-items-start mt-2'>
-								<a class='pe-2' href='#'>
-									<img
-										src='https://bootdey.com/img/Content/avatar/avatar1.png'
-										class='rounded-circle'
-										alt='Generic placeholder image'
-										height='31'
-									/>
-								</a>
-								<div class='w-100'>
-									<input
-										type='text'
-										id='simpleinput'
-										class='form-control border-0 form-control-sm'
-										placeholder='Add comment'
-									/>
-								</div>
-							</div>
-						</div>
-
-						<div class='mt-2'>
-							<a
-								href='javascript: void(0);'
-								class='btn btn-sm btn-link text-danger'
-							><i class='mdi mdi-heart'></i> Like (28)</a>
-							<a
-								href='javascript: void(0);'
-								class='btn btn-sm btn-link text-muted'
-							><i class='mdi mdi-share-variant'></i> Share</a>
-						</div>
-					</div>
-					<hr />
-					<!-- Story Box-->
-					<div class='p-2 mb-3'>
-						<div class='d-flex align-items-start'>
-							<img
-								class='me-2 avatar-sm rounded-circle'
-								src='https://bootdey.com/img/Content/avatar/avatar3.png'
-								alt='Generic placeholder image'
-							/>
-							<div class='w-100'>
-								<h5 class='m-0'>Jeremy Tomlinson</h5>
-								<p class='text-muted'><small>about 2 minuts ago</small></p>
-							</div>
-						</div>
-						<p>Story based around the idea of time lapse, animation to post
-							soon!</p>
-
-						<img
-							src='https://via.placeholder.com/800x540/FF7F50/000000'
-							alt='post-img'
-							class='rounded me-1'
-							height='60'
-						/>
-						<img
-							src='https://via.placeholder.com/800x540/FF7F50/000000'
-							alt='post-img'
-							class='rounded me-1'
-							height='60'
-						/>
-						<img
-							src='https://via.placeholder.com/800x540/FF7F50/000000'
-							alt='post-img'
-							class='rounded'
-							height='60'
-						/>
-
-						<div class='mt-2'>
-							<a
-								href='javascript: void(0);'
-								class='btn btn-sm btn-link text-muted'
-							><i class='mdi mdi-reply'></i> Reply</a>
-							<a
-								href='javascript: void(0);'
-								class='btn btn-sm btn-link text-muted'
-							><i class='mdi mdi-heart-outline'></i> Like</a>
-							<a
-								href='javascript: void(0);'
-								class='btn btn-sm btn-link text-muted'
-							><i class='mdi mdi-share-variant'></i> Share</a>
-						</div>
-					</div>
-					<hr />
-					<!-- Story Box-->
-					<div class='p-2 mb-3'>
-						<div class='d-flex align-items-start'>
-							<img
-								class='me-2 avatar-sm rounded-circle'
 								src='https://bootdey.com/img/Content/avatar/avatar6.png'
 								alt='Generic placeholder image'
 							/>
@@ -663,7 +355,7 @@
 							class='img-fluid border-0'
 						></iframe>
 					</div>
-
+					<hr />
 					<div class='text-center'>
 						<a href='javascript:void(0);' class='text-danger'><i
 								class='mdi mdi-spin mdi-loading me-1'
@@ -681,3 +373,9 @@
 	<!-- end row-->
 
 </div>
+
+<script>
+	function openForm() { document.getElementById("myForm").style.display =
+	"block"; } function closeForm() {
+	document.getElementById("myForm").style.display = "none"; }
+</script>

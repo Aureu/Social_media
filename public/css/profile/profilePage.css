@@ -148,3 +148,49 @@ body {
 .btn-secondary {
 	white-space: normal !important;
 }
+
+/* Button used to open the contact form - fixed at the bottom of the page */
+.open-button {
+  border: none;
+  cursor: pointer;
+  
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+}
+
+/* Add styles to the form container */
+.form-container {
+  padding: 10px;
+  background-color:#2c2c2c
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #494949;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #464545;
+  outline: none;
+}
+
+
+
+
+.btnBio{
+	border-radius: 6px;
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 16px;
+	background: #8e73f0;
+	padding: 5x 15px 5px 15;
+	text-decoration: none;
+}
