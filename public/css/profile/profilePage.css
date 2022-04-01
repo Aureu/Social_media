@@ -174,6 +174,7 @@ body {
   margin: 5px 0 22px 0;
   border: none;
   background: #494949;
+	color: white
 }
 
 /* When the inputs get focus, do something */
@@ -182,15 +183,3 @@ body {
   outline: none;
 }
 
-
-
-
-.btnBio{
-	border-radius: 6px;
-	font-family: Arial;
-	color: #ffffff;
-	font-size: 16px;
-	background: #8e73f0;
-	padding: 5x 15px 5px 15;
-	text-decoration: none;
-}

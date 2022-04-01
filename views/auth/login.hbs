@@ -41,11 +41,14 @@
 								Přihlásit se
 							</button>
 						</div>
+						<!-- Podmínka aby se handlebar zobrazil pouze když se daná chyba vyskytne -->
 						{{#if message}}
 							<div
 								class='alert alert-danger alert-dismissible fade show'
 								role='alert'
 							>
+								<!-- Handlebar proměnná do které se vypisují chyby (špatné heslo atd.) -->
+
 								{{message}}
 								<button
 									type='button'
@@ -57,8 +60,10 @@
 								</button>
 							</div>
 						{{/if}}
+						<!-- Konec podmínky -->
 					</form>
 				</div>
+				<!-- Směrování na registraci -->
 				<div class='card-body text-center'>Nemáte účet?
 					<a href='/register'>Zaregistrovat se</a></div>
 			</div>

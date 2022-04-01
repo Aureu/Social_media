@@ -9,6 +9,7 @@ const mysql = require('mysql');
 const auth = require('./authController');
 
 const app = express();
+
 // Render login formu
 router.get('/', (req, res) => {
 	res.render('auth/login', {
@@ -20,7 +21,6 @@ router.get('/', (req, res) => {
 // Passport
 router.post(
 	'/',
-
 	passport.authenticate('local', {
 		successRedirect: '/profile/account',
 		failureRedirect: '/login?success=false',

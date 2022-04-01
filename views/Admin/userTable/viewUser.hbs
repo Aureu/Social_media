@@ -1,18 +1,21 @@
+<!-- nav menu (předělat) -->
 <nav aria-label='breadcrumb'>
 	<ol class='breadcrumb'>
 		<li class='breadcrumb-item'><a href='/admin/users'>Domů</a></li>
 		<li class='breadcrumb-item active' aria-current='page'>Zobrazení uživatele</li>
 	</ol>
 </nav>
-
+<!-- End nav -->
 <div class='view-user p-5'>
 	<div class='row mb-5'>
 		<div class='col text-center'>
+			<!-- Jméno a přijmení uživatele -->
 			<h3>{{this.jmeno}} {{this.prijmeni}}</h3>
 		</div>
 	</div>
 	<div class='row'>
 		<div class='col'>
+			<!-- Tabulka pro uživatele -->
 			<table class='table table-dark'>
 				<thead>
 					<tr>
@@ -23,6 +26,7 @@
 					</tr>
 				</thead>
 				<tbody>
+					<!-- Zobrazení jednoho uživatele podle id -->
 					{{#each user}}
 						<tr>
 							<th scope='row'>{{this.jmeno}}</th>
@@ -33,6 +37,7 @@
 					{{/each}}
 				</tbody>
 			</table>
+			<!-- end table -->
 		</div>
 	</div>
 

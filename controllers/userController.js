@@ -49,7 +49,7 @@ router.post('/edit/:id', async (req, res) => {
 // Přidávání nových uživatelů (form)
 router.get('/adduser', (req, res) => {
 	res.render('Admin/userTable/addUser', {
-		style: 'userlist/daddUser.css',
+		style: 'userlist/addUser.css',
 	});
 });
 

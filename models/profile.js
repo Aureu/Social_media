@@ -1,6 +1,7 @@
 const conn = require('../database');
 const express = require('express');
 
+// Editování profilu - dodělát
 exports.editProfile = (ID) => {
 	return new Promise((resolve, reject) => {
 		try {
@@ -15,6 +16,7 @@ exports.editProfile = (ID) => {
 	});
 };
 
+// dodělat
 exports.updateProfile = (updateProfile, ID, callback) => {
 	return new Promise((resolve, reject) => {
 		try {

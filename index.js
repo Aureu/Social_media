@@ -55,13 +55,6 @@ app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 app.use('/admin', userRouter);
 app.use('/profile', isLoggedIn, profileRouter);
-// Test route
-app.get('/session', isLoggedIn, function (req, res) {
-	res.render('index', {
-		user: req.user, // get the user out of session and pass to template
-		style: 'index.css',
-	});
-});
 
 /* app.get('/user', function (req, res) {
 	res.render('profile/user', {
