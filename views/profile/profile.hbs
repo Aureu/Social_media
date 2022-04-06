@@ -47,14 +47,14 @@
 					<button
 						class='open-button btn-secondary btn-block btn mb-3'
 						onclick='openForm()'
-					>Open Form</button>
+					>Upravit Bio</button>
 
 					<div class='form-popup' id='myForm'>
-						<form action='/action_page.php' class='form-container'>
+						<form action='add-bio' class='form-container' method='POST'>
 
 							<input type='text' placeholder='Enter info' name='bio' required />
 
-							<button type='submit' class='btn btn-secondary'>Login</button>
+							<button type='submit' class='btn btn-secondary'>Save</button>
 							<button
 								type='button '
 								class='btn cancel btn-secondary'

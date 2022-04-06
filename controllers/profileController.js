@@ -19,6 +19,13 @@ router.get('/account', async (req, res) => {
 	console.log(req.user);
 });
 
+router.post('/add-bio', (req, res) => {
+	const bio = req.body.bio;
+	user_id = req.user.user_id;
+	profileModel.addBio(user_id, bio);
+	res.status(204).send();
+});
+
 // Cesta pro editování uživatele - není hotové
 router.get('/edit', async (req, res) => {
 	var id = req.user.user_id;
@@ -37,4 +44,5 @@ router.post('/edit', async (req, res) => {
 		console.log('User updated');
 	});
 });
+
 module.exports = router;

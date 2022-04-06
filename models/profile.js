@@ -30,3 +30,11 @@ exports.updateProfile = (updateProfile, ID, callback) => {
 		}
 	});
 };
+
+// Sql na vložení nového uživatele do DB
+exports.addBio = (user_id, bio) => {
+	let sql = `UPDATE users SET bio = '${bio}' WHERE user_id = '${user_id}'`;
+	conn.query(sql, (err) => {
+		if (err) throw err;
+	});
+};
