@@ -32,10 +32,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Session middleware
+const oneDay = 1000 * 60 * 60 * 24;
 app.use(
 	session({
 		secret: process.env.SECRET_COOKIE,
-		resave: true,
+		resave: false,
+		cookie: { maxAge: oneDay },
 		saveUninitialized: true,
 	})
 );
