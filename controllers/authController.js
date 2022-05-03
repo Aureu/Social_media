@@ -38,14 +38,18 @@ passport.use(
 						return done(null, false, { message: 'No user found' });
 					}
 					// Rozhashovavá heslo z DB s zadaným hesle uživatele
-					bcrypt.compare(password, results[0].heslo, (err, isMatch) => {
-						if (err) throw err;
-						if (isMatch) {
-							return done(null, results[0]);
-						} else {
-							return done(null, false, { message: 'Password incorrect' });
+					bcrypt.compare(
+						password,
+						results[0].hashedPassword,
+						(err, isMatch) => {
+							if (err) throw err;
+							if (isMatch) {
+								return done(null, results[0]);
+							} else {
+								return done(null, false, { message: 'Password incorrect' });
+							}
 						}
-					});
+					);
 				}
 			);
 		}

@@ -14,9 +14,9 @@ router.get('/account', async (req, res) => {
 		title: 'User',
 		style: 'profile/profilePage.css',
 		// Proměnný do kterých se vkládají hodnoty ze sessions a následně zobrazují data do handlebars
-		jmeno: req.user.jmeno,
-		prijmeni: req.user.prijmeni,
-		prezdivka: req.user.prezdivka,
+		jmeno: req.user.firstname,
+		prijmeni: req.user.lastname,
+		prezdivka: req.user.username,
 		email: email,
 		bio: req.user.bio,
 		posts: data,
@@ -40,7 +40,7 @@ router.post('/add-post', (req, res) => {
 });
 
 // Cesta pro editování uživatele - není hotové
-/* router.get('/edit', async (req, res) => {
+router.get('/edit', async (req, res) => {
 	var id = req.user.user_id;
 	const data = await profileModel.editProfile(id);
 	res.render('profile/editProfile', {
@@ -56,6 +56,6 @@ router.post('/edit', async (req, res) => {
 	await profileModel.updateProfile(user, id, function (data) {
 		console.log('User updated');
 	});
-}); */
+});
 
 module.exports = router;

@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 router.post('/', async (req, res) => {
 	try {
 		const { jmeno, prijmeni, prezdivka, email, heslo } = req.body;
-		const status = 'active';
+		const status = 'user';
 		console.log(req.body);
 		// Hashovaní hesla před uložením do DB
 		const hashedPassword = await bcrypt.hash(heslo, 10);
@@ -23,8 +23,8 @@ router.post('/', async (req, res) => {
 			jmeno,
 			prijmeni,
 			prezdivka,
-			email,
 			hashedPassword,
+			email,
 			status
 		);
 		res.redirect('/login');
