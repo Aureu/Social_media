@@ -88,6 +88,11 @@ app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 app.use('/admin', userRouter);
 app.use('/profile', isLoggedIn, profileRouter);
+app.get('/logout', (req, res) => {
+	req.session.destroy(function (err) {
+		res.redirect('/login'); //Inside a callback… bulletproof!
+	});
+});
 
 const PORT = 5000;
 
