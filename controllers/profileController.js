@@ -42,6 +42,7 @@ router.get('/account', async (req, res) => {
 	user_id = req.user.user_id;
 	const data = await profileModel.viewPost(user_id);
 	const Avatar = await profileModel.viewAvatar(user_id);
+	const userInfo = await profileModel.viewInfo(user_id);
 
 	email = req.user.email;
 	res.render('profile/profile', {
@@ -52,7 +53,7 @@ router.get('/account', async (req, res) => {
 		prijmeni: req.user.lastname,
 		prezdivka: req.user.username,
 		email: email,
-		bio: req.user.bio,
+		userInfo: userInfo,
 		posts: data,
 		image: Avatar,
 	});

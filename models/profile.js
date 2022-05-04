@@ -32,9 +32,24 @@ exports.updateProfile = (updateProfile, ID, callback) => {
 };
 
 exports.addBio = (user_id, bio) => {
-	let sql = `UPDATE users SET bio = '${bio}' WHERE user_id = '${user_id}'`;
+	//	let sql = `UPDATE user_information SET bio = '${bio}' WHERE user_id = '${user_id}'`;
+	let sql = `INSERT INTO user_information(user_id, bio) VALUES ('${user_id}', '${bio}')`;
 	conn.query(sql, (err) => {
 		if (err) throw err;
+	});
+};
+
+exports.viewInfo = (user_id) => {
+	return new Promise((resolve, reject) => {
+		try {
+			let sql = `SELECT * FROM user_information WHERE user_id = '${user_id}'`;
+			conn.query(sql, (err, results) => {
+				if (err) throw err;
+				resolve(results);
+			});
+		} catch (err) {
+			reject(err);
+		}
 	});
 };
 
