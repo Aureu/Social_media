@@ -7,6 +7,8 @@ const passport = require('passport');
 const dotenv = require('dotenv');
 const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
+const multer = require('multer');
+const conn = require('./database');
 
 const app = express();
 
@@ -21,8 +23,37 @@ const handlebars = exphbs.create({ extname: '.hbs' });
 app.engine('.hbs', handlebars.engine);
 app.set('view engine', '.hbs');
 
+/* // Multer Middleware
+const storage = multer.diskStorage({
+	destination: (req, file, cb) => {
+		cb(null, 'public/Avatars');
+	},
+
+	filename: (req, file, cb) => {
+		console.log(file);
+		cb(null, Date.now() + path.extname(file.originalname));
+	},
+});
+
+const upload = multer({ storage: storage });
+
+// Route pro uploadovani uzivatelskych avataru
+app.post('/upload', upload.single('image'), (req, res) => {
+	if (!req.file) {
+		console.log('No file upload');
+	} else {
+		console.log(req.file.filename);
+		var imgsrc = req.file.filename;
+		var insertData = 'INSERT INTO avatars(user_id, file_src)VALUES(?)';
+		conn.query(insertData, [imgsrc], (err, result) => {
+			if (err) throw err;
+			console.log('file uploaded');
+		});
+	}
+}); */
+
 // Route pro složku public
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.resolve('./public')));
 
 // Body Parser Middleware
 app.use(express.json());
@@ -58,11 +89,6 @@ app.use('/login', loginRouter);
 app.use('/admin', userRouter);
 app.use('/profile', isLoggedIn, profileRouter);
 
-/* app.get('/user', function (req, res) {
-	res.render('profile/user', {
-		style: 'user.css',
-	});
-}); */
 const PORT = 5000;
 
 app.listen(PORT, () => console.log(`Aplikace běží na portu  ${PORT}`));

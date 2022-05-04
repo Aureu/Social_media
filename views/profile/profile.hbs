@@ -44,11 +44,14 @@
 
 					<!-- Uživatelské informace -->
 					<div class='d-flex align-items-start'>
-						<img
-							src='https://bootdey.com/img/Content/avatar/avatar1.png'
-							class='rounded-circle avatar-lg img-thumbnail avatarImg'
-							alt='profile-image'
-						/>
+						{{#each image}}
+							<img
+								src='/Avatars/{{this.file_src}}'
+								class='rounded-circle avatar-lg img-thumbnail avatarImg'
+								alt='profile-image'
+							/>
+
+						{{/each}}
 						<div class='w-100 ms-3'>
 							<h4 class='my-0'>{{jmeno}} {{prijmeni}}</h4>
 							<p class='text-muted'>@{{prezdivka}}</p>

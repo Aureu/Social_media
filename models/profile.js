@@ -37,3 +37,30 @@ exports.addBio = (user_id, bio) => {
 		if (err) throw err;
 	});
 };
+
+exports.viewAvatar = (user_id) => {
+	return new Promise((resolve, reject) => {
+		try {
+			let sql = `SELECT * FROM avatars WHERE user_id = '${user_id}'`;
+			conn.query(sql, user_id, (error, results) => {
+				resolve(results);
+			});
+		} catch (err) {
+			reject(err);
+		}
+	});
+};
+
+exports.viewPost = (user_id) => {
+	return new Promise((resolve, reject) => {
+		try {
+			let sql = `SELECT * FROM posts WHERE user_id = '${user_id}'`;
+			conn.query(sql, user_id, (error, results) => {
+				if (error) throw error;
+				resolve(results);
+			});
+		} catch (err) {
+			reject(err);
+		}
+	});
+};

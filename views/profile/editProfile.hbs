@@ -1,4 +1,4 @@
-<link
+{{!-- <link
 	rel='stylesheet'
 	href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css'
 	integrity='sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA='
@@ -83,15 +83,7 @@
 										></i>
 									</div>
 									<!-- Button -->
-									<input type='file' id='customFile' name='file' hidden='' />
-									<label
-										class='btn btn-success-soft btn-block'
-										for='customFile'
-									>Upload</label>
-									<button
-										type='button'
-										class='btn btn-danger-soft'
-									>Remove</button>
+									
 									<!-- Content -->
 									<p class='text-muted mt-3 mb-0'><span
 											class='me-1'
@@ -150,6 +142,10 @@
 					<button type='submit' class='btn btn-danger btn-lg'>Delete profile</button>
 					<button type='submit' class='btn btn-primary btn-lg'>Update profile</button>
 				</div>
+			</form> --}}
+			<form action='/profile/upload' method='POST' enctype='multipart/form-data'>
+				<input type='file' name='image' />
+				<input type='submit' />
 			</form>
 			<!-- Form END -->
 		</div>
