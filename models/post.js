@@ -1,8 +1,8 @@
 const conn = require('../database');
 const express = require('express');
 
-exports.addPost = (user_id, text) => {
-	let sql = `INSERT INTO posts VALUES (NULL, '${user_id}','${text}', NOW())`;
+exports.addPost = (user_id, username, text) => {
+	let sql = `INSERT INTO posts VALUES (NULL, '${user_id}','${username}','${text}', NOW())`;
 	conn.query(sql, (err) => {
 		if (err) throw err;
 	});

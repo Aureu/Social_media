@@ -33,7 +33,7 @@ exports.updateProfile = (updateProfile, ID, callback) => {
 
 exports.addBio = (user_id, bio) => {
 	//	let sql = `UPDATE user_information SET bio = '${bio}' WHERE user_id = '${user_id}'`;
-	let sql = `INSERT INTO user_information(user_id, bio) VALUES ('${user_id}', '${bio}')`;
+	let sql = `UPDATE user_information SET bio = '${bio}' WHERE user_id = '${user_id}'`;
 	conn.query(sql, (err) => {
 		if (err) throw err;
 	});

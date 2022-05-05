@@ -29,10 +29,12 @@ router.post('/upload', upload.single('image'), (req, res) => {
 		console.log(req.file.filename);
 		var imgsrc = req.file.filename;
 		var id = req.user.user_id;
-		var insertData = `INSERT INTO avatars(user_id,file_src)VALUES('${id}', '${imgsrc}')`;
+		var insertData = `UPDATE avatars SET file_src = '${imgsrc}' WHERE user_id = '${id}'`;
+
 		conn.query(insertData, [imgsrc], (err, result) => {
 			if (err) throw err;
 			console.log('file uploaded');
+			res.redirect('/profile/account');
 		});
 	}
 });
@@ -73,7 +75,8 @@ router.post('/add-post', (req, res) => {
 	const text = req.body.postMessage;
 	console.log(req.body.text);
 	user_id = req.user.user_id;
-	postModel.addPost(user_id, text);
+	username = req.user.username;
+	postModel.addPost(user_id, username, text);
 	res.status(204).send();
 });
 
