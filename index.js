@@ -94,6 +94,25 @@ app.get('/logout', (req, res) => {
 	});
 });
 
+// search function
+app.post('/search', function (req, res) {
+	var str = {
+		stringPart: req.body.typeahead,
+	};
+
+	conn.query(
+		'SELECT username FROM users WHERE username LIKE "%' + str.stringPart + '%"',
+		function (err, rows, fields) {
+			if (err) throw err;
+			var data = [];
+			for (i = 0; i < rows.length; i++) {
+				data.push(rows[i].username);
+			}
+			res.send(JSON.stringify(data));
+		}
+	);
+});
+
 const PORT = 5000;
 
 app.listen(PORT, () => console.log(`Aplikace běží na portu  ${PORT}`));
