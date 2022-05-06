@@ -7,7 +7,7 @@
 				<!-- Button na přesměrování na signup page-->
 				<header class='card-header'>
 
-					<h4 class='card-title mt-2'>Přihlášení</h4>
+					<h4 class='card-title mt-2'>Login</h4>
 				</header>
 				<div class='card-body'>
 					<!-- login formulář -->
@@ -18,7 +18,7 @@
 							<input
 								type='email'
 								class='form-control'
-								placeholder='Zadejte email'
+								placeholder='Enter email'
 								name='email'
 								id='email'
 								required
@@ -30,7 +30,7 @@
 							<input
 								class='form-control'
 								type='password'
-								placeholder='Zadejte heslo'
+								placeholder='Enter password'
 								name='password'
 								id='password'
 								required
@@ -38,7 +38,7 @@
 						</div>
 						<div class='form-group'>
 							<button type='submit' class='btn btn-block'>
-								Přihlásit se
+								Login
 							</button>
 						</div>
 						<!-- Podmínka aby se handlebar zobrazil pouze když se daná chyba vyskytne -->
@@ -64,8 +64,11 @@
 					</form>
 				</div>
 				<!-- Směrování na registraci -->
-				<div class='card-body text-center'>Nemáte účet?
-					<a href='/register'>Zaregistrovat se</a></div>
+				<a class='text-center' href='/password-change'>Did you forget your
+					password?</a>
+				<hr />
+				<div class='card-body text-center'>Don't you have an account?
+					<a href='/register'>Create a new one</a></div>
 			</div>
 		</div>
 

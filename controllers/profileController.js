@@ -80,15 +80,20 @@ router.post('/add-post', (req, res) => {
 	res.status(204).send();
 });
 
-// Cesta pro editování uživatele - není hotové
-router.get('/edit', async (req, res) => {
-	var id = req.user.user_id;
-	const data = await profileModel.editProfile(id);
+router.get('/edit-profile', (req, res) => {
 	res.render('profile/editProfile', {
-		title: 'edit profile',
-		style: 'profile/profilePage.css',
-		user: data,
+		title: 'Edit',
+		style: 'profile/editProfile.css',
 	});
+});
+
+router.post('/insert-profile-info', (req, res) => {
+	const id = req.user.user_id;
+	const bio = req.body.bio;
+	const location = req.body.location;
+	const dateBirth = req.body.dateBirth;
+	profileModel.editProfile(id, bio, location, dateBirth);
+	res.redirect('/profile/account');
 });
 
 module.exports = router;
