@@ -15,18 +15,10 @@ router.get('/', (req, res) => {
 router.post('/', async (req, res) => {
 	try {
 		const { jmeno, prijmeni, prezdivka, email, heslo } = req.body;
-		const status = 'user';
 		console.log(req.body);
 		// Hashovaní hesla před uložením do DB
 		const hashedPassword = await bcrypt.hash(heslo, 10);
-		Register.register(
-			jmeno,
-			prijmeni,
-			prezdivka,
-			hashedPassword,
-			email,
-			status
-		);
+		Register.register(jmeno, prijmeni, prezdivka, hashedPassword, email);
 		res.redirect('/login');
 	} catch {
 		res.redirect('/register');

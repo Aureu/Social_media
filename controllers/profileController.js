@@ -4,7 +4,7 @@ const express = require('express');
 const router = require('./register');
 const profileModel = require('../models/profile');
 const postModel = require('../models/post');
-
+/* 
 const path = require('path');
 const multer = require('multer');
 
@@ -29,7 +29,7 @@ router.post('/upload', upload.single('image'), (req, res) => {
 		console.log(req.file.filename);
 		var imgsrc = req.file.filename;
 		var id = req.user.user_id;
-		var insertData = `UPDATE avatars SET file_src = '${imgsrc}' WHERE user_id = '${id}'`;
+		var insertData = `UPDATE user_avatars SET file_src = '${imgsrc}' WHERE user_id = '${id}'`;
 
 		conn.query(insertData, [imgsrc], (err, result) => {
 			if (err) throw err;
@@ -37,12 +37,12 @@ router.post('/upload', upload.single('image'), (req, res) => {
 			res.redirect('/profile/account');
 		});
 	}
-});
+}); */
 
 // Cesta na uživatelský profil
 router.get('/account', async (req, res) => {
-	user_id = req.user.user_id;
-	const data = await profileModel.viewPost(user_id);
+	const user_id = req.user.id;
+	const data = await postModel.viewPost(user_id);
 	const Avatar = await profileModel.viewAvatar(user_id);
 	const userInfo = await profileModel.viewInfo(user_id);
 
@@ -71,28 +71,19 @@ router.post('/add-bio', (req, res) => {
 	res.status(204).send();
 });
 
-router.post('/add-post', (req, res) => {
-	const text = req.body.postMessage;
-	console.log(req.body.text);
-	user_id = req.user.user_id;
-	username = req.user.username;
-	postModel.addPost(user_id, username, text);
-	res.status(204).send();
-});
-
-router.get('/edit-profile', (req, res) => {
-	res.render('profile/editProfile', {
+router.get('/edit-info', (req, res) => {
+	res.render('profile/editInfo', {
 		title: 'Edit',
-		style: 'profile/editProfile.css',
+		style: 'profile/editInfo.css',
 	});
 });
 
 router.post('/insert-profile-info', (req, res) => {
-	const id = req.user.user_id;
+	const id = req.user.id;
 	const bio = req.body.bio;
 	const location = req.body.location;
 	const dateBirth = req.body.dateBirth;
-	profileModel.editProfile(id, bio, location, dateBirth);
+	profileModel.editInfo(id, bio, location, dateBirth);
 	res.redirect('/profile/account');
 });
 

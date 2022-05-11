@@ -1,12 +1,16 @@
+const mysql = require('mysql');
 const conn = require('../database');
 const express = require('express');
+const router = require('./register');
+const postModel = require('../models/post');
 
-exports.addPost = (text, user_id, username) => {
-	let sql = `INSERT INTO posts(content, user_id, username) VALUES ('${text}','${user_id}','${username}')`;
-	conn.query(sql, (err) => {
-		if (err) throw err;
-	});
-};
+router.post('/add-post', (req, res) => {
+	const text = req.body.postMessage;
+	user_id = req.user.id;
+	username = req.user.username;
+	postModel.addPost(text, user_id, username);
+	res.status(204).send();
+});
 
 exports.viewPost = (user_id) => {
 	return new Promise((resolve, reject) => {
@@ -21,3 +25,5 @@ exports.viewPost = (user_id) => {
 		}
 	});
 };
+
+module.exports = router;

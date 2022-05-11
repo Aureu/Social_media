@@ -1,0 +1,50 @@
+<div class='container'>
+	<br /><br /><br /><br /><br />
+
+	<div class='d-flex justify-content-center align-middle'>
+		<div class='col-md-5'>
+			<div class='card'>
+				<!-- Button na přesměrování na signup page-->
+				<header class='card-header col-sm'>
+					<div class='row'>
+						<h4 class='card-title mt-2 col-sm'>Edit profile</h4>
+						<a
+							href='/profile/account'
+							class='btn btn-block editBtn col-sm'
+						>Home</a>
+					</div>
+				</header>
+				<div class='card-body'>
+					<form action='insert-profile-info' method='POST'>
+						<textarea
+							rows='3'
+							name='bio'
+							class='form-control'
+							placeholder='Enter bio'
+						></textarea>
+						<br />
+						<input
+							type='text'
+							name='location'
+							class='form-control'
+							placeholder='Enter location'
+						/>
+						<br />
+						<input
+							type='date'
+							name='dateBirth'
+							class='form-control'
+							placeholder='Enter datebirth'
+						/>
+						<br />
+						<div class='form-group'>
+							<button type='submit' class='btn btn-block'>
+								Submit
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

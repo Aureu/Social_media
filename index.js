@@ -17,40 +17,14 @@ const registerRouter = require('./controllers/register');
 const loginRouter = require('./controllers/login');
 const userRouter = require('./controllers/userController');
 const profileRouter = require('./controllers/profileController');
+const postRouter = require('./controllers/postController');
+const avatarRouter = require('./controllers/userAvatarController');
+const editProfileRouter = require('./controllers/editProfileController');
 
 // Handlebars Middleware
 const handlebars = exphbs.create({ extname: '.hbs' });
 app.engine('.hbs', handlebars.engine);
 app.set('view engine', '.hbs');
-
-/* // Multer Middleware
-const storage = multer.diskStorage({
-	destination: (req, file, cb) => {
-		cb(null, 'public/Avatars');
-	},
-
-	filename: (req, file, cb) => {
-		console.log(file);
-		cb(null, Date.now() + path.extname(file.originalname));
-	},
-});
-
-const upload = multer({ storage: storage });
-
-// Route pro uploadovani uzivatelskych avataru
-app.post('/upload', upload.single('image'), (req, res) => {
-	if (!req.file) {
-		console.log('No file upload');
-	} else {
-		console.log(req.file.filename);
-		var imgsrc = req.file.filename;
-		var insertData = 'INSERT INTO avatars(user_id, file_src)VALUES(?)';
-		conn.query(insertData, [imgsrc], (err, result) => {
-			if (err) throw err;
-			console.log('file uploaded');
-		});
-	}
-}); */
 
 // Route pro složku public
 app.use(express.static(path.resolve('./public')));
@@ -88,6 +62,9 @@ app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 app.use('/admin', userRouter);
 app.use('/profile', isLoggedIn, profileRouter);
+app.use('/posts', isLoggedIn, postRouter);
+app.use('/avatar', isLoggedIn, avatarRouter);
+app.use('/editProfile', isLoggedIn, editProfileRouter);
 app.get('/logout', (req, res) => {
 	req.session.destroy(function (err) {
 		res.redirect('/login'); //Inside a callback… bulletproof!
