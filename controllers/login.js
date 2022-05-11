@@ -10,7 +10,7 @@ const auth = require('./authController');
 
 const app = express();
 
-// Render login formu
+// Route for static page of login
 router.get('/', (req, res) => {
 	res.render('auth/login', {
 		title: 'login',
@@ -21,17 +21,12 @@ router.get('/', (req, res) => {
 // Passport
 router.post(
 	'/',
+
 	passport.authenticate('local', {
-		successRedirect: '/profile/account',
+		successRedirect: '/account',
 		failureRedirect: '/login?success=false',
 		failureFlash: true,
 	})
 );
-
-// Dodělat logout
-router.delete('/logout', (req, res) => {
-	req.logout();
-	res.redirect('/login');
-});
 
 module.exports = router;

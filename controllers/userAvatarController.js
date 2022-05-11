@@ -1,7 +1,7 @@
 const mysql = require('mysql');
 const conn = require('../database');
 const express = require('express');
-const router = require('./register');
+const router = express.Router();
 const profileModel = require('../models/profile');
 const postModel = require('../models/post');
 
@@ -34,7 +34,7 @@ router.post('/upload', upload.single('image'), (req, res) => {
 		conn.query(insertData, [imgsrc], (err, result) => {
 			if (err) throw err;
 			console.log('file uploaded');
-			res.redirect('/profile/account');
+			res.redirect('/account/:id');
 		});
 	}
 });

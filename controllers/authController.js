@@ -18,7 +18,7 @@ passport.serializeUser(function (user, done) {
 passport.deserializeUser(function (user, done) {
 	done(null, user);
 });
-// Local strategie přihlašování, která se vkládá do route loginu (passport.authenticate)
+// Local strategy for passport
 passport.use(
 	'local',
 	new LocalStrategy(
@@ -33,16 +33,17 @@ passport.use(
 				[email],
 				(err, results, req) => {
 					if (err) throw err;
-					// Hledá jestli daný uživatel existuje v DB
+					// Searching if user doesnt exist in DB
 					if (!results.length) {
 						return done(null, false, { message: 'No user found' });
 					}
-					// Rozhashovavá heslo z DB s zadaným hesle uživatele
+					// Grab password from DB and unhash it
 					bcrypt.compare(
 						password,
 						results[0].hashedPassword,
 						(err, isMatch) => {
 							if (err) throw err;
+							// Then it checks if passwords match and login user
 							if (isMatch) {
 								return done(null, results[0]);
 							} else {

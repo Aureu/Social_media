@@ -2,7 +2,7 @@ const mysql = require('mysql');
 const bcrypt = require('bcryptjs');
 const conn = require('../database');
 const express = require('express');
-const router = require('./register');
+const router = express.Router();
 const userModel = require('../models/users');
 
 // Zobrazení uživatelů

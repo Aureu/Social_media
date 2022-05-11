@@ -1,4 +1,4 @@
- @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 * {
   font-family: 'Roboto', sans-serif;
   padding: 0;
@@ -150,7 +150,7 @@ nav {
 
 .profile{
   background-color: #3a3b3b;
-  width:30%;
+  width: 260px;
   padding: 10px;
   margin: auto;
 }
@@ -172,38 +172,7 @@ nav {
 /* POSTS */
 
 .posts{
-	background-color: #3a3b3b;
-	width: 100%;
+  background-color: #3a3b3b;
+  margin: 10px 20px 0;
   padding: 10px;
-  margin: auto;
-	margin-left: 20px;
-}
-
-.post--avatar{
-	height: 30px;
-	width: 30px;
-}
-
-.post--add {
-	border-bottom: 1px solid #E6ECF0;
-  padding: 10px 15px;
-}
-
-.posts--post {
-	border-bottom: 1px solid #E6ECF0;
-  padding: 10px 15px;
-  display: flex;
-}
-
-.post--info{
-	margin-left: 10px;
-  display: flex;
-  flex-direction: column;
-}
-
-.post--content{
-	display: flex;
-	font-size: 14px;
-  color: white;
-  margin-top: 5px;
 }

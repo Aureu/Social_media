@@ -61,13 +61,13 @@ function isLoggedIn(req, res, next) {
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 app.use('/admin', userRouter);
-app.use('/profile', isLoggedIn, profileRouter);
+app.use('/', isLoggedIn, profileRouter);
 app.use('/posts', isLoggedIn, postRouter);
 app.use('/avatar', isLoggedIn, avatarRouter);
-app.use('/editProfile', isLoggedIn, editProfileRouter);
+app.use('/settings', isLoggedIn, editProfileRouter);
 app.get('/logout', (req, res) => {
 	req.session.destroy(function (err) {
-		res.redirect('/login'); //Inside a callback… bulletproof!
+		res.redirect('/login');
 	});
 });
 
@@ -78,6 +78,7 @@ app.post('/search', function (req, res) {
 	};
 
 	conn.query(
+		// Vyhleda to data z db
 		'SELECT username FROM users WHERE username LIKE "%' + str.stringPart + '%"',
 		function (err, rows, fields) {
 			if (err) throw err;
@@ -85,6 +86,7 @@ app.post('/search', function (req, res) {
 			for (i = 0; i < rows.length; i++) {
 				data.push(rows[i].username);
 			}
+			// Dodelat zobrazovani
 			res.send(JSON.stringify(data));
 		}
 	);

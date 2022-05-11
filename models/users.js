@@ -19,7 +19,7 @@ exports.getUsers = () => {
 exports.getUser = (ID) => {
 	return new Promise((resolve, reject) => {
 		try {
-			let sql = `SELECT * FROM users WHERE user_id = ?`;
+			let sql = `SELECT * FROM users WHERE id = ?`;
 			conn.query(sql, ID, (error, results) => {
 				if (error) throw error;
 				resolve(results);
@@ -34,7 +34,7 @@ exports.getUser = (ID) => {
 exports.editUser = (ID) => {
 	return new Promise((resolve, reject) => {
 		try {
-			let sql = 'SELECT * FROM users WHERE user_id = ?';
+			let sql = 'SELECT * FROM users WHERE id = ?';
 			conn.query(sql, ID, (error, results) => {
 				if (error) throw error;
 				resolve(results);
@@ -49,7 +49,7 @@ exports.editUser = (ID) => {
 exports.updateUser = (updateUser, ID, callback) => {
 	return new Promise((resolve, reject) => {
 		try {
-			let sql = 'UPDATE users SET ? WHERE user_id = ?';
+			let sql = 'UPDATE users SET ? WHERE id = ?';
 			conn.query(sql, [updateUser, ID], (err) => {
 				if (err) throw err;
 				return callback();
@@ -72,7 +72,7 @@ exports.addUser = (jmeno, prijmeni, prezdivka, email, heslo, status) => {
 exports.deleteUser = (ID) => {
 	return new Promise((resolve, reject) => {
 		try {
-			let sql = 'DELETE FROM users WHERE user_id = ?';
+			let sql = 'DELETE FROM users WHERE id = ?';
 			conn.query(sql, ID, (err, results) => {
 				if (err) throw err;
 				resolve(results);

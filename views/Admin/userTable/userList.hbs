@@ -25,23 +25,23 @@
 							<!-- Tabulka do které se vkládají uživatelé z databáze -->
 							{{#each users}}
 								<tr>
-									<th scope='row'>{{this.user_id}}</th>
+									<th scope='row'>{{this.id}}</th>
 									<td>{{this.firstname}} {{this.lastname}}</td>
 									<td>{{this.email}}</td>
 									<td class='text-end'>
 										<a
-											href='/admin/view/{{this.user_id}}'
+											href='/admin/view/{{this.id}}'
 											type='button'
 											class='btn'
 										><i class='bi bi-eye'></i> Zobrazit</a>
 										<a
-											href='/admin/edit/{{this.user_id}}'
+											href='/admin/edit/{{this.id}}'
 											type='button'
 											class='btn'
 										><i class='bi bi-pencil'></i>
 											Upravit</a>
 										<a
-											href='/admin/delete/{{this.user_id}}'
+											href='/admin/delete/{{this.id}}'
 											type='button'
 											class='btn'
 										><i class='bi bi-person-x'></i> Smazat</a>

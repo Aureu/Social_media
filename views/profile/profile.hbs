@@ -1,423 +1,129 @@
-<nav class='navbar navbar-expand-lg navbar-dark bg-dark'>
-	<a class='navbar-brand' href='#' data-abc='true'>BBBOOTSTRAP</a>
-	<button
-		class='navbar-toggler'
-		type='button'
-		data-toggle='collapse'
-		data-target='#navbarColor02'
-		aria-controls='navbarColor02'
-		aria-expanded='false'
-		aria-label='Toggle navigation'
-	> <span class='navbar-toggler-icon'></span> </button>
-	<div class='collapse navbar-collapse' id='navbarColor02'>
-		<ul class='navbar-nav mr-auto'>
-			<li class='nav-item active'>
-				<a class='nav-link' href='#' data-abc='true'>Home
-					<span class='sr-only'>(current)</span></a>
-			</li>
-			<li class='nav-item'>
-				<a class='nav-link' href='/logout' data-abc='true'>LOGOUT</a>
-			</li>
-			<li class='nav-item'>
-				<a class='nav-link' href='#' data-abc='true'>Pricing</a>
-			</li>
-			<li class='nav-item'>
-				<a class='nav-link' href='#' data-abc='true'>Social</a>
-			</li>
-		</ul>
-		<form method="POST" action="/search"> 
-			<label>Search Data</label>
-			<input class="typeahead tt-query" spellcheck="false" autocomplete="off" name="typeahead" type="text" />
-		</form>
+<html lang='en'>
 
-		</ul>
-	</div>
-</nav>
-<!-- Body -->
-<div class='container'>
-	<div class='row'>
-		<div class='col-xl-5'>
-			<div class='card'>
-				<div class='card-body'>
+	<head>
+		<meta charset='UTF-8' />
+		<meta http-equiv='X-UA-Compatible' content='IE=edge' />
+		<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+		<title>Document</title>
+		<link rel='stylesheet' href='style.css' />
+		<link
+			rel='stylesheet'
+			href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
+		/>
+	</head>
 
-					<div class='float-end'>
-						<a href='/profile/edit-profile' class='btn btn-block editBtn'>Upravit profil</a>
+	<body>
+		<section class='navigation'>
+			<nav>
+				<div class='wrap'>
+					<div class='search'>
+						<input
+							type='text'
+							class='searchTerm'
+							placeholder='What are you looking for?'
+						/>
+						<button type='submit' class='searchButton'>
+							<i class='fa fa-search'></i>
+						</button>
 					</div>
+				</div>
 
-					<!-- Uživatelské informace -->
-					<div class='d-flex align-items-start'>
-						{{#each image}}
-
-							<a class='avatarBtn' href='/profile/edit'>
-								<img
-									src='/Avatars/{{this.file_src}}'
-									class='avatarImg'
-									alt='profile-image'
-								/>
-							</a>
-
-						{{/each}}
-						<div class='w-100 ms-3'>
-							<h4 class='my-0'>{{jmeno}} {{prijmeni}}</h4>
-							<p class='text-muted'>@{{prezdivka}}</p>
-
-							<p class='text-muted mb-2 font-13'><strong>Full Name :</strong>
-								<span class='ms-2'>{{jmeno}} {{prijmeni}}</span></p>
-
-							<p class='text-muted mb-2 font-13'><strong>Email :</strong>
-								<span class='ms-2'>{{email}}</span></p>
-							<p class='text-muted mb-2 font-13'><strong>Bio: </strong>
-							{{#each userInfo}}
-								<span class='ms-2'>{{this.bio}}</span></p>
-							{{/each}}
+				<ul class='nav__link--list'>
+					<li>
+						<a
+							href=''
+							class='nav__link--anchor link__hover-effect link__hover-effect--black'
+						>Home</a>
+					</li>
+					<li>
+						<a
+							href='/account'
+							class='nav__link--anchor link__hover-effect link__hover-effect--black'
+						>Account</a>
+					</li>
+					<li
+						class='dropdown nav__link--anchor link__hover-effect link__hover-effect--black'
+					>
+						<button class='dropbtn'>Settings</button>
+						<div class='dropdown--content'>
+							<a href='/settings/info'>Info</a>
+							<a href='/settings/upload'>Avatar</a>
+							<a href='/settings/profile'>Profile</a>
 						</div>
+					</li>
+
+					<li>
+						<a
+							href='/logout'
+							class='nav__link--anchor-primary link__hover-effect link__hover-effect--black'
+						>LOGOUT</a>
+					</li>
+				</ul>
+			</nav>
+			<hr />
+		</section>
+
+		<div class='wrapper--content content'>
+			<section class='profile'>
+				{{#each image}}
+					<img
+						class='profile--avatar'
+						src='/Avatars/{{this.file_src}}'
+						alt='User'
+					/>
+				{{/each}}
+				<h3>{{jmeno}} {{prijmeni}}</h3>
+				<span>@{{prezdivka}}</span>
+				<ul class='info'>
+					{{#each userInfo}}
+						<li>{{this.bio}}</li>
+						<li>{{this.location}}</li>
+						<li>{{this.birth_day}}</li>
+					{{/each}}
+				</ul>
+			</section>
+
+			<section class='posts'>
+				<form action='/posts/add-post' class='post--add' method='post'>
+					<span class='input-icon'>
+						<textarea
+							rows='3'
+							class='form-control'
+							placeholder='Write something...'
+							name='postMessage'
+							id='postMessage'
+						></textarea>
+					</span>
+					<div class=''>
+						<button
+							type='submit'
+							class='btn btn-sm btn-dark waves-effect waves-light'
+							value='Submit'
+							id='btnsubmit'
+						>Přidat</button>
+
+					</div>
+				</form>
+				{{#each posts}}
+					<div class='p-2 mb-3'>
+						<div class='d-flex align-items-start'>
+							<img
+								class='me-2 avatar-sm rounded-circle post--avatar'
+								src='https://bootdey.com/img/Content/avatar/avatar6.png'
+								alt='Generic placeholder image'
+							/>
+							<div class='w-100'>
+								<h5 class='m-0'>{{this.username}}</h5>
+								<p class='text-muted'><small>{{this.created_at}}</small></p>
+							</div>
+						</div>
+						<p>{{this.content}}</p>
+
 					</div>
 					<hr />
-					<div class='mt-3'>
-						<a href='/avatar/upload' class='btn btnProfileMenu'>Avatar</a>
-						<a href='/profile/edit-info' class='btn btnProfileMenu'>Informace</a>
-					</div>
-					<div class='mt-3'>
-
-					</div>
-
-				</div>
-			</div>
-			<!-- end card -->
-			<div class='card'>
-				<div class='card-body'>
-
-					<h4 class='header-title mb-3'>Úvodní informace</h4>
-					<button
-						class='open-button btn-secondary btn-block btn mb-3'
-						onclick='openForm()'
-					>Upravit Bio</button>
-
-					<div class='form-popup' id='myForm'>
-						<form action='add-bio' class='form-container' method='POST'>
-
-							<input type='text' placeholder='Enter info' name='bio' required />
-
-							<button type='submit' class='btn btn-secondary'>Uložiz</button>
-							<button
-								type='button '
-								class='btn cancel btn-secondary'
-								onclick='closeForm()'
-							>Zavřít</button>
-						</form>
-					</div>
-					<a href='#' class='btn btn-secondary btn-block'>Upravit podrobnosti</a>
-
-				</div>
-			</div>
-			<!-- Inbox, předělat na chaty s přáteli, nebo na seznam přátel -->
-			<div class='card'>
-				<div class='card-body'>
-					<h4 class='header-title mb-3'>Přátelé</h4>
-
-					<div
-						class='inbox-widget'
-						data-simplebar='init'
-						style='max-height: 350px;'
-					><div class='simplebar-wrapper' style='margin: 0px;'><div
-								class='simplebar-height-auto-observer-wrapper'
-							><div class='simplebar-height-auto-observer'></div></div><div
-								class='simplebar-mask'
-							><div
-									class='simplebar-offset'
-									style='right: 0px; bottom: 0px;'
-								><div
-										class='simplebar-content-wrapper'
-										style='height: auto; overflow: hidden scroll;'
-									><div class='simplebar-content' style='padding: 0px;'>
-											<div
-												class='d-flex align-items-center pb-1'
-												id='tooltips-container'
-											>
-												<img
-													src='https://bootdey.com/img/Content/avatar/avatar2.png'
-													class='rounded-circle img-fluid avatar-md img-thumbnail bg-transparent'
-													alt=''
-												/>
-												<div class='w-100 ms-3'>
-													<h5 class='mb-1'>Tomaslau</h5>
-													<p class='mb-0 font-13'>I've finished it! See you
-														so...</p>
-												</div>
-												<a
-													href='javascript:(0);'
-													class='btn btn-sm btn-soft-info font-13'
-													data-bs-container='#tooltips-container'
-													data-bs-toggle='tooltip'
-													data-bs-placement='left'
-													title=''
-													data-bs-original-title='Reply'
-												> <i class='mdi mdi-reply'></i> </a>
-											</div>
-											<div
-												class='d-flex align-items-center py-1'
-												id='tooltips-container1'
-											>
-												<img
-													src='https://bootdey.com/img/Content/avatar/avatar3.png'
-													class='rounded-circle img-fluid avatar-md img-thumbnail bg-transparent'
-													alt=''
-												/>
-												<div class='w-100 ms-3'>
-													<h5 class='mb-1'>Stillnotdavid</h5>
-													<p class='mb-0 font-13'>This theme is awesome!</p>
-												</div>
-												<a
-													href='javascript:(0);'
-													class='btn btn-sm btn-soft-info font-13'
-													data-bs-container='#tooltips-container1'
-													data-bs-toggle='tooltip'
-													data-bs-placement='left'
-													title=''
-													data-bs-original-title='Reply'
-												> <i class='mdi mdi-reply'></i> </a>
-											</div>
-											<div
-												class='d-flex align-items-center py-1'
-												id='tooltips-container2'
-											>
-												<img
-													src='https://bootdey.com/img/Content/avatar/avatar4.png'
-													class='rounded-circle img-fluid avatar-md img-thumbnail bg-transparent'
-													alt=''
-												/>
-												<div class='w-100 ms-3'>
-													<h5 class='mb-1'>Shahedk</h5>
-													<p class='mb-0 font-13'>Hey! there I'm available...</p>
-												</div>
-												<a
-													href='javascript:(0);'
-													class='btn btn-sm btn-soft-info font-13'
-													data-bs-container='#tooltips-container2'
-													data-bs-toggle='tooltip'
-													data-bs-placement='left'
-													title=''
-													data-bs-original-title='Reply'
-												> <i class='mdi mdi-reply'></i> </a>
-											</div>
-											<div
-												class='d-flex align-items-center py-1'
-												id='tooltips-container3'
-											>
-												<img
-													src='https://bootdey.com/img/Content/avatar/avatar5.png'
-													class='rounded-circle img-fluid avatar-md img-thumbnail bg-transparent'
-													alt=''
-												/>
-												<div class='w-100 ms-3'>
-													<h5 class='mb-1'>Kurafire</h5>
-													<p class='mb-0 font-13'>Nice to meet you</p>
-												</div>
-												<a
-													href='javascript:(0);'
-													class='btn btn-sm btn-soft-info font-13'
-													data-bs-container='#tooltips-container3'
-													data-bs-toggle='tooltip'
-													data-bs-placement='left'
-													title=''
-													data-bs-original-title='Reply'
-												> <i class='mdi mdi-reply'></i> </a>
-											</div>
-											<div
-												class='d-flex align-items-center py-1'
-												id='tooltips-container4'
-											>
-												<img
-													src='https://bootdey.com/img/Content/avatar/avatar6.png'
-													class='rounded-circle img-fluid avatar-md img-thumbnail bg-transparent'
-													alt=''
-												/>
-												<div class='w-100 ms-3'>
-													<h5 class='mb-1'>Adhamdannaway</h5>
-													<p class='mb-0 font-13'>This theme is awesome!</p>
-												</div>
-												<a
-													href='javascript:(0);'
-													class='btn btn-sm btn-soft-info font-13'
-													data-bs-container='#tooltips-container4'
-													data-bs-toggle='tooltip'
-													data-bs-placement='left'
-													title=''
-													data-bs-original-title='Reply'
-												> <i class='mdi mdi-reply'></i> </a>
-											</div>
-											<div
-												class='d-flex align-items-center py-1'
-												id='tooltips-container5'
-											>
-												<img
-													src='https://bootdey.com/img/Content/avatar/avatar7.png'
-													class='rounded-circle img-fluid avatar-md img-thumbnail bg-transparent'
-													alt=''
-												/>
-												<div class='w-100 ms-3'>
-													<h5 class='mb-1'>Tomaslau</h5>
-													<p class='mb-0 font-13'>I've finished it! See you
-														so...</p>
-												</div>
-												<a
-													href='javascript:(0);'
-													class='btn btn-sm btn-soft-info font-13'
-													data-bs-container='#tooltips-container5'
-													data-bs-toggle='tooltip'
-													data-bs-placement='left'
-													title=''
-													data-bs-original-title='Reply'
-												> <i class='mdi mdi-reply'></i> </a>
-											</div>
-											<div
-												class='d-flex align-items-center py-1'
-												id='tooltips-container6'
-											>
-												<img
-													src='https://bootdey.com/img/Content/avatar/avatar8.png'
-													class='rounded-circle img-fluid avatar-md img-thumbnail bg-transparent'
-													alt=''
-												/>
-												<div class='w-100 ms-3'>
-													<h5 class='mb-1'>Shahedk</h5>
-													<p class='mb-0 font-13'>Hey! there I'm available...</p>
-												</div>
-												<a
-													href='javascript:(0);'
-													class='btn btn-sm btn-soft-info font-13'
-													data-bs-container='#tooltips-container6'
-													data-bs-toggle='tooltip'
-													data-bs-placement='left'
-													title=''
-													data-bs-original-title='Reply'
-												> <i class='mdi mdi-reply'></i> </a>
-											</div>
-											<div
-												class='d-flex align-items-center pt-1'
-												id='tooltips-container7'
-											>
-												<img
-													src='https://bootdey.com/img/Content/avatar/avatar5.png'
-													class='rounded-circle img-fluid avatar-md img-thumbnail bg-transparent'
-													alt=''
-												/>
-												<div class='w-100 ms-3'>
-													<h5 class='mb-1'>Stillnotdavid</h5>
-													<p class='mb-0 font-13'>This theme is awesome!</p>
-												</div>
-												<a
-													href='javascript:(0);'
-													class='btn btn-sm btn-soft-info font-13'
-													data-bs-container='#tooltips-container7'
-													data-bs-toggle='tooltip'
-													data-bs-placement='left'
-													title=''
-													data-bs-original-title='Reply'
-												> <i class='mdi mdi-reply'></i> </a>
-											</div>
-										</div></div></div></div><div
-								class='simplebar-placeholder'
-								style='width: auto; height: 532px;'
-							></div></div><div
-							class='simplebar-track simplebar-horizontal'
-							style='visibility: hidden;'
-						><div
-								class='simplebar-scrollbar'
-								style='width: 0px; display: none;'
-							></div></div><div
-							class='simplebar-track simplebar-vertical'
-							style='visibility: visible;'
-						><div
-								class='simplebar-scrollbar'
-								style='height: 230px; transform: translate3d(0px, 0px, 0px); display: block;'
-							></div></div></div>
-					<!-- end inbox-widget -->
-				</div>
-			</div>
-			<!-- end card-->
-
+				{{/each}}
+			</section>
 		</div>
-		<!-- end col-->
-		<!-- Přídávání příspěvků -->
-		<div class='col-xl-7'>
-			<div class='card'>
-				<div class='card-body'>
-					<!-- comment box -->
-					<form action='add-post' class='comment-area-box mb-3' method='post'>
-						<span class='input-icon'>
-							<textarea
-								rows='3'
-								class='form-control'
-								placeholder='Write something...'
-								name='postMessage'
-								id='postMessage'
-							></textarea>
-						</span>
-						<div class='float-end'>
-							<button
-								type='submit'
-								class='btn btn-sm btn-dark waves-effect waves-light'
-								value='Submit'
-								id='btnsubmit'
-							>Přidat</button>
+	</body>
 
-						</div>
-					</form>
-					<br /><hr />
-					<!-- end comment box -->
-
-					<!-- Story Box-->
-					{{#each posts}}
-						<div class='p-2 mb-3'>
-							<div class='d-flex align-items-start'>
-								<img
-									class='me-2 avatar-sm rounded-circle'
-									src='https://bootdey.com/img/Content/avatar/avatar6.png'
-									alt='Generic placeholder image'
-								/>
-								<div class='w-100'>
-									<h5 class='m-0'>{{this.username}}</h5>
-									<p class='text-muted'><small>{{this.created_at}}</small></p>
-								</div>
-							</div>
-							<p>{{this.content}}</p>
-
-						</div>
-						<hr />
-					{{/each}}
-
-					<div class='text-center'>
-						<a href='javascript:void(0);' class='text-danger'><i
-								class='mdi mdi-spin mdi-loading me-1'
-							></i>
-							Load more
-						</a>
-					</div>
-				</div>
-			</div>
-			<!-- end card-->
-
-		</div>
-		<!-- end col -->
-	</div>
-	<!-- end row-->
-
-</div>
-<!-- Funkce pro otevření formu po kliknutí na tlačítko -->
-<script>
-	function openForm() { document.getElementById("myForm").style.display =
-	"block"; } function closeForm() {
-	document.getElementById("myForm").style.display = "none"; } function
-	submitForm() {document.getElementById("text").value = "";}
-
-	$(document).ready(function(){
-    $('input.typeahead').typeahead({
-    name: 'typeahead',
-    remote: 'http://localhost:3000/search?key=%QUERY',
-    limit: 10
-    });
-    });
-
-
-</script>
+</html>
