@@ -110,8 +110,6 @@ nav {
 
 /* SEARCH BAR */
 
-
-
 .search {
   width: 100%;
   position: relative;
@@ -144,14 +142,12 @@ nav {
   font-size: 20px;
 }
 
-
-
 /* ASIDE PROFILE */
 
 .profile{
   background-color: #3a3b3b;
   width:30%;
-  padding: 10px;
+  padding: 15px;
   margin: auto;
 }
 
@@ -167,7 +163,9 @@ nav {
 
 .info{
   margin-top: 10px;
+	padding: 0px;
 }
+
 
 /* POSTS */
 

@@ -23,10 +23,16 @@ router.post(
 	'/',
 
 	passport.authenticate('local', {
-		successRedirect: '/account',
 		failureRedirect: '/login?success=false',
 		failureFlash: true,
-	})
+	}),
+	(req, res) => {
+		if (req.user.isAdmin === 1) {
+			res.redirect('/admin/users');
+		} else {
+			res.redirect('/account');
+		}
+	}
 );
 
 module.exports = router;

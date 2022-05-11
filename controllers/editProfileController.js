@@ -19,7 +19,7 @@ router.post('/edit-profile-data', async (req, res) => {
 		console.log(req.body);
 		const hashedPassword = await bcrypt.hash(password, 10);
 		editModel.editProfile(firstname, lastname, username, hashedPassword, email);
-		res.redirect('/account/:id');
+		res.redirect('/account');
 	} catch {
 		res.redirect('/profile/edit-profile');
 	}
@@ -38,7 +38,7 @@ router.post('/insert-profile-info', (req, res) => {
 	const location = req.body.location;
 	const dateBirth = req.body.dateBirth;
 	editModel.editInfo(id, bio, location, dateBirth);
-	res.redirect('/account/:id');
+	res.redirect('/account');
 });
 
 module.exports = router;

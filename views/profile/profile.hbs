@@ -72,13 +72,14 @@
 						alt='User'
 					/>
 				{{/each}}
+
 				<h3>{{jmeno}} {{prijmeni}}</h3>
 				<span>@{{prezdivka}}</span>
 				<ul class='info'>
 					{{#each userInfo}}
-						<li>{{this.bio}}</li>
-						<li>{{this.location}}</li>
-						<li>{{this.birth_day}}</li>
+						<li>Bio: {{this.bio}}</li>
+						<li>Location: {{this.location}}</li>
+						<li>{{this.date_birth}}</li>
 					{{/each}}
 				</ul>
 			</section>

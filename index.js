@@ -60,7 +60,7 @@ function isLoggedIn(req, res, next) {
 // Routes
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
-app.use('/admin', userRouter);
+app.use('/admin', isLoggedIn, userRouter);
 app.use('/', isLoggedIn, profileRouter);
 app.use('/posts', isLoggedIn, postRouter);
 app.use('/avatar', isLoggedIn, avatarRouter);
