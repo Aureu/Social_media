@@ -17,11 +17,22 @@
 			<nav>
 				<div class='wrap'>
 					<div class='search'>
-						<input
+						{{! <input
 							type='text'
 							class='searchTerm'
 							placeholder='What are you looking for?'
-						/>
+						/> }}
+						<form method='POST' action='/search'>
+							<input
+								class='typeahead tt-query searchTerm'
+								spellcheck='false'
+								autocomplete='off'
+								name='typeahead'
+								type='text'
+								placeholder='What are you looking for?'
+							/>
+
+						</form>
 						<button type='submit' class='searchButton'>
 							<i class='fa fa-search'></i>
 						</button>
@@ -47,7 +58,7 @@
 						<button class='dropbtn'>Settings</button>
 						<div class='dropdown--content'>
 							<a href='/settings/info'>Info</a>
-							<a href='/settings/upload'>Avatar</a>
+							<a href='/avatar/upload'>Avatar</a>
 							<a href='/settings/profile'>Profile</a>
 						</div>
 					</li>
@@ -60,7 +71,6 @@
 					</li>
 				</ul>
 			</nav>
-			<hr />
 		</section>
 
 		<div class='wrapper--content content'>
