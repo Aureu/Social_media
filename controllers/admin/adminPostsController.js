@@ -1,17 +1,15 @@
 const mysql = require('mysql');
-const bcrypt = require('bcryptjs');
-const conn = require('../database');
+const conn = require('../../database');
 const express = require('express');
 const router = express.Router();
-const userModel = require('../models/users');
+const adminPostModel = require('../../models/adminPosts');
 
-// Zobrazení uživatelů
-router.get('/users', async (req, res) => {
-	const data = await userModel.getUsers();
-	res.render('Admin/userTable/userList', {
-		title: 'Userlist',
+router.get('/', async (req, res) => {
+	const data = await adminPostModel.getPosts();
+	res.render('Admin/postTable/posts', {
+		title: 'Posts',
 		style: 'userlist/userList.css',
-		users: data,
+		posts: data,
 	});
 });
 
@@ -38,12 +36,21 @@ router.get('/edit/:id', async (req, res) => {
 });
 
 // úprava uživatelů
-router.post('/edit/:id', async (req, res) => {
-	var user = req.body;
+router.post('/edituser/:id', async (req, res) => {
+	const { jmeno, prijmeni, prezdivka, email, heslo } = req.body;
+
 	var id = req.params.id;
-	await userModel.updateUser(user, id, function (data) {
-		console.log('data updated');
-	});
+	await userModel.updateUser(
+		jmeno,
+		prijmeni,
+		prezdivka,
+		email,
+		id,
+		function (data) {
+			console.log('data updated');
+		},
+		res.redirect('/admin/users')
+	);
 });
 
 // Přidávání nových uživatelů (form)
@@ -81,6 +88,7 @@ router.get('/delete/:id', async (req, res) => {
 	await userModel.deleteUser(id, function (data) {
 		res.redirect('/admin/users');
 	});
+	res.redirect('back');
 });
 
 module.exports = router;

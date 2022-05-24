@@ -46,11 +46,11 @@ exports.editUser = (ID) => {
 };
 
 // Úprava dat uživatele
-exports.updateUser = (updateUser, ID, callback) => {
+exports.updateUser = (jmeno, prijmeni, prezdivka, email, ID, callback) => {
 	return new Promise((resolve, reject) => {
 		try {
-			let sql = 'UPDATE users SET ? WHERE id = ?';
-			conn.query(sql, [updateUser, ID], (err) => {
+			let sql = `UPDATE users SET firstname = '${jmeno}', lastname = '${prijmeni}', username = '${prezdivka}', email = '${email}' WHERE id = '${ID}'`;
+			conn.query(sql, (err) => {
 				if (err) throw err;
 				return callback();
 			});
@@ -62,7 +62,7 @@ exports.updateUser = (updateUser, ID, callback) => {
 
 // Přidávání uživatele
 exports.addUser = (jmeno, prijmeni, prezdivka, email, heslo, status) => {
-	let sql = `INSERT INTO users(jmeno, prijmeni, prezdivka, email, heslo, status) VALUES ('${jmeno}','${prijmeni}', '${prezdivka}','${email}','${heslo}','${status}')`;
+	let sql = `INSERT INTO users(firstname, lastname, username, email, hashedPassword, created_at) VALUES ('${jmeno}','${prijmeni}', '${prezdivka}','${email}','${heslo}',NOW())`;
 	conn.query(sql, (err) => {
 		if (err) throw err;
 	});

@@ -34,7 +34,7 @@ router.post('/upload', upload.single('image'), (req, res) => {
 		conn.query(insertData, [imgsrc], (err, result) => {
 			if (err) throw err;
 			console.log('file uploaded');
-			res.redirect('/account/:id');
+			res.redirect('/account');
 		});
 	}
 });

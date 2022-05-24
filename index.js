@@ -15,7 +15,8 @@ const app = express();
 // Získávání controllerů
 const registerRouter = require('./controllers/register');
 const loginRouter = require('./controllers/login');
-const userRouter = require('./controllers/userController');
+const adminUsersRouter = require('./controllers/admin/adminUsersController');
+const adminPostRouter = require('./controllers/admin/adminPostsController');
 const profileRouter = require('./controllers/profileController');
 const postRouter = require('./controllers/postController');
 const avatarRouter = require('./controllers/userAvatarController');
@@ -60,7 +61,8 @@ function isLoggedIn(req, res, next) {
 // Routes
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
-app.use('/admin', isLoggedIn, userRouter);
+app.use('/admin', isLoggedIn, adminUsersRouter);
+app.use('/admin/posts', isLoggedIn, adminPostRouter);
 app.use('/', isLoggedIn, profileRouter);
 app.use('/posts', isLoggedIn, postRouter);
 app.use('/avatar', isLoggedIn, avatarRouter);
@@ -92,6 +94,6 @@ app.post('/search', function (req, res) {
 	);
 });
 
-const PORT = 5000;
+const PORT = 4400;
 
 app.listen(PORT, () => console.log(`Aplikace běží na portu  ${PORT}`));
