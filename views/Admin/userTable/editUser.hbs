@@ -1,6 +1,6 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/admin/users">Domů</a></li>
+    <li class="breadcrumb-item"><a href="/admin/users/">Domů</a></li>
     <li class="breadcrumb-item active" aria-current="page">Úprava uživatele</li>
   </ol>
 </nav>
@@ -13,7 +13,7 @@
 {{/if}}
 <!-- Zobrazení user-form z Partials -->
 {{#each user}}
-<form class="row g-3 needs-validation" method="POST" action="/admin/edituser/{{this.id}}" novalidate> 
+<form class="row g-3 needs-validation" method="POST" action="/admin/users/edituser/{{this.id}}" novalidate> 
   {{> user-form-nopassword}}
 </form>
 {{/each}}

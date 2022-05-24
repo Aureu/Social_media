@@ -61,7 +61,7 @@ function isLoggedIn(req, res, next) {
 // Routes
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
-app.use('/admin', isLoggedIn, adminUsersRouter);
+app.use('/admin/users', isLoggedIn, adminUsersRouter);
 app.use('/admin/posts', isLoggedIn, adminPostRouter);
 app.use('/', isLoggedIn, profileRouter);
 app.use('/posts', isLoggedIn, postRouter);
@@ -74,26 +74,23 @@ app.get('/logout', (req, res) => {
 });
 
 // search function
-app.post('/search', function (req, res) {
-	var str = {
-		stringPart: req.body.typeahead,
-	};
 
-	conn.query(
-		// Vyhleda to data z db
-		'SELECT username FROM users WHERE username LIKE "%' + str.stringPart + '%"',
+app.get('/search', function (req, res) {
+	connection.query(
+		'SELECT first_name from TABLE_NAME where first_name like "%' +
+			req.query.key +
+			'%"',
 		function (err, rows, fields) {
 			if (err) throw err;
 			var data = [];
 			for (i = 0; i < rows.length; i++) {
-				data.push(rows[i].username);
+				data.push(rows[i].first_name);
 			}
-			// Dodelat zobrazovani
-			res.send(JSON.stringify(data));
+			res.end(JSON.stringify(data));
 		}
 	);
 });
 
-const PORT = 4400;
+const PORT = 5000;
 
 app.listen(PORT, () => console.log(`Aplikace běží na portu  ${PORT}`));

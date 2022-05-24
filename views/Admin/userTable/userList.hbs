@@ -7,7 +7,7 @@
 		<ul class='nav__link--list'>
 			<li>
 				<a
-					href='/admin/users'
+					href='/admin/users/'
 					class='nav__link--anchor link__hover-effect link__hover-effect--black'
 				>Users</a>
 			</li>
@@ -32,8 +32,11 @@
 				<h1>Uživatelé</h1>
 			</div>
 			<div class='col-6 d-flex justify-content-end'>
-				<a href='/admin/adduser' type='button' class='btn align-self-center'>+
-					Přidat uživatele</a>
+				<a
+					href='/admin/users/adduser'
+					type='button'
+					class='btn align-self-center'
+				>+ Přidat uživatele</a>
 			</div>
 		</div>
 		<div class='row'>
@@ -57,18 +60,18 @@
 									<td>{{this.email}}</td>
 									<td class='text-end'>
 										<a
-											href='/admin/view/{{this.id}}'
+											href='/admin/users/view/{{this.id}}'
 											type='button'
 											class='btn'
 										><i class='bi bi-eye'></i> Zobrazit</a>
 										<a
-											href='/admin/edit/{{this.id}}'
+											href='/admin/users/edit/{{this.id}}'
 											type='button'
 											class='btn'
 										><i class='bi bi-pencil'></i>
 											Upravit</a>
 										<a
-											href='/admin/delete/{{this.id}}'
+											href='/admin/users/delete/{{this.id}}'
 											type='button'
 											class='btn'
 										><i class='bi bi-person-x'></i> Smazat</a>

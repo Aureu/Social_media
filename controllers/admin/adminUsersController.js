@@ -6,7 +6,7 @@ const router = express.Router();
 const userModel = require('../../models/adminUserlist');
 
 // Zobrazení uživatelů
-router.get('/users', async (req, res) => {
+router.get('/', async (req, res) => {
 	const data = await userModel.getUsers();
 	res.render('Admin/userTable/userList', {
 		title: 'Userlist',

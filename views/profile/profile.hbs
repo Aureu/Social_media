@@ -24,12 +24,11 @@
 						/> }}
 						<form method='POST' action='/search'>
 							<input
-								class='typeahead tt-query searchTerm'
+								class='typeahead tt-query'
 								spellcheck='false'
 								autocomplete='off'
 								name='typeahead'
 								type='text'
-								placeholder='What are you looking for?'
 							/>
 
 						</form>
@@ -129,6 +128,11 @@
 							</div>
 						</div>
 						<p>{{this.content}}</p>
+						<a
+							href='/admin/posts/delete/{{this.id}}'
+							type='button'
+							class='btn'
+						><i class=''></i> Smazat</a>
 
 					</div>
 					<hr />
