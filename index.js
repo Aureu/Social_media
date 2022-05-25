@@ -74,9 +74,9 @@ app.get('/logout', (req, res) => {
 });
 
 // search function
-
+app.use(express.static(__dirname + '/JS'));
 app.get('/search', function (req, res) {
-	connection.query(
+	conn.query(
 		'SELECT first_name from TABLE_NAME where first_name like "%' +
 			req.query.key +
 			'%"',
