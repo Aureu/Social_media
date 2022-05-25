@@ -37,6 +37,8 @@ app.use(express.urlencoded({ extended: false }));
 // cookie parser middleware
 app.use(cookieParser());
 
+//cors middleware
+
 // Session middleware
 const oneDay = 1000 * 60 * 60 * 24;
 app.use(

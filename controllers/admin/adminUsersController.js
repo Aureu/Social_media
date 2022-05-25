@@ -87,7 +87,7 @@ router.post('/add', async (req, res) => {
 // Mazání uživatelů
 router.get('/delete/:id', async (req, res) => {
 	const id = req.params.id;
-	await userModel.deleteUser(id, function (data) {
+	await userModel.deleteUser(id, function () {
 		res.redirect('/admin/users');
 	});
 	res.redirect('back');
