@@ -58,16 +58,18 @@
 				alt='User'
 			/>
 		{{/each}}
+		{{#each user}}
 
-		<h3>{{jmeno}} {{prijmeni}}</h3>
-		<span>@{{prezdivka}}</span>
-		<ul class='info'>
-			{{#each userInfo}}
-				<li>Bio: {{this.bio}}</li>
-				<li>Location: {{this.location}}</li>
-				<li>{{this.date_birth}}</li>
-			{{/each}}
-		</ul>
+			<h3>{{this.firstname}} {{this.lastname}}</h3>
+			<span>@{{this.username}}</span>
+			{{!-- <ul class='info'>
+				{{#each userInfo}}
+					<li>Bio: {{this.bio}}</li>
+					<li>Location: {{this.location}}</li>
+					<li>{{this.date_birth}}</li>
+				{{/each}}
+			</ul> --}}
+		{{/each}}
 	</section>
 
 	<section class='posts'>
