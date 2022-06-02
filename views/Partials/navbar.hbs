@@ -1,0 +1,50 @@
+<section class='navigation'>
+	<nav>
+		<div class='wrap'>
+			<div class='search'>
+				<form method='POST' action='/search'>
+					<label>Search Data</label>
+					<input
+						class='typeahead tt-query'
+						spellcheck='false'
+						autocomplete='off'
+						name='typeahead'
+						type='text'
+					/>
+				</form>
+			</div>
+		</div>
+
+		<ul class='nav__link--list'>
+			<li>
+				<a
+					href=''
+					class='nav__link--anchor link__hover-effect link__hover-effect--black'
+				>Home</a>
+			</li>
+			<li>
+				<a
+					href='/account'
+					class='nav__link--anchor link__hover-effect link__hover-effect--black'
+				>Account</a>
+			</li>
+			<li
+				class='dropdown nav__link--anchor link__hover-effect link__hover-effect--black'
+			>
+				<button class='dropbtn'>Settings</button>
+				<div class='dropdown--content'>
+					<a href='/settings/info'>Info</a>
+					<a href='/avatar/upload'>Avatar</a>
+					<a href='/settings/profile'>Profile</a>
+				</div>
+			</li>
+
+			<li>
+				<a
+					href='/logout'
+					class='nav__link--anchor-primary link__hover-effect link__hover-effect--black'
+				>LOGOUT</a>
+			</li>
+		</ul>
+	</nav>
+</section>

@@ -1,13 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
-}
-
-/* Change the white to any color */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -17,13 +7,6 @@ input:-webkit-autofill:active {
 input:-webkit-autofill{
 	-webkit-text-fill-color: #d3d3d3 !important;
 }
-
-
-body {
-	background-color: #1d1d1d;
-	color: white;
-}
-
 
 .centered-form .panel {
 	background: #e4e3e3;
@@ -72,10 +55,4 @@ body {
 	text-decoration: none;
 }
 
-a {
-	color: #8e73f0;
-}
 
-a:hover {
-	color: #8e73f0;
-}

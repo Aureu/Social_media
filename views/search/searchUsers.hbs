@@ -1,24 +1,27 @@
-<table class='table table-dark table-hover'>
-	<thead>
-		<tr>
-			<th scope='col'>User</th>
-			<th scope='col'>Action</th>
-		</tr>
-	</thead>
-	<tbody>
-		<!-- Tabulka do které se vkládají uživatelé z databáze -->
-		{{#each users}}
+{{> navbar}}
+<div class='container'>
+	<table class='table table-dark table-hover'>
+		<thead>
 			<tr>
-				<th scope='row'>{{this}}</th>
-
-				<td>
-					<a href='/user/{{this}}' type='button' class='btn'><i
-							class='bi bi-person-x'
-						></i>
-						Add</a>
-				</td>
+				<th scope='col'>User</th>
+				<th scope='col'>Action</th>
 			</tr>
-		{{/each}}
+		</thead>
+		<tbody>
+			<!-- Tabulka do které se vkládají uživatelé z databáze -->
+			{{#each users}}
+				<tr>
+					<th scope='row'>{{this}}</th>
 
-	</tbody>
-</table>
+					<td>
+						<a href='/user/{{this}}' type='button' class='btn'><i
+								class='bi bi-person-x'
+							></i>
+							Add</a>
+					</td>
+				</tr>
+			{{/each}}
+
+		</tbody>
+	</table>
+</div>

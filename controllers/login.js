@@ -14,7 +14,7 @@ const app = express();
 router.get('/', (req, res) => {
 	res.render('auth/login', {
 		title: 'login',
-		style: 'auth/login.css',
+		style: 'auth/authForm.css',
 		message: req.flash('error'),
 	});
 });

@@ -6,6 +6,7 @@ const router = express.Router();
 router.get('/:username', async (req, res) => {
 	var username = req.params.username;
 	const data = await userProfileModel.getUser(username);
+	console.log(data);
 	res.render('userProfile/user', {
 		title: 'User',
 		style: 'profile/profilePage.css',

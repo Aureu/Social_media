@@ -16,7 +16,10 @@ router.post('/', function (req, res) {
 				data.push(rows[i].username);
 			}
 			console.log(data);
-			res.render('search/searchUsers', { users: data });
+			res.render('search/searchUsers', {
+				users: data,
+				style: 'search/search.css',
+			});
 		}
 	);
 });

@@ -7,7 +7,7 @@ const Register = require('../models/register');
 router.get('/', (req, res) => {
 	res.render('auth/register', {
 		title: 'Register',
-		style: 'auth/register.css',
+		style: 'auth/authForm.css',
 	});
 });
 

@@ -8,7 +8,7 @@
 
 						<h4 class='card-title mt-2'>Registration</h4>
 					</header>
-					<article class='card-body'>
+					<div class='card-body'>
 						<!-- Register formulář -->
 						<form action='/register' method='POST'>
 							<div class='form-row'>
@@ -16,6 +16,7 @@
 								<div class='col form-group'>
 									<input
 										type='text'
+										class='form-control'
 										maxlength='32'
 										placeholder='Firstname'
 										name='jmeno'
@@ -29,6 +30,7 @@
 
 									<input
 										type='text'
+										class='form-control'
 										maxlength='32'
 										placeholder='Lastname '
 										name='prijmeni'
@@ -43,6 +45,7 @@
 
 									<input
 										type='text'
+										class='form-control'
 										maxlength='32'
 										placeholder='Username'
 										name='prezdivka'
@@ -55,8 +58,8 @@
 							<div class='form-group'>
 								<input
 									type='email'
-									maxlength='64'
-									placeholder='Email'
+									class='form-control'
+									placeholder='Enter email'
 									name='email'
 									id='email'
 									required
@@ -66,6 +69,7 @@
 							<div class='form-group'>
 								<input
 									type='password'
+									class='form-control'
 									maxlength='60'
 									placeholder='Password'
 									id='heslo'
@@ -93,7 +97,7 @@
 							<!-- Dodělat vypisování chyb -->
 							{{message}}
 						</form>
-					</article>
+					</div>
 					<!-- Přesměrování na přihlašování -->
 					<div class='card-body text-center'>Do you have an account?
 						<a href='/login'>Login</a></div>

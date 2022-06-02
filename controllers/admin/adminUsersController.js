@@ -40,7 +40,6 @@ router.get('/edit/:id', async (req, res) => {
 // úprava uživatelů
 router.post('/edituser/:id', async (req, res) => {
 	const { jmeno, prijmeni, prezdivka, email, heslo } = req.body;
-
 	var id = req.params.id;
 	await userModel.updateUser(
 		jmeno,

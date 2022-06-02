@@ -1,75 +1,23 @@
-<section class='navigation'>
-	<nav>
-		<div class='wrap'>
-			<div class='search'>
-				<form method='POST' action='/search'>
-					<label>Search Data</label>
-					<input
-						class='typeahead tt-query'
-						spellcheck='false'
-						autocomplete='off'
-						name='typeahead'
-						type='text'
-					/>
-				</form>
-			</div>
-		</div>
-
-		<ul class='nav__link--list'>
-			<li>
-				<a
-					href=''
-					class='nav__link--anchor link__hover-effect link__hover-effect--black'
-				>Home</a>
-			</li>
-			<li>
-				<a
-					href='/account'
-					class='nav__link--anchor link__hover-effect link__hover-effect--black'
-				>Account</a>
-			</li>
-			<li
-				class='dropdown nav__link--anchor link__hover-effect link__hover-effect--black'
-			>
-				<button class='dropbtn'>Settings</button>
-				<div class='dropdown--content'>
-					<a href='/settings/info'>Info</a>
-					<a href='/avatar/upload'>Avatar</a>
-					<a href='/settings/profile'>Profile</a>
-				</div>
-			</li>
-
-			<li>
-				<a
-					href='/logout'
-					class='nav__link--anchor-primary link__hover-effect link__hover-effect--black'
-				>LOGOUT</a>
-			</li>
-		</ul>
-	</nav>
-</section>
+{{> navbar}}
 
 <div class='wrapper--content content'>
 	<section class='profile'>
-		{{#each image}}
+
+		{{#each user}}
 			<img
 				class='profile--avatar'
 				src='/Avatars/{{this.file_src}}'
 				alt='User'
 			/>
-		{{/each}}
-		{{#each user}}
-
 			<h3>{{this.firstname}} {{this.lastname}}</h3>
 			<span>@{{this.username}}</span>
-			{{!-- <ul class='info'>
-				{{#each userInfo}}
-					<li>Bio: {{this.bio}}</li>
-					<li>Location: {{this.location}}</li>
-					<li>{{this.date_birth}}</li>
-				{{/each}}
-			</ul> --}}
+			<ul class='info'>
+				<li>Bio: {{this.bio}}</li>
+				<li>Location: {{this.location}}</li>
+				<li>{{this.date_birth}}</li>
+			</ul>
 		{{/each}}
+		<button>Add Friend</button>
 	</section>
 
 	<section class='posts'>
