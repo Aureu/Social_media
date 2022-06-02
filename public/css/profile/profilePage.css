@@ -44,6 +44,14 @@ main {
 	padding: 20px 20px 0px 20px;
 }
 
+#heart {
+	color: grey;
+}
+
+#heart.red {
+	color: red;
+}
+
 .container {
 	max-width: 1250px;
 	margin: 30px auto 30px;
@@ -159,7 +167,15 @@ main {
 		text-align: center;
 	}
 }
+.likes {
+	align-items: center;
+}
+
+.likes-count {
+	padding-left: 5px;
+}
 .post--textarea {
+	margin-top: 10px;
 	padding: 5px;
 }
 
@@ -174,7 +190,7 @@ main {
 	background: #3a3b3b;
 	margin: 0 auto;
 	border-radius: 3px;
-	padding: 30px;
+	padding: 15px;
 	border-bottom: 1px solid rgb(0, 0, 0);
 	border-top: 1px solid #000000;
 }
@@ -183,6 +199,7 @@ main {
 	display: flex;
 	align-items: flex-start;
 	font-size: 14px;
+	overflow: hidden;
 }
 .tweet-header-info {
 	font-weight: bold;
@@ -195,6 +212,7 @@ main {
 .tweet-header-info p {
 	font-weight: normal;
 	margin-top: 5px;
+	word-break: break-all;
 }
 .tweet-text-wrap {
 	padding-left: 60px;
@@ -213,6 +231,7 @@ main {
 	color: #657786;
 	margin-right: 10px;
 }
+
 @media screen and (max-width: 430px) {
 	body {
 		padding-left: 20px;

@@ -21,9 +21,9 @@ router.get('/account', async (req, res) => {
 		prijmeni: req.user.lastname,
 		prezdivka: req.user.username,
 		email: email,
-		userInfo: userInfo,
+		userInfo: userInfo[0],
 		posts: data,
-		image: Avatar,
+		image: Avatar[0],
 	});
 	console.log(req.user);
 });

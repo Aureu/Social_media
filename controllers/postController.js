@@ -13,4 +13,13 @@ router.post('/add-post', (req, res) => {
 	res.redirect('back');
 });
 
+router.post('/:id/act', (req, res, next) => {
+	const action = req.body.action;
+	const user_id = req.user.id;
+	const post_id = req.params.id;
+	const counter = action === 'Like' ? 1 : -1;
+	postModel.likes(action, user_id, post_id);
+	postModel.likeCount(post_id, counter);
+});
+
 module.exports = router;
