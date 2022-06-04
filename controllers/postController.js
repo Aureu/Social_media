@@ -22,4 +22,12 @@ router.post('/:id/act', (req, res, next) => {
 	postModel.likeCount(post_id, counter);
 });
 
+// comments
+router.post('/comment/:id', (req, res) => {
+	const user_id = req.user.id;
+	const post_id = req.params.id;
+	const commentText = req.body.commentText;
+	postModel.comment(user_id, post_id, commentText);
+	res.redirect('back');
+});
 module.exports = router;

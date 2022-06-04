@@ -60,3 +60,24 @@ exports.likeCount = (post_id, counter) => {
 		reject(err);
 	}
 };
+
+exports.comment = (user_id, post_id, commentText) => {
+	try {
+		const today = new Date();
+		const date =
+			today.getDate() +
+			'/' +
+			(today.getMonth() + 1) +
+			'/' +
+			today.getFullYear();
+		const time =
+			today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+		const dateTime = date + ' ' + time;
+		let sql = `INSERT INTO comments (user_id, post_id, body, created_at) VALUES ('${user_id}','${post_id}','${commentText}','${dateTime}')`;
+		conn.query(sql, (err, results) => {
+			if (err) throw err;
+		});
+	} catch (err) {
+		reject(err);
+	}
+};

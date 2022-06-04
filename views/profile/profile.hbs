@@ -1,7 +1,7 @@
-{{> navbar}}
+		{{> navbar}}
+
 <div class="container">
 	<header>
-		<i class="fa fa-bars" aria-hidden="true"></i>
 	</header>
 	<main>
 		<div class="row">
@@ -12,6 +12,7 @@
 							src='/Avatars/{{image.file_src}}'
 							alt='User'
 						/>
+						
 				</div>
 				<h4 class="name">{{jmeno}} {{prijmeni}}</h4>
 				<p class="info">{{email}}</p>
@@ -43,22 +44,39 @@
 					<li>Groups</li>
 					<li>About</li>
 				</ul>
-				<span class="follow">Follow</span>
 				<div class="row posts">
 			<section id='posts'>
-				<div class="post--add">
-					<form action='/posts/add-post' method='post'>
-						<span class='input-icon'>
-							<textarea class="post--textarea" placeholder="Write something here!" cols="50" rows="5" name="postMessage" id="postMessage" maxlength="100"></textarea>
-						</span>
-						<button
-							type='submit'
-							class='btn btn-sm btn-dark waves-effect waves-light'
-							value='Submit'
-							id='btnsubmit'
-						>Přidat</button>
-					</form>
+	
+				<div class="add--container">
+					<div id="box">
+						<div class="top">
+							<h3 class="text-center text-muted">Add new Post</h3>
+						</div>
+						<div class="bottom add--container">
+							<form action="/posts/add-post" method="POST">
+							<textarea class="post--textarea" placeholder="Write something here!" name="postMessage" id="postMessage" maxlength="100"></textarea>
+							<div class="bottom-right">
+								<span id="countdown">100</span>
+								<button class="btn btn-primary add--post">Add</button>
+							</div>
+							</form>
+						</div>
+					</div>
 				</div>
+
+				<script>
+					$(document).ready(function(){
+  //Character limit js
+  var maxLength= 100;
+  $("textarea").keypress(function(){
+     var length = $(this).val().length;
+     var length = maxLength-length;
+     $("#countdown").text(length);
+  })
+					}
+					)
+				</script>
+				
 				
 			{{#each posts}}
 				<div class="tweet-wrap">
@@ -74,15 +92,13 @@
 							<p>{{this.content}}</p>
 						</div>
 					</div>
+					<hr>
 				<div class="tweet-info-counts">
 					<div class="comments">
-						<svg class="feather feather-message-circle sc-dnqmqq jxshSx" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-						<div class="comment-count">33</div>
+						<p>comment</p>
 					</div>
-					<div class="retweets">
-						<svg class="feather feather-repeat sc-dnqmqq jxshSx" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
-						<div class="retweet-count">397</div>
-					</div>{{ this.like_count }}
+						
+					{{ this.like_count }}
 					<div class="likes">
 							<button onclick="actOnPost(event);"
                 data-post-id="{{ this.id }}">Like
@@ -120,13 +136,23 @@
         };
     </script>
 					</div>
-					<div class="message">
-						<svg class="feather feather-send sc-dnqmqq jxshSx" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-					</div>
 					<div class="post--delete-button">
 							<a href="/admin/posts/delete/{{this.id}}" type="button" class="post--delete-btn">Delete</a>
 							</div>
 				</div>
+				<hr>
+				<div class="comment--row">
+					<figure>
+						<img src="/Avatars/{{../image.file_src}}" alt="" class="comment--avatar">
+					</figure>
+					<form action="/posts/comment/{{this.id}}" method="POST" name="commentText">
+						<input type="text" class="comment--input" name="commentText" id="commentText" placeholder="Comment">
+					</form>
+				</div>
+				<div class="comment--text">
+					{{this.body}}
+				</div>
+				
 			</div>
 		{{/each}}
 

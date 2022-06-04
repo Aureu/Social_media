@@ -1,68 +1,122 @@
 {{> navbar}}
-
-<div class='wrapper--content content'>
-	<section class='profile'>
-
-		{{#each user}}
-			<img
-				class='profile--avatar'
-				src='/Avatars/{{this.file_src}}'
-				alt='User'
-			/>
-			<h3>{{this.firstname}} {{this.lastname}}</h3>
-			<span>@{{this.username}}</span>
-			<ul class='info'>
-				<li>Bio: {{this.bio}}</li>
-				<li>Location: {{this.location}}</li>
-				<li>{{this.date_birth}}</li>
-			</ul>
-		{{/each}}
-		<button>Add Friend</button>
-	</section>
-
-	<section class='posts'>
-		<form action='/posts/add-post' class='post--add' method='post'>
-			<span class='input-icon'>
-				<textarea
-					rows='3'
-					maxlength='100'
-					class='form-control'
-					placeholder='Write something...'
-					name='postMessage'
-					id='postMessage'
-				></textarea>
-			</span>
-			<div class=''>
-				<button
-					type='submit'
-					class='btn btn-sm btn-dark waves-effect waves-light'
-					value='Submit'
-					id='btnsubmit'
-				>Přidat</button>
-
-			</div>
-		</form>
-		{{#each posts}}
-			<div class='p-2 mb-3'>
-				<div class='d-flex align-items-start'>
-					<img
-						class='me-2 avatar-sm rounded-circle post--avatar'
-						src='https://bootdey.com/img/Content/avatar/avatar6.png'
-						alt='Generic placeholder image'
-					/>
-					<div class='w-100'>
-						<h5 class='m-0'>{{this.username}}</h5>
-						<p class='text-muted'><small>{{this.created_at}}</small></p>
+<div class="container">
+	<header>
+		<i class="fa fa-bars" aria-hidden="true"></i>
+	</header>
+	<main>
+		<div class="row">
+			<div class="left col-lg-4">
+				<div class="photo-left">
+						<img
+							class='profile--avatar'
+							src='/Avatars/{{userdata1.file_src}}'
+							alt='User'
+						/>
+				</div>
+				<h4 class="name">{{userdata.firstname}} {{userdata.lastname}}</h4>
+				<p class="info">{{userdata.email}}{{userdata.id}}</p>
+				
+				<div class="stats row">
+					<div class="stat col-xs-4" style="padding-right: 50px;">
+						<p class="number-stat">3,619</p>
+						<p class="desc-stat">Followers</p>
+					</div>
+					<div class="stat col-xs-4">
+						<p class="number-stat">42</p>
+						<p class="desc-stat">Following</p>
+					</div>
+					<div class="stat col-xs-4" style="padding-left: 50px;">
+						<p class="number-stat">38</p>
+						<p class="desc-stat">Uploads</p>
 					</div>
 				</div>
-				<p>{{this.content}}</p>
-				<a href='/admin/posts/delete/{{this.id}}' type='button' class='btn'><i
-						class=''
-					></i>
-					Smazat</a>
-
+				<p class="desc">
+			<li>Bio: {{userdata.bio}}</li>
+			<li>Location: {{userdata.location}}</li>
+			<li>Birthday: {{userdata.date_birth}}</li>
+				</p>
+				<br>
 			</div>
-			<hr />
+			<div class="right col-lg-8">
+				<ul class="nav">
+					<li>Posts</li>
+					<li>Collections</li>
+					<li>Groups</li>
+					<li>About</li>
+				</ul>
+				<span class="follow">Follow</span>
+				<div class="row posts">
+			<section id='posts'>
+				
+			{{#each posts}}
+				<div class="tweet-wrap">
+					<div class="tweet-header">
+						<img src="/Avatars/{{../userdata1.file_src}}" alt="" class="avator">
+						<div class="tweet-header-info">
+							<span>
+								@{{this.username}}
+							</span>
+							<span>
+								. {{this.created_at}}
+							</span>
+							<p>{{this.content}}</p>
+						</div>
+					</div>
+				<div class="tweet-info-counts">
+					<div class="comments">
+						<svg class="feather feather-message-circle sc-dnqmqq jxshSx" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+						<div class="comment-count">33</div>
+					</div>
+					<div class="retweets">
+						<svg class="feather feather-repeat sc-dnqmqq jxshSx" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+						<div class="retweet-count">397</div>
+					</div>{{ this.like_count }}
+					<div class="likes">
+							<button onclick="actOnPost(event);"
+                data-post-id="{{ this.id }}">Like
+               </button>
+						<div class="likes-count">
+							<span id="likes-count-{{ this.id }}">{{ this.like_count }}</span>
+						</div>
+						<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        var updatePostStats = {
+            Like: function (postId) {
+                document.querySelector('#likes-count-' + postId);
+            },
+            Unlike: function(postId) {
+                document.querySelector('#likes-count-' + postId);
+            }
+        };
+    
+        var toggleButtonText = {
+            Like: function(button) {
+                button.textContent = "Unlike";
+            },
+            Unlike: function(button) {
+                button.textContent = "Like";
+            }
+        };
+    
+        var actOnPost = function (event) {
+            var postId = event.target.dataset.postId;
+            var action = event.target.textContent.trim();
+						
+            toggleButtonText[action](event.target);
+            updatePostStats[action](postId);
+            axios.post('/posts/' + postId + '/act', { action: action });
+        };
+    </script>
+					</div>
+					<div class="message">
+						<svg class="feather feather-send sc-dnqmqq jxshSx" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+					</div>
+				</div>
+			</div>
 		{{/each}}
-	</section>
+
+			</section>
+				</div>
+			</div>
+	</main>
 </div>
