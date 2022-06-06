@@ -21,8 +21,9 @@ const profileRouter = require('./controllers/profileController');
 const postRouter = require('./controllers/postController');
 const avatarRouter = require('./controllers/userAvatarController');
 const editProfileRouter = require('./controllers/editProfileController');
-const viewUserRouter = require('./controllers/viewUserProfile');
+const userRouter = require('./controllers/userProfileController');
 const searchRouter = require('./controllers/searchbar');
+const mainpageRouter = require('./controllers/mainPageController');
 // Handlebars Middleware
 const handlebars = exphbs.create({ extname: '.hbs' });
 app.engine('.hbs', handlebars.engine);
@@ -71,7 +72,8 @@ app.use('/posts', isLoggedIn, postRouter);
 app.use('/avatar', isLoggedIn, avatarRouter);
 app.use('/settings', isLoggedIn, editProfileRouter);
 app.use('/search', isLoggedIn, searchRouter);
-app.use('/user', isLoggedIn, viewUserRouter);
+app.use('/user', isLoggedIn, userRouter);
+app.use('/main', mainpageRouter);
 app.get('/logout', (req, res) => {
 	req.session.destroy(function (err) {
 		res.redirect('/login');

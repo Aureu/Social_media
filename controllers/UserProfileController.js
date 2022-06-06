@@ -1,5 +1,5 @@
 const conn = require('../database');
-const userProfileModel = require('../models/viewUser');
+const userProfileModel = require('../models/User');
 const express = require('express');
 const router = express.Router();
 
@@ -15,6 +15,13 @@ router.get('/:username', async (req, res) => {
 		userdata1: data1[0],
 		posts: posts,
 	});
+});
+
+router.post('/:id', (req, res, next) => {
+	const followerId = req.user.id;
+	const followedId = req.params.id;
+	userProfileModel.follow(followerId, followedId);
+	console.log(+followerId + 'followed' + followedId);
 });
 
 module.exports = router;

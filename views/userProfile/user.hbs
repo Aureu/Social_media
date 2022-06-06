@@ -7,14 +7,18 @@
 		<div class="row">
 			<div class="left col-lg-4">
 				<div class="photo-left">
-						<img
-							class='profile--avatar'
-							src='/Avatars/{{userdata1.file_src}}'
-							alt='User'
-						/>
-				</div>
+					<figure class="profile--wrap">
+						<div>
+							<img
+								class='profile__avatar--img'
+								src='/Avatars/{{userdata1.file_src}}'
+								alt='User'
+							/>
+							</div>
+							{{!-- <span class="profile__name">Change PFP</span> --}}
+					</figure>
 				<h4 class="name">{{userdata.firstname}} {{userdata.lastname}}</h4>
-				<p class="info">{{userdata.email}}{{userdata.id}}</p>
+				<p class="info">{{userdata.email}}</p>
 				
 				<div class="stats row">
 					<div class="stat col-xs-4" style="padding-right: 50px;">
@@ -43,8 +47,17 @@
 					<li>Collections</li>
 					<li>Groups</li>
 					<li>About</li>
+				
 				</ul>
-				<span class="follow">Follow</span>
+				<button class="follow" onclick="followUser(event)" data-user-id="{{userdata.id}}">Follow</button>
+				<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+				<script>
+					const followUser = function (event) {
+            const userId = event.target.dataset.userId;
+					
+            axios.post('/user/' + userId );
+        };
+				</script>
 				<div class="row posts">
 			<section id='posts'>
 				
@@ -78,9 +91,9 @@
 						<div class="likes-count">
 							<span id="likes-count-{{ this.id }}">{{ this.like_count }}</span>
 						</div>
-						<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+						
     <script>
-        var updatePostStats = {
+        const updatePostStats = {
             Like: function (postId) {
                 document.querySelector('#likes-count-' + postId);
             },
@@ -89,7 +102,7 @@
             }
         };
     
-        var toggleButtonText = {
+        const toggleButtonText = {
             Like: function(button) {
                 button.textContent = "Unlike";
             },
@@ -98,9 +111,9 @@
             }
         };
     
-        var actOnPost = function (event) {
-            var postId = event.target.dataset.postId;
-            var action = event.target.textContent.trim();
+        const actOnPost = function (event) {
+            const postId = event.target.dataset.postId;
+            const action = event.target.textContent.trim();
 						
             toggleButtonText[action](event.target);
             updatePostStats[action](postId);

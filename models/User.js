@@ -5,7 +5,7 @@ const express = require('express');
 exports.getUser = (username) => {
 	return new Promise((resolve, reject) => {
 		try {
-			let sql = `SELECT u.firstname, u.lastname, u.username, u.email, i.bio, i.location, i.date_birth FROM users AS u JOIN user_info AS i ON u.id = i.user_id WHERE u.username = ?`;
+			let sql = `SELECT * FROM users AS u JOIN user_info AS i ON u.id = i.user_id WHERE u.username = ?`;
 			conn.query(sql, username, (error, results) => {
 				if (error) throw error;
 				resolve(results);
@@ -33,6 +33,20 @@ exports.Posts = (username) => {
 		try {
 			let sql = `SELECT p.username, p.content, p.like_count, p.created_at FROM users AS u JOIN posts AS p ON u.id = p.user_id WHERE u.username = ?`;
 			conn.query(sql, username, (error, results) => {
+				if (error) throw error;
+				resolve(results);
+			});
+		} catch (err) {
+			reject(err);
+		}
+	});
+};
+
+exports.follow = (followerId, followedId) => {
+	return new Promise((resolve, reject) => {
+		try {
+			let sql = `INSERT INTO followers (follower_id, followed_id) VALUES ('${followerId}', '${followedId}')`;
+			conn.query(sql, (error, results) => {
 				if (error) throw error;
 				resolve(results);
 			});

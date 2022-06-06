@@ -71,6 +71,9 @@ main {
 	border: 4px solid #fff;
 }
 
+.follow:hover {
+	background-color: white;
+}
 .profile__name {
 	position: absolute;
 	bottom: -10px;

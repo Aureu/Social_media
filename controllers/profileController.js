@@ -11,6 +11,7 @@ router.get('/account', async (req, res) => {
 	const data = await postModel.viewPost(user_id);
 	const Avatar = await profileModel.viewAvatar(user_id);
 	const userInfo = await profileModel.viewInfo(user_id);
+	const followers = await profileModel.getFollowers(user_id);
 
 	email = req.user.email;
 	res.render('profile/profile', {
@@ -24,6 +25,7 @@ router.get('/account', async (req, res) => {
 		userInfo: userInfo[0],
 		posts: data,
 		image: Avatar[0],
+		followers: followers,
 	});
 	console.log(req.user);
 });

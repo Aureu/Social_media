@@ -53,6 +53,9 @@
 			<li>Bio: {{userInfo.bio}}</li>
 			<li>Location: {{userInfo.location}}</li>
 			<li>Birthday: {{userInfo.date_birth}}</li>
+			{{#each followers}}
+			<li>{{this.username}}</li>
+			{{/each}}
 				</p>
 				<br>
 			</div>
