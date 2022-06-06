@@ -1,4 +1,4 @@
-		{{> navbar}}
+{{> navbar}}
 
 <div class="container">
 	<header>
@@ -7,11 +7,30 @@
 		<div class="row">
 			<div class="left col-lg-4">
 				<div class="photo-left">
-						<img
-							class='profile--avatar'
-							src='/Avatars/{{image.file_src}}'
-							alt='User'
-						/>
+					<figure class="profile--wrap">
+						<a href='/avatar/upload'>
+							<img
+								class='profile__avatar--img'
+								src='/Avatars/{{image.file_src}}'
+								alt='User'
+							/>
+							</a>
+							{{!-- <span class="profile__name">Change PFP</span> --}}
+					</figure>
+					
+	<!-- Trigger/Open The Modal -->
+			
+
+			<!-- The Modal -->
+			<div id='myModal' class='modal'>
+
+				<!-- Modal content -->
+				<div class='modal-content'>
+					<span class='close'>&times;</span>
+					<p>Some text in the Modal..</p>
+				</div>
+
+			</div>
 						
 				</div>
 				<h4 class="name">{{jmeno}} {{prijmeni}}</h4>
@@ -161,11 +180,4 @@
 			</div>
 	</main>
 </div>
-<script>
-	(function() {
-  const heart = document.getElementById('heart');
-  heart.addEventListener('click', function() {
-    heart.classList.toggle('red');
-  });
-})();
-</script>
+
