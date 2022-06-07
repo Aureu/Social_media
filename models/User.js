@@ -2,6 +2,7 @@ const conn = require('../database');
 const mysql = require('mysql');
 const express = require('express');
 
+// Selects user table with user_info table using JOIN
 exports.getUser = (username) => {
 	return new Promise((resolve, reject) => {
 		try {
@@ -15,6 +16,8 @@ exports.getUser = (username) => {
 		}
 	});
 };
+
+// Selects user_avatars table
 exports.getUser1 = (username) => {
 	return new Promise((resolve, reject) => {
 		try {
@@ -28,6 +31,8 @@ exports.getUser1 = (username) => {
 		}
 	});
 };
+
+// Selects post
 exports.Posts = (username) => {
 	return new Promise((resolve, reject) => {
 		try {
@@ -42,6 +47,7 @@ exports.Posts = (username) => {
 	});
 };
 
+// Follow user
 exports.follow = (followerId, followedId) => {
 	return new Promise((resolve, reject) => {
 		try {

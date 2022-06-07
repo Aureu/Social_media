@@ -89,6 +89,7 @@ nav {
 	width: 100%;
 	position: relative;
 	display: flex;
+	border-radius: 50px;
 }
 
 .searchTerm {
@@ -97,7 +98,6 @@ nav {
 	border-right: none;
 	padding: 5px;
 	height: 36px;
-	border-radius: 5px 0 0 5px;
 	outline: none;
 	color: #9dbfaf;
 }

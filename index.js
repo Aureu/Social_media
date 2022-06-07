@@ -73,7 +73,7 @@ app.use('/avatar', isLoggedIn, avatarRouter);
 app.use('/settings', isLoggedIn, editProfileRouter);
 app.use('/search', isLoggedIn, searchRouter);
 app.use('/user', isLoggedIn, userRouter);
-app.use('/main', mainpageRouter);
+app.use('/main', isLoggedIn, mainpageRouter);
 app.get('/logout', (req, res) => {
 	req.session.destroy(function (err) {
 		res.redirect('/login');

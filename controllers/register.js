@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const Register = require('../models/register');
 
-// Zobrazení stránky
+// Display register form page
 router.get('/', (req, res) => {
 	res.render('auth/register', {
 		title: 'Register',
@@ -11,11 +11,11 @@ router.get('/', (req, res) => {
 	});
 });
 
-// Dodělat error handling
+// Post request for register
 router.post('/', async (req, res) => {
 	try {
 		const { jmeno, prijmeni, prezdivka, email, heslo } = req.body;
-		// Hashovaní hesla před uložením do DB
+		// Password hashing
 		const hashedPassword = await bcrypt.hash(heslo, 10);
 		Register.register(jmeno, prijmeni, prezdivka, hashedPassword, email);
 		res.redirect('/login');

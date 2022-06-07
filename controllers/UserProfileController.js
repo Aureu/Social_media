@@ -3,6 +3,7 @@ const userProfileModel = require('../models/User');
 const express = require('express');
 const router = express.Router();
 
+// Shows user profile by username
 router.get('/:username', async (req, res) => {
 	const username = req.params.username;
 	const data = await userProfileModel.getUser(username);
@@ -17,6 +18,7 @@ router.get('/:username', async (req, res) => {
 	});
 });
 
+// Following -- not done
 router.post('/:id', (req, res, next) => {
 	const followerId = req.user.id;
 	const followedId = req.params.id;

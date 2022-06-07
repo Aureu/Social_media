@@ -17,20 +17,6 @@
 							</a>
 							{{!-- <span class="profile__name">Change PFP</span> --}}
 					</figure>
-					
-	<!-- Trigger/Open The Modal -->
-			
-
-			<!-- The Modal -->
-			<div id='myModal' class='modal'>
-
-				<!-- Modal content -->
-				<div class='modal-content'>
-					<span class='close'>&times;</span>
-					<p>Some text in the Modal..</p>
-				</div>
-
-			</div>
 						
 				</div>
 				<h4 class="name">{{jmeno}} {{prijmeni}}</h4>
@@ -76,7 +62,7 @@
 						</div>
 						<div class="bottom add--container">
 							<form action="/posts/add-post" method="POST">
-							<textarea class="post--textarea" placeholder="Write something here!" name="postMessage" id="postMessage" maxlength="100"></textarea>
+							<textarea class="post--textarea" placeholder="Write something here!" name="postMessage" id="postMessage" maxlength="100" required></textarea>
 							<div class="bottom-right">
 								<span id="countdown">100</span>
 								<button class="btn btn-primary add--post">Add</button>
@@ -171,8 +157,8 @@
 						<input type="text" class="comment--input" name="commentText" id="commentText" placeholder="Comment">
 					</form>
 				</div>
+				{{this.body}}
 				<div class="comment--text">
-					{{this.body}}
 				</div>
 				
 			</div>

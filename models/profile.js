@@ -1,6 +1,7 @@
 const conn = require('../database');
 const express = require('express');
 
+// Selects user info from DB
 exports.viewInfo = (user_id) => {
 	return new Promise((resolve, reject) => {
 		try {
@@ -15,6 +16,7 @@ exports.viewInfo = (user_id) => {
 	});
 };
 
+// Selects user avatar from DB
 exports.viewAvatar = (user_id) => {
 	return new Promise((resolve, reject) => {
 		try {
@@ -28,6 +30,7 @@ exports.viewAvatar = (user_id) => {
 	});
 };
 
+// not done lol
 exports.getFollowers = (user_id) => {
 	return new Promise((resolve, reject) => {
 		try {

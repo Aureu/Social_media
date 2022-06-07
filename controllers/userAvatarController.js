@@ -21,7 +21,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-
+// Post for uploading avatar
 router.post('/upload', upload.single('image'), (req, res) => {
 	if (!req.file) {
 		console.log('No file upload');

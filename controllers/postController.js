@@ -13,6 +13,7 @@ router.post('/add-post', (req, res) => {
 	res.redirect('back');
 });
 
+// Like a post - not done
 router.post('/:id/act', (req, res, next) => {
 	const action = req.body.action;
 	const user_id = req.user.id;
@@ -22,7 +23,7 @@ router.post('/:id/act', (req, res, next) => {
 	postModel.likeCount(post_id, counter);
 });
 
-// comments
+// comments - not done
 router.post('/comment/:id', (req, res) => {
 	const user_id = req.user.id;
 	const post_id = req.params.id;

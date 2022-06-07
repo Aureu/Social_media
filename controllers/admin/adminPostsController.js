@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const adminPostModel = require('../../models/adminPosts');
 
+// Getting route for table with posts
 router.get('/', async (req, res) => {
 	const data = await adminPostModel.getPosts();
 	res.render('Admin/postTable/posts', {
@@ -13,7 +14,7 @@ router.get('/', async (req, res) => {
 	});
 });
 
-// Mazání prispevku
+// Delete post by id
 router.get('/delete/:id', async (req, res) => {
 	const id = req.params.id;
 	await adminPostModel.deletePost(id, function (data) {

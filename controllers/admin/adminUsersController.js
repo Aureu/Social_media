@@ -5,7 +5,7 @@ const express = require('express');
 const router = express.Router();
 const userModel = require('../../models/adminUserlist');
 
-// Zobrazení uživatelů
+// Displays users into table
 router.get('/', async (req, res) => {
 	const data = await userModel.getUsers();
 	res.render('Admin/userTable/userList', {
@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
 	});
 });
 
-// Zobrazí jednoho uživatele
+// Displays one user by id
 router.get('/view/:id', async (req, res) => {
 	var id = req.params.id;
 	const data = await userModel.getUser(id);
@@ -26,7 +26,7 @@ router.get('/view/:id', async (req, res) => {
 	});
 });
 
-// cesta na form pro úpravu uživatelů
+// Route for form for edit user
 router.get('/edit/:id', async (req, res) => {
 	var id = req.params.id;
 	const data = await userModel.editUser(id);
@@ -37,7 +37,7 @@ router.get('/edit/:id', async (req, res) => {
 	});
 });
 
-// úprava uživatelů
+// Edit user by id
 router.post('/edituser/:id', async (req, res) => {
 	const { jmeno, prijmeni, prezdivka, email, heslo } = req.body;
 	var id = req.params.id;
@@ -54,14 +54,14 @@ router.post('/edituser/:id', async (req, res) => {
 	);
 });
 
-// Přidávání nových uživatelů (form)
+// Displays form for adding new user
 router.get('/adduser', (req, res) => {
 	res.render('Admin/userTable/addUser', {
 		style: 'userlist/addUser.css',
 	});
 });
 
-// Přidávání nových uživatelů
+// Adding new post to the DB
 router.post('/add', async (req, res) => {
 	try {
 		const { jmeno, prijmeni, prezdivka, email, heslo } = req.body;
@@ -83,7 +83,7 @@ router.post('/add', async (req, res) => {
 	}
 });
 
-// Mazání uživatelů
+// Delete users
 router.get('/delete/:id', async (req, res) => {
 	const id = req.params.id;
 	await userModel.deleteUser(id, function () {

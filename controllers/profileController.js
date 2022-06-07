@@ -17,7 +17,7 @@ router.get('/account', async (req, res) => {
 	res.render('profile/profile', {
 		title: 'User',
 		style: 'profile/profilePage.css',
-		// Proměnný do kterých se vkládají hodnoty ze sessions a následně zobrazují data do handlebars
+		// Variables that takes user info from sesssion
 		jmeno: req.user.firstname,
 		prijmeni: req.user.lastname,
 		prezdivka: req.user.username,

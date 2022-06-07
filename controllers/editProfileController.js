@@ -25,6 +25,7 @@ router.post('/edit-profile-data', async (req, res) => {
 	}
 });
 
+// Route for editing user info -- remake into modal on profile page
 router.get('/info', (req, res) => {
 	res.render('profile/editInfo', {
 		title: 'Edit',
@@ -32,6 +33,7 @@ router.get('/info', (req, res) => {
 	});
 });
 
+// Inserting user profile info
 router.post('/insert-profile-info', (req, res) => {
 	const id = req.user.id;
 	const bio = req.body.bio;

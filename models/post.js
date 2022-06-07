@@ -18,8 +18,22 @@ exports.addPost = (text, user_id, username) => {
 exports.viewPost = (user_id) => {
 	return new Promise((resolve, reject) => {
 		try {
-			let sql = `SELECT * FROM posts WHERE user_id = '${user_id}'`;
+			let sql = `SELECT posts.*, comments.body FROM posts LEFT JOIN comments ON comments.post_id = posts.id WHERE posts.user_id = ?`;
 			conn.query(sql, user_id, (error, results) => {
+				if (error) throw error;
+				resolve(results);
+			});
+		} catch (err) {
+			reject(err);
+		}
+	});
+};
+
+exports.viewAll = () => {
+	return new Promise((resolve, reject) => {
+		try {
+			let sql = `SELECT * FROM posts`;
+			conn.query(sql, (error, results) => {
 				if (error) throw error;
 				resolve(results);
 			});

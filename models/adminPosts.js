@@ -1,7 +1,7 @@
 const conn = require('../database');
 const express = require('express');
 
-// Model pro zobrazení uživatelů do tabulky
+// Model for getting posts into the table
 exports.getPosts = () => {
 	return new Promise((resolve, reject) => {
 		try {
@@ -15,7 +15,7 @@ exports.getPosts = () => {
 		}
 	});
 };
-// Mazání uživatele
+// Deleting post by id
 exports.deletePost = (ID) => {
 	return new Promise((resolve, reject) => {
 		try {
