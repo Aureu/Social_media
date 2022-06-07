@@ -27,9 +27,9 @@ router.post('/upload', upload.single('image'), (req, res) => {
 		console.log('No file upload');
 	} else {
 		console.log(req.file.filename);
-		var imgsrc = req.file.filename;
-		var user_id = req.user.id;
-		var insertData = `INSERT INTO user_avatars(file_src, user_id) VALUES('${imgsrc}','${user_id}') ON DUPLICATE KEY UPDATE file_src = '${imgsrc}'`;
+		const imgsrc = req.file.filename;
+		const user_id = req.user.id;
+		const insertData = `INSERT INTO user_avatars(file_src, user_id) VALUES('${imgsrc}','${user_id}') ON DUPLICATE KEY UPDATE file_src = '${imgsrc}'`;
 
 		conn.query(insertData, [imgsrc], (err, result) => {
 			if (err) throw err;

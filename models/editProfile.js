@@ -5,12 +5,21 @@ exports.editProfile = (
 	firstname,
 	lastname,
 	username,
+	email,
 	hashedPassword,
-	email
+	id
 ) => {
-	let sql = `UPDATE users SET firstname = '${firstname}', lastname = '${lastname}', username = '${username}', email = '${email}', hashedPassword = '${hashedPassword}' WHERE id = '${user_id}'`;
-	conn.query(sql, (err) => {
-		if (err) throw err;
+	return new Promise((resolve, reject) => {
+		try {
+			let sql = `UPDATE users SET firstname = '${firstname}', lastname = '${lastname}', username = '${username}', email = '${email}', hashedPassword = '${hashedPassword}' WHERE id = ?`;
+			conn.query(sql, id, (err, results) => {
+				if (err) throw err;
+				resolve(results);
+				console.log('id = ' + id);
+			});
+		} catch (err) {
+			reject(err);
+		}
 	});
 };
 

@@ -3,26 +3,27 @@
 		<div class='wrap'>
 			<div class='search'>
 				<form method='POST' action='/search'>
-					<label>Search Data</label>
 					<input
 						class='typeahead tt-query'
+						id='searchbar'
 						spellcheck='false'
 						autocomplete='off'
 						name='typeahead'
 						type='text'
+						placeholder='Search'
 					/>
 				</form>
 			</div>
 		</div>
 
 		<ul class='nav__link--list'>
-			<li>
+			<li class='nav__link'>
 				<a
-					href=''
+					href='/main'
 					class='nav__link--anchor link__hover-effect link__hover-effect--black'
 				>Home</a>
 			</li>
-			<li>
+			<li class='nav__link'>
 				<a
 					href='/account'
 					class='nav__link--anchor link__hover-effect link__hover-effect--black'
@@ -35,7 +36,7 @@
 				<div class='dropdown--content'>
 					<a href='/settings/info'>Info</a>
 					<a href='/avatar/upload'>Avatar</a>
-					<a href='/settings/profile'>Profile</a>
+					<a href='/account/edit/:{{profile.id}}'>Profile</a>
 				</div>
 			</li>
 

@@ -5,7 +5,7 @@
 	</header>
 	<main>
 		<div class="row">
-			<div class="left col-lg-4">
+			<div class="left">
 				<div class="photo-left">
 					<figure class="profile--wrap">
 						<a href='/avatar/upload'>
@@ -19,19 +19,23 @@
 					</figure>
 						
 				</div>
-				<h4 class="name">{{jmeno}} {{prijmeni}}</h4>
-				<p class="info">{{email}}</p>
+				<h4 class="name">{{profile.firstname}} {{profile.lastname}}</h4>
+				<p class="info">{{profile.email}}
+					<br>
+					@{{profile.username}}
+				</p>
+
 				<div class="stats row">
 					<div class="stat col-xs-4" style="padding-right: 50px;">
 						<p class="number-stat">3,619</p>
 						<p class="desc-stat">Followers</p>
 					</div>
 					<div class="stat col-xs-4">
-						<p class="number-stat">42</p>
+						<p class="number-stat">{{followingCounts.followingCount}}</p>
 						<p class="desc-stat">Following</p>
 					</div>
 					<div class="stat col-xs-4" style="padding-left: 50px;">
-						<p class="number-stat">38</p>
+						<p class="number-stat">{{counts.postCount}}</p>
 						<p class="desc-stat">Uploads</p>
 					</div>
 				</div>
@@ -45,7 +49,7 @@
 				</p>
 				<br>
 			</div>
-			<div class="right col-lg-8">
+			<div class="right ">
 				<ul class="nav">
 					<li>Posts</li>
 					<li>Collections</li>

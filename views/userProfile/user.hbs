@@ -54,7 +54,7 @@
 				<script>
 					const followUser = function (event) {
             const userId = event.target.dataset.userId;
-					
+						console.log(userId)
             axios.post('/user/' + userId );
         };
 				</script>

@@ -1,6 +1,19 @@
 const conn = require('../database');
 const express = require('express');
 
+exports.viewProfile = (user_id) => {
+	return new Promise((resolve, reject) => {
+		try {
+			let sql = `SELECT * FROM users WHERE id = ?`;
+			conn.query(sql, user_id, (err, results) => {
+				if (err) throw err;
+				resolve(results);
+			});
+		} catch (err) {
+			reject(err);
+		}
+	});
+};
 // Selects user info from DB
 exports.viewInfo = (user_id) => {
 	return new Promise((resolve, reject) => {
@@ -30,19 +43,26 @@ exports.viewAvatar = (user_id) => {
 	});
 };
 
-// not done lol
-exports.getFollowers = (user_id) => {
+// counters
+exports.postCounter = (user_id) => {
 	return new Promise((resolve, reject) => {
 		try {
-			let sql = `SELECT uf1.follower_id AS id, u.username, COUNT(uf2.followed_id) AS count
-			FROM followers uf1
-					LEFT JOIN followers uf2
-							ON uf1.followed_id = uf2.followed_id
-					INNER JOIN users u
-							ON uf1.followed_id = u.id
-			WHERE uf1.follower_id = '${user_id}'
-			GROUP BY uf1.follower_id`;
-			conn.query(sql, (error, results) => {
+			let sql = `SELECT COUNT(*) AS postCount FROM posts WHERE user_id = ?`;
+			conn.query(sql, user_id, (error, results) => {
+				if (error) throw error;
+				resolve(results);
+			});
+		} catch (err) {
+			reject(err);
+		}
+	});
+};
+
+exports.followingCounter = (user_id) => {
+	return new Promise((resolve, reject) => {
+		try {
+			let sql = `SELECT COUNT(*) AS followingCount FROM followers WHERE follower_id = ?`;
+			conn.query(sql, user_id, (error, results) => {
 				if (error) throw error;
 				resolve(results);
 			});

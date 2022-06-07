@@ -11,3 +11,10 @@ body {
 	background-color: #1d1d1d;
 	color: white;
 }
+
+.row {
+	width: 100%;
+	max-width: 1100px;
+	margin: 0 auto;
+	padding: 0 12px;
+}

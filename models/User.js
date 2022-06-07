@@ -49,9 +49,15 @@ exports.Posts = (username) => {
 
 // Follow user
 exports.follow = (followerId, followedId) => {
+	const today = new Date();
+	const date =
+		today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+	const time =
+		today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+	const dateTime = date + ' ' + time;
 	return new Promise((resolve, reject) => {
 		try {
-			let sql = `INSERT INTO followers (follower_id, followed_id) VALUES ('${followerId}', '${followedId}')`;
+			let sql = `INSERT INTO followers (follower_id, followed_id, created_at) VALUES ('${followerId}', '${followedId}', '${dateTime}')`;
 			conn.query(sql, (error, results) => {
 				if (error) throw error;
 				resolve(results);

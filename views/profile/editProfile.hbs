@@ -13,15 +13,21 @@
 					</header>
 					<article class='card-body'>
 						<!-- Register formulář -->
-						<form action='/profile/edit-profile-data' method='POST'>
+						<form action='/account/edit-profile/{{profile.id}}' method='POST'>
 							<div class='form-row'>
 								<!-- Input na jméno -->
 								<div class='col form-group'>
 									<input
+										type='hidden'
+										id='id'
+										name='id'
+										value='{{profile.id}}'
+									/>
+									<input
 										type='text'
 										class='form-control'
-										placeholder='Firstname'
 										name='firstname'
+										value='{{profile.firstname}}'
 										required
 									/>
 								</div>
@@ -31,7 +37,7 @@
 									<input
 										type='text'
 										class='form-control'
-										placeholder='Lastname '
+										value='{{profile.lastname}}'
 										name='lastname'
 										required
 									/>
@@ -44,7 +50,7 @@
 									<input
 										type='text'
 										class='form-control'
-										placeholder='Username'
+										value='{{profile.username}}'
 										name='username'
 										required
 									/>
@@ -55,7 +61,7 @@
 								<input
 									type='email'
 									class='form-control'
-									placeholder='Email'
+									value='{{profile.email}}'
 									name='email'
 									required
 								/>
@@ -65,7 +71,7 @@
 								<input
 									class='form-control'
 									type='password'
-									placeholder='Password'
+									value='{{profile.hashedPassword}}'
 									name='password'
 									required
 									min='5'
