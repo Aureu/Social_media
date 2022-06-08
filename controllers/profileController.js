@@ -6,6 +6,7 @@ const router = express.Router();
 const profileModel = require('../models/profile');
 const postModel = require('../models/post');
 const editModel = require('../models/editProfile');
+const counterModel = require('../models/counters');
 
 // Cesta na uživatelský profil
 router.get('/account', async (req, res) => {
@@ -14,8 +15,9 @@ router.get('/account', async (req, res) => {
 	const data = await postModel.viewPost(user_id);
 	const Avatar = await profileModel.viewAvatar(user_id);
 	const userInfo = await profileModel.viewInfo(user_id);
-	const counter = await profileModel.postCounter(user_id);
-	const followingCounter = await profileModel.followingCounter(user_id);
+	const postCounter = await counterModel.postCounter(user_id);
+	const followingCounter = await counterModel.followingCounter(user_id);
+	const followersCounter = await counterModel.followersCounter(user_id);
 
 	res.render('profile/profile', {
 		title: 'User',
@@ -25,11 +27,11 @@ router.get('/account', async (req, res) => {
 		userInfo: userInfo[0],
 		posts: data,
 		image: Avatar[0],
-		counts: counter[0],
+		postCounts: postCounter[0],
 		followingCounts: followingCounter[0],
+		followersCounts: followersCounter[0],
 	});
 	console.log(req.user);
-	console.log(counter);
 });
 
 // Route for static page
@@ -62,7 +64,7 @@ router.post('/account/edit-profile/:id', async (req, res, err) => {
 });
 
 // Route for editing user info -- remake into modal on profile page
-router.get('/info', (req, res) => {
+router.get('/account/info', (req, res) => {
 	res.render('profile/editInfo', {
 		title: 'Edit',
 		style: 'profile/editInfo.css',
@@ -70,7 +72,7 @@ router.get('/info', (req, res) => {
 });
 
 // Inserting user profile info
-router.post('/insert-profile-info', (req, res) => {
+router.post('/account/insert-profile-info', (req, res) => {
 	const id = req.user.id;
 	const bio = req.body.bio;
 	const location = req.body.location;

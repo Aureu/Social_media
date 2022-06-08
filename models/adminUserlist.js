@@ -46,10 +46,18 @@ exports.editUser = (ID) => {
 };
 
 // Úprava dat uživatele
-exports.updateUser = (jmeno, prijmeni, prezdivka, email, ID, callback) => {
+exports.updateUser = (
+	jmeno,
+	prijmeni,
+	prezdivka,
+	email,
+	id,
+	hashedPassword,
+	callback
+) => {
 	return new Promise((resolve, reject) => {
 		try {
-			let sql = `UPDATE users SET firstname = '${jmeno}', lastname = '${prijmeni}', username = '${prezdivka}', email = '${email}' WHERE id = '${ID}'`;
+			let sql = `UPDATE users SET firstname = '${jmeno}', lastname = '${prijmeni}', username = '${prezdivka}', email = '${email}', hashedPassword='${hashedPassword}' WHERE id = '${id}'`;
 			conn.query(sql, (err) => {
 				if (err) throw err;
 				return callback();

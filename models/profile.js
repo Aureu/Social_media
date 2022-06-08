@@ -42,32 +42,3 @@ exports.viewAvatar = (user_id) => {
 		}
 	});
 };
-
-// counters
-exports.postCounter = (user_id) => {
-	return new Promise((resolve, reject) => {
-		try {
-			let sql = `SELECT COUNT(*) AS postCount FROM posts WHERE user_id = ?`;
-			conn.query(sql, user_id, (error, results) => {
-				if (error) throw error;
-				resolve(results);
-			});
-		} catch (err) {
-			reject(err);
-		}
-	});
-};
-
-exports.followingCounter = (user_id) => {
-	return new Promise((resolve, reject) => {
-		try {
-			let sql = `SELECT COUNT(*) AS followingCount FROM followers WHERE follower_id = ?`;
-			conn.query(sql, user_id, (error, results) => {
-				if (error) throw error;
-				resolve(results);
-			});
-		} catch (err) {
-			reject(err);
-		}
-	});
-};

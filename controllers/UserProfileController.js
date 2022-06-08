@@ -9,11 +9,13 @@ router.get('/:username', async (req, res) => {
 	const data = await userProfileModel.getUser(username);
 	const data1 = await userProfileModel.getUser1(username);
 	const posts = await userProfileModel.Posts(username);
+	const info = await userProfileModel.getUserInfo(username);
 	res.render('userProfile/user', {
 		title: 'User',
 		style: 'profile/profilePage.css',
 		userdata: data[0],
 		userdata1: data1[0],
+		userInfo: info[0],
 		posts: posts,
 	});
 });

@@ -12,8 +12,6 @@
   </div>
 {{/if}}
 <!-- Zobrazení user-form z Partials -->
-{{#each user}}
-<form class="row g-3 needs-validation" method="POST" action="/admin/users/edituser/{{this.id}}" novalidate> 
+<form class="row g-3 needs-validation" method="POST" action="/admin/users/edituser/{{data.id}}" novalidate> 
   {{> user-form-nopassword}}
 </form>
-{{/each}}

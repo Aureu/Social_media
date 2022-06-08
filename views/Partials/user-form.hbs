@@ -12,7 +12,7 @@
 						<input
 							type='text'
 							class='form-control'
-							placeholder='Jméno'
+							value='{{data.firstname}}'
 							name='jmeno'
 						/>
 					</div>
@@ -22,7 +22,7 @@
 						<input
 							type='text'
 							class='form-control'
-							placeholder='Přijmení '
+							value='{{data.lastname}}'
 							name='prijmeni'
 						/>
 					</div>
@@ -34,7 +34,7 @@
 						<input
 							type='text'
 							class='form-control'
-							placeholder='Přezdívka'
+							value='{{data.username}}'
 							name='prezdivka'
 						/>
 					</div>
@@ -44,7 +44,7 @@
 					<input
 						type='email'
 						class='form-control'
-						placeholder='Email'
+						value='{{data.email}}'
 						name='email'
 					/>
 				</div>
@@ -53,7 +53,7 @@
 					<input
 						class='form-control'
 						type='password'
-						placeholder='Heslo'
+						value='{{data.hashedPassword}}'
 						name='heslo'
 					/>
 				</div>

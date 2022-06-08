@@ -28,25 +28,29 @@ router.get('/view/:id', async (req, res) => {
 
 // Route for form for edit user
 router.get('/edit/:id', async (req, res) => {
-	var id = req.params.id;
+	const id = req.params.id;
 	const data = await userModel.editUser(id);
 	res.render('Admin/userTable/editUser', {
 		title: 'edit',
 		style: 'userlist/editUser.css',
-		user: data,
+		data: data[0],
 	});
 });
 
 // Edit user by id
 router.post('/edituser/:id', async (req, res) => {
 	const { jmeno, prijmeni, prezdivka, email, heslo } = req.body;
-	var id = req.params.id;
+	const id = req.params.id;
+	const hashedPassword = await bcrypt.hash(heslo, 10);
+
 	await userModel.updateUser(
 		jmeno,
 		prijmeni,
 		prezdivka,
 		email,
 		id,
+		hashedPassword,
+
 		function (data) {
 			console.log('data updated');
 		},

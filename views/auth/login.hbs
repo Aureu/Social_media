@@ -6,71 +6,72 @@
 				<div class='card'>
 					<header class='card-header'>
 
-					<h4 class='card-title mt-2'>Login</h4>
-				</header>
-				<div class='card-body'>
-					<!-- login formulář -->
-					<form action='/login' method='POST'>
-						<!-- input pro email -->
-						<div class='form-group'>
+						<h4 class='card-title mt-2'>Login</h4>
+					</header>
+					<div class='card-body'>
+						<!-- login formulář -->
+						<form action='/login' method='POST'>
+							<!-- input pro email -->
+							<div class='form-group'>
 
-							<input
-								type='email'
-								class='form-control'
-								placeholder='Enter email'
-								name='email'
-								id='email'
-								required
-							/>
-						</div>
-						<!-- Input pro heslo -->
-						<div class='form-group'>
+								<input
+									type='email'
+									class='form-control'
+									placeholder='Enter email'
+									name='email'
+									id='email'
+									required
+								/>
+							</div>
+							<!-- Input pro heslo -->
+							<div class='form-group'>
 
-							<input
-								class='form-control'
-								type='password'
-								placeholder='Enter password'
-								name='password'
-								id='password'
-								required
-							/>
-						</div>
-						<div class='form-group'>
-							<button type='submit' class='btn btn-block'>
-								Login
-							</button>
-						</div>
-						<!-- Podmínka aby se handlebar zobrazil pouze když se daná chyba vyskytne -->
-						{{#if message}}
-							<div
-								class='alert alert-danger alert-dismissible fade show'
-								role='alert'
-							>
-								<!-- Handlebar proměnná do které se vypisují chyby (špatné heslo atd.) -->
-
-								{{message}}
-								<button
-									type='button'
-									class='close'
-									data-dismiss='alert'
-									aria-label='Close'
-								>
-									<span aria-hidden='true'>×</span>
+								<input
+									class='form-control'
+									type='password'
+									placeholder='Enter password'
+									name='password'
+									id='password'
+									required
+								/>
+							</div>
+							<div class='form-group'>
+								<button type='submit' class='btn btn-block'>
+									Login
 								</button>
 							</div>
-						{{/if}}
-						<!-- Konec podmínky -->
-					</form>
+							<!-- Podmínka aby se handlebar zobrazil pouze když se daná chyba vyskytne -->
+							{{#if message}}
+								<div
+									class='alert alert-danger alert-dismissible fade show'
+									role='alert'
+								>
+									<!-- Handlebar proměnná do které se vypisují chyby (špatné heslo atd.) -->
+
+									{{message}}
+									<button
+										type='button'
+										class='close'
+										data-dismiss='alert'
+										aria-label='Close'
+									>
+										<span aria-hidden='true'>×</span>
+									</button>
+								</div>
+							{{/if}}
+							<!-- Konec podmínky -->
+						</form>
+					</div>
+					<!-- Směrování na registraci -->
+					<a class='text-center' href='/password-change'>Did you forget your
+						password?</a>
+					<hr />
+					<div class='card-body text-center'>Don't you have an account?
+						<a href='/register'>Create a new one</a></div>
 				</div>
-				<!-- Směrování na registraci -->
-				<a class='text-center' href='/password-change'>Did you forget your
-					password?</a>
-				<hr />
-				<div class='card-body text-center'>Don't you have an account?
-					<a href='/register'>Create a new one</a></div>
 			</div>
+
 		</div>
 
 	</div>
-
 </div>
