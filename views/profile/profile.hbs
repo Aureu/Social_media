@@ -11,7 +11,7 @@
 						<a href='/avatar/upload'>
 							<img
 								class='profile__avatar--img'
-								src='/Avatars/{{image.file_src}}'
+								src='/Avatars/{{profile.file_src}}'
 								alt='User'
 							/>
 							</a>
@@ -40,9 +40,9 @@
 					</div>
 				</div>
 				<p class="desc">
-			<li>Bio: {{userInfo.bio}}</li>
-			<li>Location: {{userInfo.location}}</li>
-			<li>Birthday: {{userInfo.date_birth}}</li>
+			<li>Bio: {{profile.bio}}</li>
+			<li>Location: {{profile.location}}</li>
+			<li>Birthday: {{profile.date_birth}}</li>
 			{{#each followers}}
 			<li>{{this.username}}</li>
 			{{/each}}
@@ -93,7 +93,7 @@
 			{{#each posts}}
 				<div class="tweet-wrap">
 					<div class="tweet-header">
-						<img src="/Avatars/{{../image.file_src}}" alt="" class="avator">
+						<img src="/Avatars/{{../profile.file_src}}" alt="" class="avator">
 						<div class="tweet-header-info">
 							<span>
 								@{{this.username}}
@@ -149,25 +149,28 @@
     </script>
 					</div>
 					<div class="post--delete-button">
-							<a href="/admin/posts/delete/{{this.id}}" type="button" class="post--delete-btn">Delete</a>
+							<a href="/posts/delete/{{this.post_id}}" type="button" class="post--delete-btn">Delete</a>
 							</div>
 				</div>
 				<hr>
 				<div class="comment--row">
 					<figure>
-						<img src="/Avatars/{{../image.file_src}}" alt="" class="comment--avatar">
+						<img src="/Avatars/{{../profile.file_src}}" alt="" class="comment--avatar">
 					</figure>
-					<form action="/posts/comment/{{this.id}}" method="POST" name="commentText">
+					<form action="/posts/comment/{{this.post_id}}" method="POST" name="commentText">
 						<input type="text" class="comment--input" name="commentText" id="commentText" placeholder="Comment">
 					</form>
 				</div>
-				{{this.body}}
+				
 				<div class="comment--text">
+					{{#each ../comments}}
+						{{body}}
+					{{/each}}
 				</div>
 				
 			</div>
 		{{/each}}
-
+		
 			</section>
 				</div>
 			</div>

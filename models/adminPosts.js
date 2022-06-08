@@ -19,7 +19,7 @@ exports.getPosts = () => {
 exports.deletePost = (ID) => {
 	return new Promise((resolve, reject) => {
 		try {
-			let sql = 'DELETE FROM posts WHERE id = ?';
+			let sql = 'DELETE FROM posts WHERE post_id = ?';
 			conn.query(sql, ID, (err, results) => {
 				if (err) throw err;
 				resolve(results);

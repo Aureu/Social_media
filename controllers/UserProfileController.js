@@ -8,15 +8,12 @@ const router = express.Router();
 router.get('/:username', async (req, res) => {
 	const username = req.params.username;
 	const data = await userProfileModel.getUser(username);
-	const data1 = await userProfileModel.getUser1(username);
 	const posts = await userProfileModel.Posts(username);
-	const info = await userProfileModel.getUserInfo(username);
+
 	res.render('userProfile/user', {
 		title: 'User',
 		style: 'profile/profilePage.css',
 		userdata: data[0],
-		userdata1: data1[0],
-		userInfo: info[0],
 		posts: posts,
 	});
 });
@@ -26,7 +23,7 @@ router.post('/:id', (req, res, next) => {
 	const followerId = req.user.id;
 	const followedId = parseInt(req.params.id);
 
-	sql = `SELECT * FROM followers WHERE follower_id = ?`;
+	let sql = `SELECT * FROM followers WHERE follower_id = ?`;
 	conn.query(sql, followerId, (err, results) => {
 		if (results[0].followed_id !== followedId) {
 			userProfileModel.follow(followerId, followedId);

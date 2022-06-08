@@ -6,36 +6,7 @@ const express = require('express');
 exports.getUser = (username) => {
 	return new Promise((resolve, reject) => {
 		try {
-			let sql = `SELECT * FROM users WHERE username = ?`;
-			conn.query(sql, username, (error, results) => {
-				if (error) throw error;
-				resolve(results);
-			});
-		} catch (err) {
-			reject(err);
-		}
-	});
-};
-
-exports.getUserInfo = (username) => {
-	return new Promise((resolve, reject) => {
-		try {
-			let sql = `SELECT * FROM users AS u JOIN user_info AS i ON u.id = i.user_id WHERE u.username = ?`;
-			conn.query(sql, username, (error, results) => {
-				if (error) throw error;
-				resolve(results);
-			});
-		} catch (err) {
-			reject(err);
-		}
-	});
-};
-
-// Selects user_avatars table
-exports.getUser1 = (username) => {
-	return new Promise((resolve, reject) => {
-		try {
-			let sql = `SELECT a.file_src, u.id FROM users AS u JOIN user_avatars AS a ON u.id = a.user_id WHERE u.username = ?`;
+			let sql = `SELECT * FROM viewuser WHERE username = ?`;
 			conn.query(sql, username, (error, results) => {
 				if (error) throw error;
 				resolve(results);

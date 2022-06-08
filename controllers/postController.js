@@ -23,6 +23,13 @@ router.post('/:id/act', (req, res, next) => {
 	postModel.likeCount(post_id, counter);
 });
 
+router.get('/delete/:id', async (req, res) => {
+	const id = req.params.id;
+	console.log(id);
+	await postModel.deletePost(id);
+	res.redirect('back');
+});
+
 // comments - not done
 router.post('/comment/:id', (req, res) => {
 	const user_id = req.user.id;

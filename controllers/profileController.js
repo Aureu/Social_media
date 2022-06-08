@@ -9,24 +9,39 @@ const editModel = require('../models/editProfile');
 const counterModel = require('../models/counters');
 
 // Cesta na uživatelský profil
-router.get('/account', async (req, res) => {
+router.get('/account', async (req, res, results) => {
 	const user_id = req.user.id;
 	const profile = await profileModel.viewProfile(user_id);
-	const data = await postModel.viewPost(user_id);
-	const Avatar = await profileModel.viewAvatar(user_id);
-	const userInfo = await profileModel.viewInfo(user_id);
 	const postCounter = await counterModel.postCounter(user_id);
 	const followingCounter = await counterModel.followingCounter(user_id);
 	const followersCounter = await counterModel.followersCounter(user_id);
+	const data = await postModel.viewPost(user_id);
+	let comment = '';
+	for (var i = 0; i < data.length; i++) {
+		post_id = data[i].post_id;
+		comment = await postModel.viewComments(post_id);
+	}
 
+	/* 	const followerId = req.user.id;
+	const followedId = parseInt(req.params.id);
+
+	let sql = `SELECT * FROM followers WHERE follower_id = ?`;
+	conn.query(sql, followerId, (err, results) => {
+		if (results[0].followed_id !== followedId) {
+			userProfileModel.follow(followerId, followedId);
+			console.log(+followerId + 'followed' + followedId);
+		} else {
+			console.log('You already follow this user');
+		}
+	});
+}); */
 	res.render('profile/profile', {
 		title: 'User',
 		style: 'profile/profilePage.css',
 		// Variables that takes user info from sesssion
 		profile: profile[0],
-		userInfo: userInfo[0],
 		posts: data,
-		image: Avatar[0],
+		comments: comment,
 		postCounts: postCounter[0],
 		followingCounts: followingCounter[0],
 		followersCounts: followersCounter[0],

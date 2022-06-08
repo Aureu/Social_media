@@ -18,8 +18,22 @@ exports.addPost = (text, user_id, username) => {
 exports.viewPost = (user_id) => {
 	return new Promise((resolve, reject) => {
 		try {
-			let sql = `SELECT posts.*, comments.body FROM posts LEFT JOIN comments ON comments.post_id = posts.id WHERE posts.user_id = ?`;
+			let sql = `SELECT * FROM viewpost WHERE id = ?`;
 			conn.query(sql, user_id, (error, results) => {
+				if (error) throw error;
+				resolve(results);
+			});
+		} catch (err) {
+			reject(err);
+		}
+	});
+};
+
+exports.viewComments = (post_id) => {
+	return new Promise((resolve, reject) => {
+		try {
+			let sql = `SELECT * FROM viewcomments WHERE post_id = ?`;
+			conn.query(sql, post_id, (error, results) => {
 				if (error) throw error;
 				resolve(results);
 			});
@@ -32,9 +46,24 @@ exports.viewPost = (user_id) => {
 exports.viewAll = () => {
 	return new Promise((resolve, reject) => {
 		try {
-			let sql = `SELECT * FROM posts`;
+			let sql = `SELECT * FROM viewposts`;
 			conn.query(sql, (error, results) => {
 				if (error) throw error;
+				resolve(results);
+			});
+		} catch (err) {
+			reject(err);
+		}
+	});
+};
+
+// Deleting post by id
+exports.deletePost = (ID) => {
+	return new Promise((resolve, reject) => {
+		try {
+			let sql = 'DELETE FROM posts WHERE post_id = ?';
+			conn.query(sql, ID, (err, results) => {
+				if (err) throw err;
 				resolve(results);
 			});
 		} catch (err) {

@@ -4,37 +4,9 @@ const express = require('express');
 exports.viewProfile = (user_id) => {
 	return new Promise((resolve, reject) => {
 		try {
-			let sql = `SELECT * FROM users WHERE id = ?`;
+			let sql = `SELECT * FROM viewprofile WHERE id = ?`;
 			conn.query(sql, user_id, (err, results) => {
 				if (err) throw err;
-				resolve(results);
-			});
-		} catch (err) {
-			reject(err);
-		}
-	});
-};
-// Selects user info from DB
-exports.viewInfo = (user_id) => {
-	return new Promise((resolve, reject) => {
-		try {
-			let sql = `SELECT * FROM user_info WHERE user_id = '${user_id}'`;
-			conn.query(sql, (err, results) => {
-				if (err) throw err;
-				resolve(results);
-			});
-		} catch (err) {
-			reject(err);
-		}
-	});
-};
-
-// Selects user avatar from DB
-exports.viewAvatar = (user_id) => {
-	return new Promise((resolve, reject) => {
-		try {
-			let sql = `SELECT * FROM user_avatars WHERE user_id = '${user_id}'`;
-			conn.query(sql, user_id, (error, results) => {
 				resolve(results);
 			});
 		} catch (err) {

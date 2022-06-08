@@ -11,7 +11,7 @@
 						<div>
 							<img
 								class='profile__avatar--img'
-								src='/Avatars/{{userdata1.file_src}}'
+								src='/Avatars/{{userdata.file_src}}'
 								alt='User'
 							/>
 							</div>
@@ -35,9 +35,9 @@
 					</div>
 				</div>
 				<p class="desc">
-			<li>Bio: {{userInfo.bio}}</li>
-			<li>Location: {{userInfo.location}}</li>
-			<li>Birthday: {{userInfo.date_birth}}</li>
+			<li>Bio: {{userdata.bio}}</li>
+			<li>Location: {{userdata.location}}</li>
+			<li>Birthday: {{userdata.date_birth}}</li>
 				</p>
 				<br>
 			</div>
@@ -64,7 +64,7 @@
 			{{#each posts}}
 				<div class="tweet-wrap">
 					<div class="tweet-header">
-						<img src="/Avatars/{{../userdata1.file_src}}" alt="" class="avator">
+						<img src="/Avatars/{{../userdata.file_src}}" alt="" class="avator">
 						<div class="tweet-header-info">
 							<span>
 								@{{this.username}}
