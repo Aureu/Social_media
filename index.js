@@ -23,6 +23,7 @@ const avatarRouter = require('./controllers/userAvatarController');
 const userRouter = require('./controllers/userProfileController');
 const searchRouter = require('./controllers/searchbar');
 const mainpageRouter = require('./controllers/mainPageController');
+const followersRouter = require('./controllers/followersListController');
 // Handlebars Middleware
 const handlebars = exphbs.create({ extname: '.hbs' });
 app.engine('.hbs', handlebars.engine);
@@ -72,12 +73,13 @@ app.use('/avatar', isLoggedIn, avatarRouter);
 app.use('/search', isLoggedIn, searchRouter);
 app.use('/user', isLoggedIn, userRouter);
 app.use('/main', isLoggedIn, mainpageRouter);
+app.use('/followers', isLoggedIn, followersRouter);
 app.get('/logout', (req, res) => {
 	req.session.destroy(function (err) {
 		res.redirect('/login');
 	});
 });
 
-const PORT = 5000;
+const PORT = process.env.PORT;
 
 app.listen(PORT, () => console.log(`Aplikace běží na portu  ${PORT}`));
