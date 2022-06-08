@@ -9,7 +9,6 @@ router.get('/', async (req, res) => {
 	res.render('followers/followers', {
 		title: 'login',
 		style: 'followers/style.css',
-		message: req.flash('error'),
 		data: followers,
 	});
 	console.log(followers);

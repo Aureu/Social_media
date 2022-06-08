@@ -63,6 +63,15 @@ router.post('/account/edit-profile/:id', async (req, res, err) => {
 	res.redirect('/account');
 });
 
+router.post('/account/edit-profile/password/:id', async (req, res, err) => {
+	console.log(req.params.id);
+	const { password } = req.body;
+	const id = req.params.id;
+	const hashedPassword = await bcrypt.hash(password, 10);
+	await editModel.editPassword(id, hashedPassword);
+	res.redirect('/account');
+});
+
 // Route for editing user info -- remake into modal on profile page
 router.get('/account/info', (req, res) => {
 	res.render('profile/editInfo', {

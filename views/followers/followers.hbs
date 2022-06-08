@@ -1,8 +1,10 @@
 {{>navbar}}
 <div class="container">
-{{#each data}}
-  <p>
-      {{this.followed_id}}
-</p>
-{{/each}}
+  <div class="row">
+    {{#if data}}
+      {{#each data}}
+          {{this.followed_id}}
+      {{/each}}
+    {{/if}}
+   </div>
 </div>

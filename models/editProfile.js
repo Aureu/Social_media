@@ -1,17 +1,25 @@
 const conn = require('../database');
 const express = require('express');
 
-exports.editProfile = (
-	firstname,
-	lastname,
-	username,
-	email,
-	hashedPassword,
-	id
-) => {
+exports.editProfile = (firstname, lastname, username, email, id) => {
 	return new Promise((resolve, reject) => {
 		try {
-			let sql = `UPDATE users SET firstname = '${firstname}', lastname = '${lastname}', username = '${username}', email = '${email}', hashedPassword = '${hashedPassword}' WHERE id = ?`;
+			let sql = `UPDATE users SET firstname = '${firstname}', lastname = '${lastname}', username = '${username}', email = '${email}' WHERE id = ?`;
+			conn.query(sql, id, (err, results) => {
+				if (err) throw err;
+				resolve(results);
+				console.log('id = ' + id);
+			});
+		} catch (err) {
+			reject(err);
+		}
+	});
+};
+
+exports.editPassword = (id, hashedPassword) => {
+	return new Promise((resolve, reject) => {
+		try {
+			let sql = `UPDATE users SET hashedPassword = '${hashedPassword}' WHERE id = ?`;
 			conn.query(sql, id, (err, results) => {
 				if (err) throw err;
 				resolve(results);
