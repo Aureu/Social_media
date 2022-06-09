@@ -16,32 +16,13 @@ router.get('/account', async (req, res, results) => {
 	const followingCounter = await counterModel.followingCounter(user_id);
 	const followersCounter = await counterModel.followersCounter(user_id);
 	const data = await postModel.viewPost(user_id);
-	let comment = '';
-	for (var i = 0; i < data.length; i++) {
-		post_id = data[i].post_id;
-		comment = await postModel.viewComments(post_id);
-	}
 
-	/* 	const followerId = req.user.id;
-	const followedId = parseInt(req.params.id);
-
-	let sql = `SELECT * FROM followers WHERE follower_id = ?`;
-	conn.query(sql, followerId, (err, results) => {
-		if (results[0].followed_id !== followedId) {
-			userProfileModel.follow(followerId, followedId);
-			console.log(+followerId + 'followed' + followedId);
-		} else {
-			console.log('You already follow this user');
-		}
-	});
-}); */
 	res.render('profile/profile', {
 		title: 'User',
 		style: 'profile/profilePage.css',
 		// Variables that takes user info from sesssion
 		profile: profile[0],
 		posts: data,
-		comments: comment,
 		postCounts: postCounter[0],
 		followingCounts: followingCounter[0],
 		followersCounts: followersCounter[0],

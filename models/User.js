@@ -21,7 +21,7 @@ exports.getUser = (username) => {
 exports.Posts = (username) => {
 	return new Promise((resolve, reject) => {
 		try {
-			let sql = `SELECT p.username, p.content, p.like_count, p.created_at FROM users AS u JOIN posts AS p ON u.id = p.user_id WHERE u.username = ?`;
+			let sql = `SELECT p.username, p.content,  p.created_at FROM users AS u JOIN posts AS p ON u.id = p.user_id WHERE u.username = ?`;
 			conn.query(sql, username, (error, results) => {
 				if (error) throw error;
 				resolve(results);

@@ -22,14 +22,13 @@ router.get('/:username', async (req, res) => {
 router.post('/:id', (req, res, next) => {
 	const followerId = req.user.id;
 	const followedId = parseInt(req.params.id);
-
+	console.log(followedId);
 	let sql = `SELECT * FROM followers WHERE follower_id = ?`;
 	conn.query(sql, followerId, (err, results) => {
-		if (results[0].followed_id !== followedId) {
+		if (results.length == 0) {
 			userProfileModel.follow(followerId, followedId);
-			console.log(+followerId + 'followed' + followedId);
 		} else {
-			console.log('You already follow this user');
+			console.log('u follow this user');
 		}
 	});
 });

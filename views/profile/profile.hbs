@@ -32,7 +32,7 @@
 					</div>
 					<div class="stat col-xs-4">
 						<p class="number-stat">{{followingCounts.followingCount}}</p>
-						<p class="desc-stat">Following</p>
+						<a href="/followers"><p class="desc-stat">Following</p></a>
 					</div>
 					<div class="stat col-xs-4" style="padding-left: 50px;">
 						<p class="number-stat">{{postCounts.postCount}}</p>
@@ -68,6 +68,7 @@
 							<form action="/posts/add-post" method="POST">
 							<textarea class="post--textarea" placeholder="Write something here!" name="postMessage" id="postMessage" maxlength="100" required></textarea>
 							<div class="bottom-right">
+								<script src="/javascript/textarea-length.js"></script>
 								<span id="countdown">100</span>
 								<button class="btn btn-primary add--post">Add</button>
 							</div>
@@ -76,18 +77,7 @@
 					</div>
 				</div>
 
-				<script>
-					$(document).ready(function(){
-  //Character limit js
-  var maxLength= 100;
-  $("textarea").keypress(function(){
-     var length = $(this).val().length;
-     var length = maxLength-length;
-     $("#countdown").text(length);
-  })
-					}
-					)
-				</script>
+				
 				
 				
 			{{#each posts}}
@@ -113,12 +103,11 @@
 					{{ this.like_count }}
 					<div class="likes">
 							<button onclick="actOnPost(event);"
-                data-post-id="{{ this.id }}">Like
+                data-post-id="{{ this.post_id }}">Like
                </button>
 						<div class="likes-count">
-							<span id="likes-count-{{ this.id }}">{{ this.like_count }}</span>
+							<span id="likes-count-{{ this.post_id }}">{{ this.like_count }}</span>
 						</div>
-						<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
         var updatePostStats = {
             Like: function (postId) {
@@ -161,14 +150,16 @@
 						<input type="text" class="comment--input" name="commentText" id="commentText" placeholder="Comment">
 					</form>
 				</div>
-				
-				<div class="comment--text">
-					{{#each ../comments}}
-						{{body}}
-					{{/each}}
-				</div>
-				
-			</div>
+				<button  onclick="showComments(event)" data-post-id="{{this.post_id}}">Comments</button>
+				{{!-- <script>
+					const showComments = function (event) {
+            const postId = event.target.dataset.postId;
+						console.log(postId)
+            axios.post('/posts/show-comments/' + postId );
+        };
+				</script> --}}
+
+				</div>	
 		{{/each}}
 		
 			</section>

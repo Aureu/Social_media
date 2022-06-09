@@ -15,11 +15,11 @@ exports.addPost = (text, user_id, username) => {
 	});
 };
 
-exports.viewPost = (user_id) => {
+exports.viewPost = (user_id, post_id) => {
 	return new Promise((resolve, reject) => {
 		try {
-			let sql = `SELECT * FROM viewpost WHERE id = ?`;
-			conn.query(sql, user_id, (error, results) => {
+			let sql = `SELECT * FROM viewposts WHERE id = '${user_id}' `;
+			conn.query(sql, (error, results) => {
 				if (error) throw error;
 				resolve(results);
 			});

@@ -38,4 +38,9 @@ router.post('/comment/:id', (req, res) => {
 	postModel.comment(user_id, post_id, commentText);
 	res.redirect('back');
 });
+
+router.post('/posts/show-comments/:id', (req, res) => {
+	const id = req.params.id;
+	console.log(id);
+});
 module.exports = router;
