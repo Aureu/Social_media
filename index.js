@@ -10,6 +10,7 @@ const cookieParser = require('cookie-parser');
 const multer = require('multer');
 const conn = require('./database');
 const axios = require('axios');
+const feather = require('feather-icons');
 
 const app = express();
 

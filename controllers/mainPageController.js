@@ -7,13 +7,12 @@ const profileModel = require('../models/profile');
 router.get('/', async (req, res) => {
 	const user_id = req.user.id;
 	const data = await postModel.viewAll();
+	const profile = await profileModel.viewProfile(user_id);
 
 	res.render('main_page/index', {
 		title: 'mainpage',
 		style: 'mainpage/main.css',
-		jmeno: req.user.firstname,
-		prijmeni: req.user.lastname,
-		prezdivka: req.user.username,
+		profile: profile[0],
 		posts: data,
 	});
 });

@@ -1,4 +1,4 @@
-<section class='navigation'>
+{{!-- <section class='navigation'>
 	<nav>
 		<div class='wrap'>
 			<div class='search'>
@@ -48,4 +48,67 @@
 			</li>
 		</ul>
 	</nav>
+</section> --}}
+
+<section id='header'>
+	<nav class='navbar navbar-expand-md justify-content-center'>
+		<div class='navbar-brand d-flex w-50 mr-auto'>
+			<form class='form-inline my-2 my-lg-0' method='POST' action='/search'>
+				<input
+					class='typeahead tt-query'
+					id='searchbar'
+					spellcheck='false'
+					autocomplete='off'
+					name='typeahead'
+					type='text'
+					placeholder='Search'
+				/>
+			</form>
+		</div>
+		<button
+			class='navbar-toggler'
+			type='button'
+			data-toggle='collapse'
+			data-target='#collapsingNavbar3'
+		>
+			<span class='navbar-toggler-icon'></span>
+		</button>
+		<div class='navbar-collapse collapse w-100' id='collapsingNavbar3'>
+			<ul class='navbar-nav w-100 justify-content-center'>
+				<li class='nav-item active'>
+					<a class='nav-link' href='/main'>HOME</a>
+				</li>
+			</ul>
+			<ul class='nav navbar-nav ml-auto w-100 justify-content-end'>
+				<li class='nav-item'>
+					<a class='nav-link' href='/account'><img
+							class='navbar--avatar'
+							src='/Avatars/{{profile.file_src}}'
+							alt='User'
+						/>{{profile.firstname}}
+						{{profile.lastname}}</a>
+				</li>
+				<li class='nav-item'>
+					<div class='dropdown'>
+						<button type='button' class='' data-toggle='dropdown'><i
+								data-feather='arrow-down'
+							></i></button>
+						<div class='dropdown-menu dropdown-menu-right'>
+							<a class='dropdown-item' href='/account'>ACCOUNT</a>
+
+							<div class='dropdown-divider'></div>
+							<a class='dropdown-item' href='#'>SETTINGS</a>
+							<a class='dropdown-item' href='#'>THEME</a>
+							<a class='dropdown-item' href='/logout'>LOGOUT</a>
+
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
 </section>
+
+<script>
+	feather.replace()
+</script>

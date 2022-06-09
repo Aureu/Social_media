@@ -6,8 +6,7 @@ exports.addPost = (text, user_id, username) => {
 	const today = new Date();
 	const date =
 		today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
-	const time =
-		today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+	const time = today.getHours() + ':' + today.getMinutes();
 	const dateTime = date + ' ' + time;
 	let sql = `INSERT INTO posts(content, user_id, username, created_at) VALUES ('${text}','${user_id}','${username}', '${dateTime}')`;
 	conn.query(sql, (err) => {
