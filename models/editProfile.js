@@ -16,6 +16,20 @@ exports.editProfile = (firstname, lastname, username, email, id) => {
 	});
 };
 
+exports.viewDisctricts = () => {
+	return new Promise((resolve, reject) => {
+		try {
+			let sql = `SELECT * FROM districts`;
+			conn.query(sql, (err, results) => {
+				if (err) throw err;
+				resolve(results);
+			});
+		} catch (err) {
+			reject(err);
+		}
+	});
+};
+
 exports.editPassword = (id, hashedPassword) => {
 	return new Promise((resolve, reject) => {
 		try {
@@ -31,8 +45,8 @@ exports.editPassword = (id, hashedPassword) => {
 	});
 };
 
-exports.editInfo = (user_id, bio, location, dateBirth) => {
-	let sql = `INSERT INTO user_info(bio, location, date_birth, user_id) VALUES('${bio}','${location}','${dateBirth}', '${user_id}') ON DUPLICATE KEY UPDATE bio = '${bio}', location = "${location}", date_birth = "${dateBirth}"`;
+exports.editInfo = (user_id, bio, district_id, dateBirth) => {
+	let sql = `INSERT INTO user_info(bio, district_id, date_birth, user_id) VALUES('${bio}','${district_id}','${dateBirth}', '${user_id}') ON DUPLICATE KEY UPDATE bio = '${bio}', district_id = "${district_id}", date_birth = "${dateBirth}"`;
 	conn.query(sql, (err) => {
 		if (err) throw err;
 	});

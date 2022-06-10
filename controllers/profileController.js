@@ -44,6 +44,7 @@ router.get('/account/edit/:id', async (req, res) => {
 // Route that takes data from form and then save them into the DB
 router.post('/account/edit-profile/:id', async (req, res, err) => {
 	console.log(req.params.id);
+
 	const { firstname, lastname, username, email, password } = req.body;
 	const id = req.params.id;
 	console.log(req.body);
@@ -69,10 +70,13 @@ router.post('/account/edit-profile/password/:id', async (req, res, err) => {
 });
 
 // Route for editing user info -- remake into modal on profile page
-router.get('/account/info', (req, res) => {
+router.get('/account/info', async (req, res) => {
+	const data = await editModel.viewDisctricts();
+	console.log(data);
 	res.render('profile/editInfo', {
 		title: 'Edit',
 		style: 'profile/editInfo.css',
+		districts: data,
 	});
 });
 
@@ -80,9 +84,10 @@ router.get('/account/info', (req, res) => {
 router.post('/account/insert-profile-info', (req, res) => {
 	const id = req.user.id;
 	const bio = req.body.bio;
-	const location = req.body.location;
+	const district_id = req.body.district_id;
+	console.log(district_id);
 	const dateBirth = req.body.dateBirth;
-	editModel.editInfo(id, bio, location, dateBirth);
+	editModel.editInfo(id, bio, district_id, dateBirth);
 	res.redirect('/account');
 });
 
