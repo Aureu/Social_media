@@ -61,7 +61,7 @@
 					autocomplete='off'
 					name='typeahead'
 					type='text'
-					placeholder='Search'
+					placeholder='Hledejte uživatele!'
 				/>
 			</form>
 		</div>
@@ -76,7 +76,7 @@
 		<div class='navbar-collapse collapse w-100' id='collapsingNavbar3'>
 			<ul class='navbar-nav w-100 justify-content-center'>
 				<li class='nav-item active'>
-					<a class='nav-link' href='/main'>HOME</a>
+					<a class='nav-link' href='/main'>Domů</a>
 				</li>
 			</ul>
 			<ul class='nav navbar-nav ml-auto w-100 justify-content-end'>
@@ -94,12 +94,12 @@
 								data-feather='arrow-down'
 							></i></button>
 						<div class='dropdown-menu dropdown-menu-right'>
-							<a class='dropdown-item' href='/account'>ACCOUNT</a>
+							<a class='dropdown-item' href='/account'>{{profile.username}}</a>
 
 							<div class='dropdown-divider'></div>
-							<a class='dropdown-item' href='#'>SETTINGS</a>
-							<a class='dropdown-item' href='#'>THEME</a>
-							<a class='dropdown-item' href='/logout'>LOGOUT</a>
+							<a class='dropdown-item' href='#'>Nastavení</a>
+							<a class='dropdown-item' href='#'>Theme</a>
+							<a class='dropdown-item' href='/logout'>Odhlásit se</a>
 
 						</div>
 					</div>

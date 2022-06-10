@@ -1,6 +1,7 @@
 {{> navbar}}
 <section id="main">
 	<div class="row">
+		<div class="container">
 	<div class="container--wrapper">
 			<div class="sidenav" id="section--profile">
 				<div class="container">
@@ -17,42 +18,42 @@
 							<h4>@{{profile.username}}</h4>
 						</div>
 						<div class='dropdown' id="profile--dropdown">
-							<button type='button' class='' data-toggle='dropdown'>Setting</button>
+							<button type='button' class='' data-toggle='dropdown'>Nastavení</button>
 							<div class='dropdown-menu dropdown-menu-right'>
-								<a class='dropdown-item' href='/account/edit/{{profile.id}}'>Edit Profile</a>
-								<a class='dropdown-item' href='/account/info'>Edit info</a>
+								<a class='dropdown-item' href='/account/edit/{{profile.id}}'>Upravit profil</a>
+								<a class='dropdown-item' href='/account/info'>Upravit info</a>
 							</div>
 						</div>
 					</div>
 					<div class="profile--stats">
 						<div class="profile--stats__stat" >
 							<p class="number-stat">{{followersCounts.followersCount}}</p>
-							<a href="/followers"><p class="desc-stat">Followers</p></a>
+							<a href="/followers"><p class="desc-stat">Sledující</p></a>
 						</div>
 						<div class="profile--stats__stat">
 							<p class="number-stat">{{followingCounts.followingCount}}</p>
-							<a href="/followers"><p class="desc-stat">Following</p></a>
+							<a href="/followers"><p class="desc-stat">Sleduji</p></a>
 						</div>
 						<div class="profile--stats__stat">
 							<p class="number-stat">{{postCounts.postCount}}</p>
-							<p class="desc-stat">Uploads</p>
+							<p class="desc-stat">Příspěvky</p>
 						</div>
 					</div>
 					<hr>
 					<div class="user--info">
 						<p>bio: {{profile.bio}}</p>
-						<p>Location: {{profile.name}}</p>
+						<p>Kraj: {{profile.name}}</p>
 					</div>
 			</div>
 			</div>
 			<div class="" id="section--posts">
 				<div class="container">
 				<form action="/posts/add-post" method="POST">
-						<textarea class="post--textarea" placeholder="Write something here!" name="postMessage" id="postMessage" maxlength="100" required></textarea>
+						<textarea class="post--textarea" placeholder="Napište něco!" name="postMessage" id="postMessage" maxlength="100" required></textarea>
 						<div class="bottom-right">
 							<script src="/javascript/textarea-length.js"></script>
 							<span id="countdown">100</span>
-							<button class="btn btn-primary add--post">Add</button>
+							<button class="btn btn-primary add--post">Přidat</button>
 						</div>
 						</form>
 				<hr />
@@ -76,13 +77,14 @@
 								<a href="/posts/delete/{{this.post_id}}" type="button" class="">Delete</a>
 						</div>
 						<form action="/posts/comment/{{this.post_id}}" method="POST" name="comment--text">
-							<input type="text" class="comment--input" name="commentText" id="commentText" placeholder="Comment">
+							<input type="text" class="comment--input" name="commentText" id="commentText" placeholder="Okomentujte">
 						</form>
 					</div>
 				{{/each}}
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 </div>
 

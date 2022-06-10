@@ -15,9 +15,3 @@ body {
 img {
 	object-fit: cover;
 }
-.row {
-	width: 100%;
-	max-width: 1100px;
-	margin: 0 auto;
-	padding: 0 12px;
-}
