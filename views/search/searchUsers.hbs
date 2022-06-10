@@ -11,10 +11,10 @@
 			<!-- Tabulka do které se vkládají uživatelé z databáze -->
 			{{#each users}}
 				<tr>
-					<th scope='row'>{{this}}</th>
+					<th scope='row'>{{this.username}}</th>
 
 					<td>
-						<a href='/user/{{this}}' type='button' class='btn'><i
+						<a href='/user/{{this.id}}' type='button' class='btn'><i
 								class='bi bi-person-x'
 							></i>
 							Add</a>

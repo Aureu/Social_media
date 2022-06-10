@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const conn = require('../database');
+const searchModel = require('../models/search');
 
-// Post request for session
+/* // Post request for session
 router.post('/', function (req, res) {
 	var str = {
 		// Data from search bar
@@ -11,7 +12,9 @@ router.post('/', function (req, res) {
 
 	conn.query(
 		// SQL query -- inserts data from searchbar
-		'SELECT username FROM users WHERE username LIKE "%' + str.stringPart + '%"',
+		'SELECT id, username FROM users WHERE username LIKE "%' +
+			str.stringPart +
+			'%"',
 		function (err, rows, fields) {
 			if (err) throw err;
 			var data = [];
@@ -26,6 +29,17 @@ router.post('/', function (req, res) {
 			});
 		}
 	);
+}); */
+
+router.post('/', async (req, res) => {
+	const str = req.body.typeahead;
+	console.log(str);
+	const data = await searchModel.search(str);
+	console.log(data);
+	res.render('search/searchUsers', {
+		users: data,
+		style: 'search/search.css',
+	});
 });
 
 module.exports = router;

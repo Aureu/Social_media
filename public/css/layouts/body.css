@@ -12,6 +12,9 @@ body {
 	color: white;
 }
 
+img {
+	object-fit: cover;
+}
 .row {
 	width: 100%;
 	max-width: 1100px;

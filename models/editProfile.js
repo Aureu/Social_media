@@ -16,7 +16,7 @@ exports.editProfile = (firstname, lastname, username, email, id) => {
 	});
 };
 
-exports.viewDisctricts = () => {
+exports.viewDistricts = () => {
 	return new Promise((resolve, reject) => {
 		try {
 			let sql = `SELECT * FROM districts`;

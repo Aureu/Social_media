@@ -27,7 +27,7 @@ router.post(
 		failureFlash: true,
 	}),
 	(req, res) => {
-		if (req.user.isAdmin === 1) {
+		if (req.user.role === 1) {
 			res.redirect('/admin/users');
 		} else {
 			res.redirect('/account');

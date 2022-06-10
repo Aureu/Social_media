@@ -9,12 +9,12 @@
 							<img
 								class='avatar'
 								src='/Avatars/{{profile.file_src}}'
-								alt='User'
+								alt='User avatar'
 							/>
 						</a>
 						<div class="profile--wrap__name">
 							<h4>{{profile.firstname}} {{profile.lastname}}</h4> 
-							<h4>{{profile.username}}</h4>
+							<h4>@{{profile.username}}</h4>
 						</div>
 						<div class='dropdown' id="profile--dropdown">
 							<button type='button' class='' data-toggle='dropdown'>Setting</button>
@@ -41,7 +41,7 @@
 					<hr>
 					<div class="user--info">
 						<p>bio: {{profile.bio}}</p>
-						<p>Location: {{profile.location}}</p>
+						<p>Location: {{profile.name}}</p>
 					</div>
 			</div>
 			</div>

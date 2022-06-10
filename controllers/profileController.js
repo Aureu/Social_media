@@ -71,8 +71,7 @@ router.post('/account/edit-profile/password/:id', async (req, res, err) => {
 
 // Route for editing user info -- remake into modal on profile page
 router.get('/account/info', async (req, res) => {
-	const data = await editModel.viewDisctricts();
-	console.log(data);
+	const data = await editModel.viewDistricts();
 	res.render('profile/editInfo', {
 		title: 'Edit',
 		style: 'profile/editInfo.css',
@@ -84,7 +83,7 @@ router.get('/account/info', async (req, res) => {
 router.post('/account/insert-profile-info', (req, res) => {
 	const id = req.user.id;
 	const bio = req.body.bio;
-	const district_id = req.body.district_id;
+	const district_id = req.body.districts;
 	console.log(district_id);
 	const dateBirth = req.body.dateBirth;
 	editModel.editInfo(id, bio, district_id, dateBirth);
