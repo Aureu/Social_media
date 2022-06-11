@@ -27,7 +27,6 @@ router.get('/account', async (req, res, results) => {
 		followingCounts: followingCounter[0],
 		followersCounts: followersCounter[0],
 	});
-	console.log(req.user);
 });
 
 // Route for static page

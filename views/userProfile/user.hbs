@@ -1,7 +1,11 @@
-{{> navbar}}
+<script src="/javascript/axios.js"></script>
+
+{{> layouts/navbar}}
 <section id="main">
 	<div class="row">
-	<div class="container--wrapper">
+		<div class="container">
+
+			<div class="container--wrapper">
 			<div class="sidenav" id="section--profile">
 				<div class="container">
 					<div class="profile--wrap">
@@ -44,15 +48,10 @@
 						<p>Location: {{profile.name}}</p>
 					</div>
 			</div>
-			<button class="follow" onclick="followUser(event)" data-user-id="{{userdata.id}}">Follow</button>
-				<script>
-					const followUser = function (event) {
-            const userId = event.target.dataset.userId;
-            axios.post('/user/' + userId );
-        };
-				</script>
+			<button class="follow" onclick="followUser({{userdata.id}})">FOLLOW</button>
+
 			</div>
-			<div class="" id="section--posts">
+			<div id="section--posts">
 				<div class="container">
 				
 				{{#each posts}}
@@ -68,13 +67,17 @@
 							</h5>
 						</div>
 						</div>
-						<p class="comment--text">
+						<p class="post--text">
 							{{this.content}}
 						</p>
 					
 						<form action="/user/{{../user_id}}/posts/{{this.post_id}}/comment" method="POST" name="comment--text">
 							<input type="text" class="comment--input" name="commentText" id="commentText" placeholder="Comment">
 						</form>
+						<button onclick="likePost({{this.post_id}})">Like</button>
+						{{this.likes}}
+						
+						</script>	
 					</div>
 				{{/each}}
 			</div>
@@ -82,6 +85,6 @@
 	</div>
 </div>
 </div>
-
+</div>
 </section>
 

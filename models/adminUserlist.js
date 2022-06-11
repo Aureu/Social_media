@@ -5,7 +5,7 @@ const express = require('express');
 exports.getUsers = () => {
 	return new Promise((resolve, reject) => {
 		try {
-			let sql = 'SELECT * FROM users';
+			let sql = 'SELECT * FROM viewuser';
 			conn.query(sql, (err, results) => {
 				if (err) throw err;
 				resolve(results);
@@ -19,7 +19,7 @@ exports.getUsers = () => {
 exports.getUser = (ID) => {
 	return new Promise((resolve, reject) => {
 		try {
-			let sql = `SELECT * FROM users WHERE id = ?`;
+			let sql = `SELECT * FROM viewuser WHERE id = ?`;
 			conn.query(sql, ID, (error, results) => {
 				if (error) throw error;
 				resolve(results);

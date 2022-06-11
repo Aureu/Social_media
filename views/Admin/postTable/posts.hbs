@@ -1,4 +1,4 @@
-{{> navbar-admin}}
+{{> layouts/navbar-admin}}
 	<div class='container'>
 		<div class='row'>
 			<div class='col-6'>
@@ -15,6 +15,7 @@
 								<th scope='col'>#</th>
 								<th scope='col'>Username</th>
 								<th scope='col'>Content</th>
+								<th scope="col">Likes</th>
 								<th scope='col'>createdAt</th>
 								<th scope='col'>Action</th>
 							</tr>
@@ -23,17 +24,22 @@
 							<!-- Tabulka do které se vkládají uživatelé z databáze -->
 							{{#each posts}}
 								<tr>
-									<th scope='row'>{{this.id}}</th>
+									<th scope='row'>{{this.post_id}}</th>
 									<td>{{this.username}}</td>
 									<td>{{this.content}}</td>
+									<td>{{this.likes}}</td>
 									<td>{{this.created_at}}</td>
 									<td class='text-end'>
-
 										<a
-											href='/admin/posts/delete/{{this.id}}'
+											href='/admin/posts/delete/{{this.post_id}}'
 											type='button'
 											class='btn'
 										><i class='bi bi-person-x'></i> Smazat</a>
+										<a
+											href='/admin/posts/comment/{{this.post_id}}'
+											type='button'
+											class='btn'
+										><i class='bi bi-person-x'></i> Komentáře</a>
 									</td>
 								</tr>
 							{{/each}}

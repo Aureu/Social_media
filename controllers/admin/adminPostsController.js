@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
 	const data = await adminPostModel.getPosts();
 	res.render('Admin/postTable/posts', {
 		title: 'Posts',
-		style: 'userlist/userList.css',
+		style: 'admin/users/userlist.css',
 		posts: data,
 	});
 });
@@ -23,4 +23,13 @@ router.get('/delete/:id', async (req, res) => {
 	res.redirect('back');
 });
 
+router.get('/comment/:id', async (req, res) => {
+	const id = req.params.id;
+	const data = await adminPostModel.viewComments(id);
+	res.render('Admin/postTable/comments', {
+		title: 'Comments',
+		style: 'admin/posts/comment.css',
+		comments: data,
+	});
+});
 module.exports = router;

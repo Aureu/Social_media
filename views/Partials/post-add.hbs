@@ -1,0 +1,15 @@
+<form action='/posts/add-post' method='POST'>
+	<textarea
+		class='post--textarea'
+		placeholder='Napište něco!'
+		name='postMessage'
+		id='postMessage'
+		maxlength='100'
+		required
+	></textarea>
+	<div class='bottom-right'>
+		<script src='/javascript/textarea-length.js'></script>
+		<span id='countdown'>100</span>
+		<button class='btn btn-primary add--post'>Přidat</button>
+	</div>
+</form>

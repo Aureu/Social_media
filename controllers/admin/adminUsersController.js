@@ -10,19 +10,19 @@ router.get('/', async (req, res) => {
 	const data = await userModel.getUsers();
 	res.render('Admin/userTable/userList', {
 		title: 'Userlist',
-		style: 'userlist/userList.css',
+		style: 'admin/users/userList.css',
 		users: data,
 	});
 });
 
 // Displays one user by id
 router.get('/view/:id', async (req, res) => {
-	var id = req.params.id;
+	const id = req.params.id;
 	const data = await userModel.getUser(id);
 	res.render('Admin/userTable/viewUser', {
 		title: 'UserList',
 		style: 'userlist/viewUser.css',
-		user: data,
+		user: data[0],
 	});
 });
 
@@ -32,7 +32,7 @@ router.get('/edit/:id', async (req, res) => {
 	const data = await userModel.editUser(id);
 	res.render('Admin/userTable/editUser', {
 		title: 'edit',
-		style: 'userlist/editUser.css',
+		style: 'admin/users/editUser.css',
 		data: data[0],
 	});
 });
@@ -61,7 +61,7 @@ router.post('/edituser/:id', async (req, res) => {
 // Displays form for adding new user
 router.get('/adduser', (req, res) => {
 	res.render('Admin/userTable/addUser', {
-		style: 'userlist/addUser.css',
+		style: 'admin/users/addUser.css',
 	});
 });
 

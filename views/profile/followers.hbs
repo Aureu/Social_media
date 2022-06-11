@@ -1,0 +1,51 @@
+<script src="/javascript/axios.js"></script>
+
+{{>layouts/navbar}}
+<div class='container'>
+	<div class='row row-cols-1 row-cols-md-3'>
+		{{#each data}}
+			<div class='col mb-4'>
+
+				<div class='card h-80'>
+					<img src='/Avatars/{{this.file_src}}' alt='' class='card-img-top' />
+					<div class='card-body'>
+						<h5 class='card-title'>{{this.firstname}} {{this.lastname}}</h5>
+						<p class='card-text'>{{this.bio}}</p>
+
+					</div>
+
+					<ul class='list-group list-group-flush'>
+						<li class='list-group-item'>{{this.username}}</li>
+						<li class='list-group-item'>{{this.email}}</li>
+						<li class='list-group-item'>{{this.date_birth}}</li>
+						<li class='list-group-item'>{{this.name}}</li>
+            {{#if ../status}}
+              <li class='list-group-item'>
+                <button
+                  class='unfollow'
+                  onclick='unfollowUser({{this.followed_id}})'
+                  >UNFOLLOW
+                </button>
+              </li>
+            {{else}}
+              <li class='list-group-item'>
+                <button
+                  class='unfollow'
+                  onclick='follow({{this.followed_id}})'
+                  >FOLLOW BACK
+                </button>
+              </li>
+              {{/if}}
+              <div class="card-footer">
+              <a href='/user/{{this.id}}' type='button' class='btn'><i
+								class='bi bi-person-x'
+							></i>
+							Zobrazit</a>
+              </div>
+					</ul>
+				</div>
+			</div>
+
+		{{/each}}
+	</div>
+</div>

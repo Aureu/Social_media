@@ -9,8 +9,7 @@ const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
 const multer = require('multer');
 const conn = require('./database');
-const axios = require('axios');
-const feather = require('feather-icons');
+const axios = require('axios').default;
 
 const app = express();
 

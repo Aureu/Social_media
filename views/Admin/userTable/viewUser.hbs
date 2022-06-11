@@ -1,44 +1,12 @@
-<!-- nav menu (předělat) -->
-<nav aria-label='breadcrumb'>
-	<ol class='breadcrumb'>
-		<li class='breadcrumb-item'><a href='/admin/users/'>Domů</a></li>
-		<li class='breadcrumb-item active' aria-current='page'>Zobrazení uživatele</li>
-	</ol>
-</nav>
-<!-- End nav -->
-<div class='view-user p-5'>
-	<div class='row mb-5'>
-		<div class='col text-center'>
-			<!-- Jméno a přijmení uživatele -->
-			<h3>{{this.jmeno}} {{this.prijmeni}}</h3>
-		</div>
-	</div>
-	<div class='row'>
-		<div class='col'>
-			<!-- Tabulka pro uživatele -->
-			<table class='table table-dark'>
-				<thead>
-					<tr>
-						<th scope='col'>Jméno</th>
-						<th scope='col'>Přijmení</th>
-						<th scope='col'>Přezdívka</th>
-						<th scope='col'>Email</th>
-					</tr>
-				</thead>
-				<tbody>
-					<!-- Zobrazení jednoho uživatele podle id -->
-					{{#each user}}
-						<tr>
-							<th scope='row'>{{this.firstname}}</th>
-							<td>{{this.lastname}}</td>
-							<td>{{this.username}}</td>
-							<td>{{this.email}}</td>
-						</tr>
-					{{/each}}
-				</tbody>
-			</table>
-			<!-- end table -->
-		</div>
-	</div>
+{{> layouts/navbar-admin}}
 
+<div class="container">
+	<h4>{{user.firstname}}</h4> <br>
+	<h4>{{user.lastname}}</h4><br>
+	<h4>{{user.username}}</h4><br>
+	<h4>{{user.email}}</h4><br>
+	<h4>{{user.date_birth}}</h4><br>
+	<h4>{{user.bio}}</h4><br>
+	<h4>{{user.name}}</h4><br>
+	<img src="/Avatars/{{user.file_src}}" alt="avatar" class="avatar">
 </div>

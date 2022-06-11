@@ -13,23 +13,6 @@ router.post('/add-post', (req, res) => {
 	res.redirect('back');
 });
 
-// Like a post - not done
-router.post('/:id/act', (req, res, next) => {
-	const action = req.body.action;
-	const user_id = req.user.id;
-	const post_id = req.params.id;
-	const counter = action === 'Like' ? 1 : -1;
-	postModel.likes(action, user_id, post_id);
-	postModel.likeCount(post_id, counter);
-});
-
-router.get('/delete/:id', async (req, res) => {
-	const id = req.params.id;
-	console.log(id);
-	await postModel.deletePost(id);
-	res.redirect('back');
-});
-
 // comments - not done
 router.post('/comment/:id', (req, res) => {
 	const user_id = req.user.id;
@@ -39,8 +22,18 @@ router.post('/comment/:id', (req, res) => {
 	res.redirect('back');
 });
 
-router.post('/posts/show-comments/:id', (req, res) => {
-	const id = req.params.id;
-	console.log(id);
+router.post('/delete', async (req, res) => {
+	const post_id = req.body.post_id;
+	console.log('deleted');
+	await postModel.deletePost(post_id);
+	res.redirect('back');
+});
+
+router.post('/like', (req, res) => {
+	console.log('liked');
+	const user_id = req.user.id;
+	const post_id = req.body.post_id;
+	postModel.like(user_id, post_id);
+	res.redirect('back');
 });
 module.exports = router;

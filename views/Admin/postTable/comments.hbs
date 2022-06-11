@@ -1,0 +1,19 @@
+{{> layouts/navbar-admin}}
+<div class="container">
+  {{#each comments}}
+    <div class="wrap">
+      <div class="item">
+        <figure>
+          <img src="/Avatars/{{this.file_src}}" alt="avatar" class="avatar">
+        </figure>
+      </div>
+      <div class="item">
+        <h4>{{this.username}} |</h4>
+      </div>
+      <div class="item">
+        <h4>{{this.comment_body}} |</h4>
+      </div>
+      <br>
+    </div>
+  {{/each}}
+</div>

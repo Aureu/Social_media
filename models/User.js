@@ -17,12 +17,12 @@ exports.getUser = (user_id) => {
 	});
 };
 
-// Selects post
-exports.Posts = (user_id) => {
+// Follow user
+exports.follow = (followerId, followedId) => {
 	return new Promise((resolve, reject) => {
 		try {
-			let sql = `SELECT p.post_id, p.username, p.content,  p.created_at FROM users AS u JOIN posts AS p ON u.id = p.user_id WHERE u.id = ?`;
-			conn.query(sql, user_id, (error, results) => {
+			let sql = `INSERT INTO followers (follower_id, followed_id) VALUES ('${followerId}', '${followedId}')`;
+			conn.query(sql, (error, results) => {
 				if (error) throw error;
 				resolve(results);
 			});
@@ -32,14 +32,15 @@ exports.Posts = (user_id) => {
 	});
 };
 
-// Follow user
-exports.follow = (followerId, followedId) => {
+// Unfollow user
+exports.unFollow = (followedId) => {
 	return new Promise((resolve, reject) => {
 		try {
-			let sql = `INSERT INTO followers (follower_id, followed_id, created_at) VALUES ('${followerId}', '${followedId}', NOW())`;
-			conn.query(sql, (error, results) => {
+			let sql = `DELETE FROM followers WHERE followed_id = ? `;
+			conn.query(sql, followedId, (error, results) => {
 				if (error) throw error;
 				resolve(results);
+				console.log('User unfollowed');
 			});
 		} catch (err) {
 			reject(err);
