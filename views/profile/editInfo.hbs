@@ -23,13 +23,16 @@
 						></textarea>
 						<br />
 						<div class='form-group'>
-							<select name='districts' id='districts' class='form-control'>
-								{{#each districts}}
-									<option
-										value='{{this.district_id}}'
-									>{{this.district_id}}.{{this.name}}</option>
-								{{/each}}
-							</select>
+							<div class='form-row'>
+								<select name='districts' id='districts' class='form-control'>
+									{{#each districts}}
+										<option
+											value='{{this.district_id}}'
+										>{{this.district_id}}.{{this.name}}</option>
+									{{/each}}
+								</select>
+
+							</div>
 						</div>
 						<br />
 						<input

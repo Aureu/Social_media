@@ -33,3 +33,10 @@ const unfollowUser = (userId) => {
 		});
 	console.log('click');
 };
+
+const viewComments = (postId) => {
+	axios
+		.post('http://127.0.0.1:5000/posts/viewcomments', { post_id: postId })
+		.then((response) => {});
+	console.log('click');
+};

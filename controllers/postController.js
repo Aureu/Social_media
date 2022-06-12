@@ -36,4 +36,16 @@ router.post('/like', (req, res) => {
 	postModel.like(user_id, post_id);
 	res.redirect('back');
 });
+
+// Zobrazeni komentu
+router.post('/viewcomments', async (req, res, next) => {
+	console.log('clicked');
+	const post_id = req.body.post_id;
+	const data = await postModel.viewComments(post_id);
+	/* res.render('profile/profile', {
+		comments: data[0],
+	}); */
+	next();
+	console.log(data);
+});
 module.exports = router;

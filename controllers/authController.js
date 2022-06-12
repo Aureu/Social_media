@@ -6,7 +6,6 @@ const session = require('express-session');
 const conn = require('../database');
 const LocalStrategy = require('passport-local').Strategy;
 const mysql = require('mysql');
-const Auth = require('../models/Auth');
 
 const app = express();
 
@@ -35,7 +34,7 @@ passport.use(
 					if (err) throw err;
 					// Searching if user doesnt exist in DB
 					if (!results.length) {
-						return done(null, false, { message: 'No user found' });
+						return done(null, false, { message: 'Uživatel nenalezen!' });
 					}
 					// Grab password from DB and unhash it
 					bcrypt.compare(
@@ -47,7 +46,9 @@ passport.use(
 							if (isMatch) {
 								return done(null, results[0]);
 							} else {
-								return done(null, false, { message: 'Password incorrect' });
+								return done(null, false, {
+									message: 'Zadali jste špatné heslo!',
+								});
 							}
 						}
 					);

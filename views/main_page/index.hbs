@@ -1,113 +1,45 @@
+<script src="/javascript/axios.js"></script>
 
 {{>layouts/navbar}}
 <!-- header ends -->
+			<div class="" id="section--posts">
+				<div class="container">
+				{{>post-add}}
+				<hr />
+				{{#each posts}}
+					<div class="post--wrap">
+						<div class="post--header">
+						<figure>
+							<img class="comment-avatar" src="/Avatars/{{this.file_src}}" alt="" >
+						</figure>
+						<div class="post--header__sub">
+							<h5>
+								<span class="glyphicon glyphicon-time"></span> {{this.username}}, <br>
+								{{this.created_at}}.
+							</h5>
+						</div>
+						</div>
+						<p class="comment--text">
+							{{this.content}}
+						</p>
+						
+						<button onclick="likePost({{this.post_id}})">Like</button>
+						{{this.likes}}
 
-<!-- main body starts -->
-<div class='main__body'>
-	<!-- sidebar starts -->
-	<div class='sidebar'>
-		<div class='sidebarRow'>
-			<img
-				class='user__avatar'
-				src="/Avatars/{{posts.file_src}}"
-				alt=''
-			/>
-			<h4>{{jmeno}}</h4>
-		</div>
-
-
-	<!-- sidebar ends -->
-
-	<!-- feed starts -->
-	<div class='feed'>
-
-		<!-- message sender starts -->
-		<div class='messageSender'>
-			<div class='messageSender__top'>
-				<img
-					class='user__avatar'
-					src='/Avatars/{{posts.file_src}}'
-					alt=''
-				/>
-				<form>
-					<input
-						class='messageSender__input'
-						placeholder="What's on your mind?"
-						type='text'
-					/>
-				</form>
-			</div>
-
-			<div class='messageSender__bottom'>
-				<div class='messageSender__option'>
-					<span style='color: red' class='material-icons'> videocam </span>
-					<h3>Live</h3>
-				</div>
-
-				<div class='messageSender__option'>
-					<span style='color: green' class='material-icons'>
-						photo_library
-					</span>
-					<h3>Photo</h3>
-				</div>
-
-				<div class='messageSender__option'>
-					<span style='color: orange' class='material-icons'>
-						insert_emoticon
-					</span>
-					<h3>Feeling</h3>
-				</div>
+						<hr>
+						<form action="/posts/comment/{{this.post_id}}" method="POST" name="comment--text">
+							<input type="text" class="comment--input" name="commentText" id="commentText" placeholder="Okomentujte">
+						</form>
+						<button  onclick="viewComments({{this.post_id}})">
+							Komentáře
+						</button>
+						<hr>
+						<div class="collapse" id="comments">
+							<div class="comemnts--content">
+								IDK
+							</div>
+						</div>
+					</div>
+				{{/each}}
 			</div>
 		</div>
-		<!-- message sender ends -->
-
-		<!-- post starts -->
-
-		<!-- post ends -->
-
-		<!-- post starts -->
-    {{#each posts}}
-		<div class='post'>
-			<div class='post__top'>
-				<img
-					class='user__avatar post__avatar'
-					src="/Avatars/{{this.file_src}}" 
-          alt="" 
-				/>
-				<div class='post__topInfo'>
-					<h3>@{{this.username}}</h3>
-					<p>{{this.created_at}}</p>
-				</div>
-			</div>
-
-			<div class='post__bottom'>
-				<p>{{this.content}}</p>
-			</div>
-
-			<div class='post__options'>
-				<div class='post__option'>
-					<span class='material-icons'> thumb_up </span>
-					<p>Like</p>
-				</div>
-
-				<div class='post__option'>
-					<span class='material-icons'> chat_bubble_outline </span>
-					<p>Comment</p>
-				</div>
-
-				<div class='post__option'>
-					<span class='material-icons'> near_me </span>
-					<p>Share</p>
-				</div>
-			</div>
-		</div>
-    {{/each}}
-   
-		<!-- post ends -->
-
-	</div>
-	<!-- feed ends -->
-
-</div>
-<!-- main body ends -->
-

@@ -41,11 +41,11 @@ exports.viewComments = (post_id) => {
 	});
 };
 
-exports.viewAll = () => {
+exports.viewAll = (user_id) => {
 	return new Promise((resolve, reject) => {
 		try {
-			let sql = `SELECT * FROM viewposts `;
-			conn.query(sql, (error, results) => {
+			let sql = `SELECT * FROM viewposts AS p JOIN followers AS f ON p.id = f.followed_id WHERE f.follower_id = ?`;
+			conn.query(sql, user_id, (error, results) => {
 				if (error) throw error;
 				resolve(results);
 			});

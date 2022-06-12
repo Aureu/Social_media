@@ -6,7 +6,7 @@ const profileModel = require('../models/profile');
 // Route for main page
 router.get('/', async (req, res) => {
 	const user_id = req.user.id;
-	const data = await postModel.viewAll();
+	const data = await postModel.viewAll(user_id);
 	const profile = await profileModel.viewProfile(user_id);
 
 	res.render('main_page/index', {

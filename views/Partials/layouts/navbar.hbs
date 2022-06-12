@@ -1,6 +1,17 @@
-<section id='header'>
-	<nav class='navbar navbar-expand-md justify-content-center'>
+{{!-- <section id='header'>
+	<nav class='navbar sticky-top navbar-expand-md justify-content-center'>
 		<div class='navbar-brand d-flex w-50 mr-auto'>
+			<button
+				class='navbar-toggler'
+				type='button'
+				data-toggle='collapse'
+				data-target='#navbarScroll'
+				aria-controls='navbarScroll'
+				aria-expanded='false'
+				aria-label='Toggle navigation'
+			>
+				<span class='navbar-toggler-icon'></span>
+			</button>
 			<form class='form-inline my-2 my-lg-0' method='POST' action='/search'>
 				<input
 					class='typeahead tt-query'
@@ -53,4 +64,52 @@
 			</ul>
 		</div>
 	</nav>
-</section>
+</section> --}}
+
+<nav class='navbar navbar-expand-lg'>
+	<a class='navbar-brand' href='/account'><img
+			class='navbar--avatar'
+			src='/Avatars/{{profile.file_src}}'
+			alt='User'
+		/>{{profile.firstname}}
+		{{profile.lastname}}</a>
+	<button
+		class='navbar-toggler'
+		type='button'
+		data-toggle='collapse'
+		data-target='#navbarScroll'
+		aria-controls='navbarScroll'
+		aria-expanded='false'
+		aria-label='Toggle navigation'
+	>
+		<span class='navbar-toggler-icon'></span>
+	</button>
+	<div class='collapse navbar-collapse' id='navbarScroll'>
+		<ul
+			class='navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll'
+			style='max-height: 100px;'
+		>
+			<li class='nav-item active'>
+				<a class='nav-link' href='/main'>Home
+					<span class='sr-only'>(current)</span></a>
+			</li>
+
+			<li class='nav-item dropdown'>
+				<a class='nav-link' href='/logout'>Odhlásit se</a>
+
+			</li>
+
+		</ul>
+		<form class='form-inline my-2 my-lg-0' method='POST' action='/search'>
+			<input
+				class='typeahead tt-query'
+				id='searchbar'
+				spellcheck='false'
+				autocomplete='off'
+				name='typeahead'
+				type='text'
+				placeholder='Hledejte uživatele!'
+			/>
+		</form>
+	</div>
+</nav>
