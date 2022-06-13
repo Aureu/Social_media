@@ -1,16 +1,13 @@
 {{> layouts/navbar}}
 <div class='container'>
 	<table class='table table-dark table-hover'>
-		<thead>
-			<tr>
-				<th scope='col'>User</th>
-				<th scope='col'>Action</th>
-			</tr>
-		</thead>
+
 		<tbody>
 			<!-- Tabulka do které se vkládají uživatelé z databáze -->
 			{{#each users}}
 				<tr>
+					<th scope='row'><img src="Avatars/{{this.file_src}}" style="height:50px; width:50px"alt=""></th>
+
 					<th scope='row'>{{this.username}}</th>
 
 					<td>

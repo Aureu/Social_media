@@ -1,45 +1,82 @@
-<script src="/javascript/axios.js"></script>
+<script src="/javascript/axios.js">
+</script>
+
 
 {{>layouts/navbar}}
 <!-- header ends -->
-			<div class="" id="section--posts">
-				<div class="container">
-				{{>post-add}}
-				<hr />
-				{{#each posts}}
-					<div class="post--wrap">
-						<div class="post--header">
-						<figure>
-							<img class="comment-avatar" src="/Avatars/{{this.file_src}}" alt="" >
-						</figure>
-						<div class="post--header__sub">
-							<h5>
-								<span class="glyphicon glyphicon-time"></span> {{this.username}}, <br>
-								{{this.created_at}}.
-							</h5>
-						</div>
-						</div>
-						<p class="comment--text">
-							{{this.content}}
-						</p>
-						
-						<button onclick="likePost({{this.post_id}})">Like</button>
-						{{this.likes}}
+<div class="container-fluid-xl" id="container">
+	<div class="row">
+		<div class="col-sm-4">
+			<div class="users--list">
+			<div class='row row-cols-4 row-cols-md-1'>
+				<h2>Uživatelé které sleduješ</h2>
+			{{#each users}}
 
-						<hr>
-						<form action="/posts/comment/{{this.post_id}}" method="POST" name="comment--text">
-							<input type="text" class="comment--input" name="commentText" id="commentText" placeholder="Okomentujte">
-						</form>
-						<button  onclick="viewComments({{this.post_id}})">
-							Komentáře
-						</button>
-						<hr>
-						<div class="collapse" id="comments">
-							<div class="comemnts--content">
-								IDK
+				<div class="row">
+					<div class="col-sm-11">
+						<div class="card">
+							<div class="card-body bg-grey">
+								<div class="row d-flex align-items-center justify-content-start">
+									<img src="/Avatars/{{this.file_src}}" alt="avatar" class="card--avatar list--item"> <br>
+									<h5 class="card-title ml-2" >{{this.username}}</h5>
+									<a href="/user/{{this.id}}" class="btn ml-1">Zobrazit uživatele</a>
+
+								</div>
 							</div>
 						</div>
 					</div>
-				{{/each}}
+				</div>
+			{{/each}}
 			</div>
+			</div>
+
 		</div>
+		<div class="col-sm-8">
+		<div class="posts--wrap">
+		{{>post-add}}
+			<hr />
+			{{#each posts}}
+				<div class="post--wrap">
+					<div class="post--header">
+					<figure>
+						<img class="comment-avatar" src="/Avatars/{{this.file_src}}" alt="" >
+					</figure>
+					<div class="post--header__sub">
+						<h5>
+							<span class="glyphicon glyphicon-time"></span> {{this.username}}, <br>
+							{{this.created_at}}.
+						</h5>
+					</div>
+					</div>
+					<p class="comment--text">
+						{{this.content}}
+					</p>
+					<div class="counter">
+						{{this.likes}} 
+						{{this.comments}}
+					</div>
+					<hr>
+					<div class="post--links">
+						<button id="likeBtn" onclick="likePost({{this.post_id}}); this.onclick=null;">To se mi líbí</button>
+						<button onclick="viewComments({{this.post_id}})">
+							Komentáře
+						</button>
+					</div>
+					<hr>
+					<form action="/posts/comment/{{this.post_id}}" method="POST" name="comment--text">
+						<input type="text" class="comment--input" name="commentText" id="commentText" placeholder="Okomentujte">
+					</form>
+					
+					<hr>
+					<div class="comments">
+					{{#each comments}}
+						{{this.post_id}}
+					{{/each}}
+					</div>
+					
+				</div>
+			{{/each}}
+		</div>
+		</div>
+</div>
+</div>

@@ -1,5 +1,4 @@
 const conn = require('../database');
-const express = require('express');
 
 exports.viewProfile = (user_id) => {
 	return new Promise((resolve, reject) => {

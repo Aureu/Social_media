@@ -15,3 +15,40 @@ body {
 img {
 	object-fit: cover;
 }
+
+a {
+	color: #8e73f0;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #8e73f0;
+}
+
+/* / Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+	#container {
+		margin: 10px;
+	}
+}
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+	#container {
+		margin: 10px;
+	}
+}
+
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+	#container {
+		margin: 10px;
+	}
+}
+
+/* // Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+	#container {
+		margin: 100px;
+	}
+}

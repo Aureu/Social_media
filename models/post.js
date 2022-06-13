@@ -84,6 +84,13 @@ exports.comment = (user_id, post_id, commentText) => {
 		let sql = `INSERT INTO comments (user_id, post_id, comment_body, created_at) VALUES ('${user_id}','${post_id}','${commentText}','${dateTime}')`;
 		conn.query(sql, (err, results) => {
 			if (err) throw err;
+			conn.query(
+				`UPDATE posts SET comments = comments + 1 WHERE post_id = ?`,
+				post_id,
+				(err2, results2) => {
+					if (err2) throw err;
+				}
+			);
 		});
 	} catch (err) {
 		reject(err);

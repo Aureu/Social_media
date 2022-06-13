@@ -35,6 +35,8 @@ router.post('/follow', (req, res, next) => {
 	const followerId = req.user.id;
 	const followedId = req.body.user_id;
 	userProfileModel.follow(followerId, followedId);
+	res.redirect('back');
+	console.log('followed');
 });
 
 router.post('/unfollow', (req, res, next) => {

@@ -1,15 +1,12 @@
 <script src="/javascript/axios.js"></script>
 
 
-
-
 {{> layouts/navbar}}
 
-<section id="main">
+
+<div class="container-fluid-xl" id="container">
 	<div class="row">
-		
-</div>
-	<div class="container--wrapper">
+		<div class="col-sm-4">
 			<div class="sidenav" id="section--profile">
 				<div class="container">
 					<div class='dropdown' id="profile--dropdown">
@@ -20,14 +17,42 @@
 							</div>
 						</div>
 					<div class="profile--wrap">
+					
+							<button type="button" class="modal--open" data-toggle="modal" data-target="#upload">
+								<img
+									class='avatar'
+									src='/Avatars/{{profile.file_src}}'
+									alt='User avatar'
+								/>
+							</button>
+							<div class="modal fade" id="upload" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered">
+								<form
+									action='/avatar/upload'
+									method='POST'
+									enctype='multipart/form-data'
+								>
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Edit Avatar</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">		
+										<div class='form-group'>
+											<input type='file' class='form-control' name='image' />
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
+										<button type="submit" class="btn btn-primary">Uložit změny</button>
+									</div>
+								</div>
+								</form>
+							</div>
+						</div>
 						
-						<a href='/avatar/upload'>
-							<img
-								class='avatar'
-								src='/Avatars/{{profile.file_src}}'
-								alt='User avatar'
-							/>
-						</a>
 						<div class="profile--wrap__name">
 							<h4>{{profile.firstname}} {{profile.lastname}}</h4> 
 							<h4>@{{profile.username}}</h4>
@@ -53,24 +78,79 @@
 						<p>bio: {{profile.bio}}</p>
 						<p>Kraj: {{profile.name}}</p>
 					</div>
+				</div>
 			</div>
 			</div>
+				<div class="col-sm-8">
 			<div class="" id="section--posts">
 				<div class="container">
 				{{>post-add}}
 				<hr />
-				{{>posts}}
-				<div class="comment--text">
-			{{#each comments}}
-				{{this.post_id}}
-			{{/each}}
-		</div>
-			</div>
-		</div>
+				{{#each posts}}
+					<div class='post--wrap'>
+						<div class='post--header'>
+							<figure>
+								<img class='comment-avatar' src='/Avatars/{{this.file_src}}' alt='' />
+							</figure>
+							<div class='post--header__sub'>
+								<h5>
+									<span class='glyphicon glyphicon-time'></span>
+									{{this.username}},
+									<br />
+									{{this.created_at}}.
+								</h5>
+							</div>
+						</div>
+						<p class='comment--text'>
+							{{this.content}}
+						</p>
+						<div class='counter'>
+							<div class="likes" id="clicks">
+								{{this.likes}}
+							</div>
+							<div class="comments">
+								{{this.comments}}
+							</div>
+						</div>
+						<hr />
+						<div class='post--links'>
+							<button id='likeBtn' onclick='likePost({{this.post_id}})'><i
+									class='fa-solid fa-thumbs-up'
+								></i>To se mi líbí</button>
+								<div id="demo"></div>
+							<button onclick='viewComments({{this.post_id}})'>
+								<i class='fa-solid fa-comments'></i>Komentáře
+							</button>
+						</div>
+						<hr />
+						<form
+							action='/posts/comment/{{this.post_id}}'
+							method='POST'
+							name='comment--text'
+						>
+							<input
+								type='text'
+								class='comment--input'
+								name='commentText'
+								id='commentText'
+								placeholder='Okomentujte'
+							/>
+						</form>
+
+						<hr />
+
+					</div>
+					{{/each}}
+				<div id="demo"></div>
+							</div>
+						</div>
 	</div>
 </div>
 </div>
-</div>
-</section>
+
+
+
+
+
 
 

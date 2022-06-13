@@ -7,9 +7,6 @@ const passport = require('passport');
 const dotenv = require('dotenv');
 const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
-const multer = require('multer');
-const conn = require('./database');
-const axios = require('axios').default;
 
 const app = express();
 

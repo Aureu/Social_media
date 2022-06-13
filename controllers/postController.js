@@ -1,5 +1,3 @@
-const mysql = require('mysql');
-const conn = require('../database');
 const express = require('express');
 const router = express.Router();
 const postModel = require('../models/post');
@@ -38,14 +36,10 @@ router.post('/like', (req, res) => {
 });
 
 // Zobrazeni komentu
-router.post('/viewcomments', async (req, res, next) => {
+router.post('/viewcomments', async (req, res) => {
 	console.log('clicked');
 	const post_id = req.body.post_id;
 	const data = await postModel.viewComments(post_id);
-	/* res.render('profile/profile', {
-		comments: data[0],
-	}); */
-	next();
-	console.log(data);
+	res.send({ comments: data });
 });
 module.exports = router;
