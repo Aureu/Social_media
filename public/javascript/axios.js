@@ -1,8 +1,4 @@
 const likePost = (postId) => {
-	/* 	$(document).ready(function () {
-		var btn = document.getElementById('likeBtn');
-		btn.disabled = true;
-	}); */
 	axios
 		.post('http://127.0.0.1:5000/posts/like', { post_id: postId })
 		.then((response) => {
@@ -22,11 +18,6 @@ const deletePost = (postId) => {
 };
 
 const followUser = (userId) => {
-	/* 	$(document).ready(function () {
-		var btn = document.getElementById('likeBtn');
-		btn.disabled = true;
-	});
- */
 	axios
 		.post('http://127.0.0.1:5000/user/follow', { user_id: userId })
 		.then((response) => {
@@ -44,16 +35,4 @@ const unfollowUser = (userId) => {
 			window.location.reload();
 		});
 	console.log('click');
-};
-
-const viewComments = (postId) => {
-	axios
-		.post('http://127.0.0.1:5000/posts/viewcomments', { post_id: postId })
-		.then((response) => {
-			return response.json();
-		})
-		.then((data) => {
-			let comments = data;
-			console.log(comments);
-		});
 };

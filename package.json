@@ -28,6 +28,7 @@
     "feather-icons": "^4.29.0",
     "flash": "^1.1.0",
     "handlebars-dateformat": "^1.1.2",
+    "jquery": "^3.6.0",
     "jsonwebtoken": "^8.5.1",
     "method-override": "^3.0.0",
     "multer": "^1.4.4",

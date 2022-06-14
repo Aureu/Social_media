@@ -44,16 +44,15 @@ router.get('/account/edit/:id', async (req, res) => {
 router.post('/account/edit-profile/:id', async (req, res, err) => {
 	console.log(req.params.id);
 
-	const { firstname, lastname, username, email, password } = req.body;
+	const { firstname, lastname, username, email } = req.body;
 	const id = req.params.id;
-	console.log(req.body);
-	const hashedPassword = await bcrypt.hash(password, 10);
+
 	await editModel.editProfile(
 		firstname,
 		lastname,
 		username,
 		email,
-		hashedPassword,
+
 		id
 	);
 	res.redirect('/account');
@@ -70,12 +69,17 @@ router.post('/account/edit-profile/password/:id', async (req, res, err) => {
 
 // Route for editing user info -- remake into modal on profile page
 router.get('/account/info', async (req, res) => {
+	const user_id = req.user.id;
+
 	const data = await editModel.viewDistricts();
+	const profile = await profileModel.viewProfile(user_id);
 	res.render('profile/editInfo', {
 		title: 'Edit',
 		style: 'profile/editInfo.css',
 		districts: data,
+		profile: profile[0],
 	});
+	console.log(profile);
 });
 
 // Inserting user profile info

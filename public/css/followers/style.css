@@ -1,5 +1,5 @@
 p {
-	color: black;
+	color: white;
 }
 
 .container {
@@ -7,5 +7,27 @@ p {
 }
 
 .card {
-	color: black;
+	color: white;
+	background-color: #3a3b3b;
+}
+
+.list-group-item {
+	color: white;
+	background-color: #3a3b3b;
+}
+
+.btn {
+	-webkit-border-radius: 6;
+	-moz-border-radius: 6;
+	border-radius: 6px;
+	color: #ffffff;
+	font-size: 14px;
+	background: #8e73f0;
+	padding: 10px 20px 10px 20px;
+	text-decoration: none;
+	transition: all 300ms ease;
+}
+
+.btn:hover {
+	background: #644fb5;
 }

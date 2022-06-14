@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const profileModel = require('../models/profile');
 const postModel = require('../models/post');
+const counterModel = require('../models/counters');
 
 // Adding new post data into the DB
 router.post('/add-post', (req, res) => {
@@ -36,10 +38,23 @@ router.post('/like', (req, res) => {
 });
 
 // Zobrazeni komentu
-router.post('/viewcomments', async (req, res) => {
-	console.log('clicked');
-	const post_id = req.body.post_id;
-	const data = await postModel.viewComments(post_id);
-	res.send({ comments: data });
+router.post('/viewcomments/:id', async (req, res) => {
+	const post_id = req.params.id;
+	console.log('clicked' + post_id);
+	const comments = await postModel.viewComment(post_id);
+	const user_id = req.user.id;
+	const profile = await profileModel.viewProfile(user_id);
+	const data = await postModel.vPost(post_id);
+
+	res.render('profile/comments', {
+		title: 'Comments',
+		style: 'profile/profilePage.css',
+		// Variables that takes user info from sesssion
+		profile: profile[0],
+		posts: data,
+		comments: comments,
+	});
+	console.log(data);
+	console.log(comments);
 });
 module.exports = router;

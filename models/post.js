@@ -27,10 +27,24 @@ exports.viewPost = (user_id) => {
 	});
 };
 
-exports.viewComments = (post_id) => {
+exports.vPost = (user_id) => {
 	return new Promise((resolve, reject) => {
 		try {
-			let sql = `SELECT * FROM viewcomments WHERE post_id = ?`;
+			let sql = `SELECT * FROM viewposts WHERE post_id = ? `;
+			conn.query(sql, user_id, (error, results) => {
+				if (error) throw error;
+				resolve(results);
+			});
+		} catch (err) {
+			reject(err);
+		}
+	});
+};
+
+exports.viewComment = (post_id) => {
+	return new Promise((resolve, reject) => {
+		try {
+			let sql = `SELECT * FROM viewcomments AS v WHERE post_id = ?`;
 			conn.query(sql, post_id, (error, results) => {
 				if (error) throw error;
 				resolve(results);

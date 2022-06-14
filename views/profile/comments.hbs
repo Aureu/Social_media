@@ -1,0 +1,55 @@
+{{>layouts/navbar}}
+
+<div class="container">
+{{#each posts}}
+	<div class='post--wrap'>
+		<div class='post--header'>
+			<figure>
+				<img class='comment-avatar' src='/Avatars/{{this.file_src}}' alt='' />
+			</figure>
+			<div class='post--header__sub'>
+				<h5>
+					<span class='glyphicon glyphicon-time'></span>
+					{{this.username}},
+					<br />
+					{{this.created_at}}.
+					<br />
+
+				</h5>
+			</div>
+		</div>
+		<p class='comment--text'>
+			{{this.content}}
+		</p>
+		
+
+
+		<hr />
+    <div class="comments--wrap">
+		{{#each ../comments}}
+    <div class="ml-5">
+		<div class='post--header'>
+			<figure>
+				<img class='comment-avatar' src='/Avatars/{{this.file_src}}' alt='' />
+			</figure>
+			<div class='post--header__sub'>
+				<h5>
+					<span class='glyphicon glyphicon-time'></span>
+					{{this.username}},
+					<br />
+					{{this.created_at}}.
+					<br />
+
+				</h5>
+			</div>
+		</div>
+		<p class='comment--text'>
+			{{this.comment_body}}
+		</p>
+    </div>
+
+    <hr>
+		{{/each}}
+    </div>
+{{/each}}
+</div>

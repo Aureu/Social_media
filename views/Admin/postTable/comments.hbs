@@ -1,19 +1,47 @@
 {{> layouts/navbar-admin}}
-<div class="container">
-  {{#each comments}}
-    <div class="wrap">
-      <div class="item">
-        <figure>
-          <img src="/Avatars/{{this.file_src}}" alt="avatar" class="avatar">
-        </figure>
-      </div>
-      <div class="item">
-        <h4>{{this.username}} |</h4>
-      </div>
-      <div class="item">
-        <h4>{{this.comment_body}} |</h4>
-      </div>
-      <br>
-    </div>
-  {{/each}}
-</div>
+
+
+<div class='container'>
+		<div class='row'>
+			<div class='col-6'>
+				<h1>Komentáře</h1>
+			</div>
+
+		</div>
+		<div class='row'>
+			<div class='col-md-12'>
+				<div class='table-wrap'>
+					<table class='table table-dark table-hover'>
+						<thead>
+							<tr>
+								<th scope='col'>Id příspěvku</th>
+								<th scope='col'>Avatar</th>
+								<th scope='col'>Uživatel</th>
+								<th scope='col'>Text</th>
+                <th scope="col">Datum</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- Tabulka do které se vkládají uživatelé z databáze -->
+							{{#each comments}}
+								<tr>
+									<th scope='row'>
+                    {{this.post_id}}
+                  </th>
+									<td><figure>
+                      <img src="/Avatars/{{this.file_src}}" alt="avatar" class="avatar">
+                    </figure></td>
+									<td>{{this.username}}</td>
+									<td>{{this.comment_body}}</td>
+									<td>{{this.created_at}}</td>
+									
+								</tr>
+							{{/each}}
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

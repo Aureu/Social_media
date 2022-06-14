@@ -70,7 +70,10 @@ exports.updateUser = (
 
 // Přidávání uživatele
 exports.addUser = (jmeno, prijmeni, prezdivka, email, heslo, status) => {
-	let sql = `INSERT INTO users(firstname, lastname, username, email, hashedPassword, created_at) VALUES ('${jmeno}','${prijmeni}', '${prezdivka}','${email}','${heslo}',NOW())`;
+	let sql = ` BEGIN;
+	INSERT INTO users(firstname, lastname, username, email, hashedPassword, created_at, role) VALUES ('${jmeno}','${prijmeni}', '${prezdivka}','${email}','${heslo}', NOW(), '0');
+	INSERT INTO user_avatars(user_id, file_src) VALUES (LAST_INSERT_ID(), "avatar.jpg");
+	COMMIT;`;
 	conn.query(sql, (err) => {
 		if (err) throw err;
 	});

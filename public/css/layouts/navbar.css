@@ -13,3 +13,26 @@ nav {
 	border-radius: 25px;
 	margin-right: 5px;
 }
+
+#searchBar {
+	background-color: #3a3b3b;
+	width: 100%;
+	padding: 5px;
+	margin-bottom: 6px;
+	color: white;
+	border-radius: 5px;
+	border: none;
+	outline: none !important;
+	transition: all 300ms ease;
+}
+
+#searchBar:hover {
+	border: 1px solid #8e73f0;
+}
+
+#searchBar:focus {
+	box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	border: 1px solid #8e73f0;
+}

@@ -19,7 +19,7 @@ exports.getPosts = () => {
 exports.viewComments = (post_id) => {
 	return new Promise((resolve, reject) => {
 		try {
-			let sql = 'SELECT * FROM viewcomments';
+			let sql = 'SELECT * FROM viewcomments WHERE post_id = ?';
 			conn.query(sql, post_id, (err, results) => {
 				if (err) throw err;
 				resolve(results);
@@ -33,7 +33,7 @@ exports.viewComments = (post_id) => {
 exports.deletePost = (ID) => {
 	return new Promise((resolve, reject) => {
 		try {
-			let sql = 'DELETE FROM viewposts WHERE post_id = ?';
+			let sql = 'DELETE FROM posts WHERE post_id = ?';
 			conn.query(sql, ID, (err, results) => {
 				if (err) throw err;
 				resolve(results);

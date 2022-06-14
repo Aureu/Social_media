@@ -22,18 +22,14 @@
             {{#if ../status}}
               <li class='list-group-item'>
                 <button
-                  class='unfollow'
+                  class='unfollow btn'
                   onclick='unfollowUser({{this.followed_id}})'
                   >UNFOLLOW
                 </button>
               </li>
             {{else}}
               <li class='list-group-item'>
-                <button
-                  class='unfollow'
-                  onclick='follow({{this.followed_id}})'
-                  >FOLLOW BACK
-                </button>
+
               </li>
               {{/if}}
               <div class="card-footer">

@@ -60,6 +60,15 @@ function isLoggedIn(req, res, next) {
 	if (req.isAuthenticated()) return next();
 	res.redirect('/login');
 }
+
+function isAdmin(req, res) {
+	if (req.user.role === 1) {
+		res.redirect('/admin/users');
+	} else {
+		res.redirect('/account');
+	}
+}
+
 // Routes
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);

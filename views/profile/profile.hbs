@@ -1,16 +1,16 @@
-<script src="/javascript/axios.js"></script>
+<script src="/javascript/axios.js">
+</script>
 
 
 {{> layouts/navbar}}
 
-
 <div class="container-fluid-xl" id="container">
 	<div class="row">
 		<div class="col-sm-4">
-			<div class="sidenav" id="section--profile">
-				<div class="container">
-					<div class='dropdown' id="profile--dropdown">
-							<button type='button' class='' data-toggle='dropdown'>Nastavení</button>
+			<div class="animate__fadeInLeft" id="section--profile">
+				<div class="">
+					<div class='dropdown float-right' id="profile--dropdown">
+						<button type='button' class='btn' data-toggle='dropdown'><i class="fa-solid fa-ellipsis"></i></button>
 							<div class='dropdown-menu dropdown-menu-right'>
 								<a class='dropdown-item' href='/account/edit/{{profile.id}}'>Upravit profil</a>
 								<a class='dropdown-item' href='/account/info'>Upravit info</a>
@@ -77,6 +77,7 @@
 					<div class="user--info">
 						<p>bio: {{profile.bio}}</p>
 						<p>Kraj: {{profile.name}}</p>
+						<p>Datum narození: {{profile.date_birth}}</p>
 					</div>
 				</div>
 			</div>
@@ -98,29 +99,25 @@
 									{{this.username}},
 									<br />
 									{{this.created_at}}.
+									<br>
+									
 								</h5>
 							</div>
 						</div>
 						<p class='comment--text'>
 							{{this.content}}
 						</p>
-						<div class='counter'>
-							<div class="likes" id="clicks">
-								{{this.likes}}
-							</div>
-							<div class="comments">
-								{{this.comments}}
-							</div>
-						</div>
+
 						<hr />
 						<div class='post--links'>
-							<button id='likeBtn' onclick='likePost({{this.post_id}})'><i
+							<button  class="btn" onclick='likePost({{this.post_id}})'><i
 									class='fa-solid fa-thumbs-up'
-								></i>To se mi líbí</button>
-								<div id="demo"></div>
-							<button onclick='viewComments({{this.post_id}})'>
-								<i class='fa-solid fa-comments'></i>Komentáře
-							</button>
+								></i>To se mi líbí ({{this.likes}})</button>
+								<form action="/posts/viewcomments/{{this.post_id}}" method="POST">
+									<button type="submit" class="btn ml-2">
+										<i class='fa-solid fa-comments'></i>Komentáře ({{this.comments}})
+									</button>
+							</form>
 						</div>
 						<hr />
 						<form
@@ -128,20 +125,25 @@
 							method='POST'
 							name='comment--text'
 						>
-							<input
-								type='text'
+							<textarea
 								class='comment--input'
 								name='commentText'
-								id='commentText'
+								id=''
 								placeholder='Okomentujte'
-							/>
+								maxlength="150"
+								rows="3"
+								required
+							></textarea>
+							<div class="bottom-right">	
+							<button class='btn add--post'>Přidat komentář</button>
+							</div>
 						</form>
 
 						<hr />
 
 					</div>
 					{{/each}}
-				<div id="demo"></div>
+
 							</div>
 						</div>
 	</div>

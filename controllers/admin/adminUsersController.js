@@ -4,35 +4,50 @@ const conn = require('../../database');
 const express = require('express');
 const router = express.Router();
 const userModel = require('../../models/adminUserlist');
+const profileModel = require('../../models/profile');
 
 // Displays users into table
 router.get('/', async (req, res) => {
+	const user_id = req.user.id;
+
 	const data = await userModel.getUsers();
+	const profile = await profileModel.viewProfile(user_id);
+
 	res.render('Admin/userTable/userList', {
 		title: 'Userlist',
 		style: 'admin/users/userList.css',
+		profile: profile[0],
 		users: data,
 	});
 });
 
 // Displays one user by id
 router.get('/view/:id', async (req, res) => {
+	const user_id = req.user.id;
+
+	const profile = await profileModel.viewProfile(user_id);
 	const id = req.params.id;
 	const data = await userModel.getUser(id);
 	res.render('Admin/userTable/viewUser', {
 		title: 'UserList',
-		style: 'userlist/viewUser.css',
+		style: 'followers/style.css',
 		user: data[0],
+		profile: profile[0],
 	});
 });
 
 // Route for form for edit user
 router.get('/edit/:id', async (req, res) => {
+	const user_id = req.user.id;
+
 	const id = req.params.id;
 	const data = await userModel.editUser(id);
+	const profile = await profileModel.viewProfile(user_id);
+
 	res.render('Admin/userTable/editUser', {
 		title: 'edit',
 		style: 'admin/users/editUser.css',
+		profile: profile[0],
 		data: data[0],
 	});
 });
@@ -59,9 +74,15 @@ router.post('/edituser/:id', async (req, res) => {
 });
 
 // Displays form for adding new user
-router.get('/adduser', (req, res) => {
+router.get('/adduser', async (req, res) => {
+	const user_id = req.user.id;
+
+	const profile = await profileModel.viewProfile(user_id);
+
 	res.render('Admin/userTable/addUser', {
+		title: 'adduser',
 		style: 'admin/users/addUser.css',
+		profile: profile[0],
 	});
 });
 

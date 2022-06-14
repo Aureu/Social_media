@@ -12,6 +12,9 @@ body {
 	color: white;
 }
 
+li {
+	list-style-type: none;
+}
 img {
 	object-fit: cover;
 }
@@ -23,6 +26,12 @@ a {
 
 a:hover {
 	color: #8e73f0;
+}
+
+input:focus {
+	box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
 }
 
 /* / Small devices (landscape phones, 576px and up) */
